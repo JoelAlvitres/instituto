@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('paginas', function (Blueprint $table) {
             $table->id();
+            $table->string('key')->unique();
+            $table->string('titulo')->default('Institucional');
+
+            $table->longText('historia')->nullable();
+            $table->longText('mision')->nullable();
+            $table->longText('vision')->nullable();
+
+            $table->string('banner')->nullable();
+
+            $table->string('organigrama_pdf')->nullable();
+            $table->string('organigrama_imagen')->nullable();
+
             $table->timestamps();
         });
     }
