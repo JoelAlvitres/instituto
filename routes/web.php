@@ -56,4 +56,11 @@ Route::middleware(['auth', 'role:admin'])->get('/admin-only', function () {
     return '✅ Acceso permitido: eres admin';
 });
 
-require __DIR__ . '/auth.php';
+
+require __DIR__.'/auth.php';
+
+Route::get('/aula', function () {
+    return view('public.aula.index');
+})->name('public.aula');
+
+
