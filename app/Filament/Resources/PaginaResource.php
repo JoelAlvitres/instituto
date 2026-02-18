@@ -17,6 +17,8 @@ class PaginaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationLabel = 'Páginas';
+    protected static ?string $navigationGroup = 'Gestión Web';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -31,7 +33,7 @@ class PaginaResource extends Resource
                                 Forms\Components\TextInput::make('key')
                                     ->required()
                                     ->helperText('Ej: institucional')
-                                    ->disabled(fn ($record) => filled($record)) // no se cambia al editar
+                                    ->disabled(fn($record) => filled($record)) // no se cambia al editar
                                     ->dehydrated()
                                     ->unique(ignoreRecord: true),
 

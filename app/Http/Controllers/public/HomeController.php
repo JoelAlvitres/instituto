@@ -13,13 +13,13 @@ class HomeController extends Controller
         $noticias = Noticia::query()
             ->where('publicada', true)
             ->orderByDesc('fecha_publicacion')
-            ->orderBy('orden')
+            ->orderByDesc('created_at')
             ->limit(3)
             ->get();
 
         $testimonios = Testimonio::query()
             ->where('activo', true)
-            ->orderBy('orden')
+            ->orderByDesc('created_at')
             ->limit(6)
             ->get();
 

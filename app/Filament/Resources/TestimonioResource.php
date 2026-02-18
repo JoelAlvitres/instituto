@@ -3,83 +3,116 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TestimonioResource\Pages;
-use App\Filament\Resources\TestimonioResource\RelationManagers;
 use App\Models\Testimonio;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Toggle;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\TextColumn;
 
 class TestimonioResource extends Resource
 {
     protected static ?string $model = Testimonio::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
+    protected static ?string $navigationGroup = 'Egresados';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
-{
-    return $form->schema([
-        Section::make('Testimonio')
-            ->columns(2)
-            ->schema([
-                TextInput::make('nombre')->required(),
-                TextInput::make('programa')->label('Programa/Carrera')->nullable(),
+    {
+        return $form->schema([
+            Forms\Components\Group::make()
+                ->schema([
+                    Forms\Components\Section::make('Información del Testimonio')
+                        ->schema([
+                            Forms\Components\TextInput::make('nombre')
+                                ->required()
+                                ->maxLength(120),
 
-                TextInput::make('cargo')->label('Cargo o referencia')->nullable(),
-                TextInput::make('orden')->numeric()->default(0),
+                            Forms\Components\TextInput::make('programa')
+                                ->label('Programa/Carrera')
+                                ->placeholder('Ej: Enfermería Técnica')
+                                ->maxLength(120),
 
-                Toggle::make('activo')->default(true),
-            ]),
+                            Forms\Components\TextInput::make('cargo')
+                                ->label('Cargo / Rol')
+                                ->placeholder('Ej: Egresado 2023')
+                                ->maxLength(120)
+                                ->columnSpanFull(),
 
-        Section::make('Contenido')
-            ->schema([
-                FileUpload::make('foto')
+                            Forms\Components\Textarea::make('mensaje')
+                                ->required()
+                                ->rows(4)
+                                ->columnSpanFull(),
+                        ])->columns(2),
+                ])
+                ->columnSpan(['lg' => 2]),
+
+            Forms\Components\Group::make()
+                ->schema([
+                    Forms\Components\Section::make('Foto y Estado')
+                        ->schema([
+                            Forms\Components\Toggle::make('activo')
+                                ->default(true)
+                                ->onColor('success'),
+
+                            Forms\Components\TextInput::make('orden')
+                                ->numeric()
+                                ->default(0),
+
+                            Forms\Components\FileUpload::make('foto')
+                                ->disk('public')
+                                ->directory('testimonios')
+                                ->image()
+                                ->imageEditor()
+                                ->imagePreviewHeight('200')
+                                ->maxSize(4096),
+                        ]),
+                ])
+                ->columnSpan(['lg' => 1]),
+        ])->columns(3);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\ImageColumn::make('foto')
                     ->disk('public')
-                    ->directory('testimonios')
-                    ->image()
-                    ->imageEditor()
-                    ->imagePreviewHeight('200')
-                    ->maxSize(4096),
+                    ->label('Foto')
+                    ->circular(),
 
-                Textarea::make('mensaje')
-                    ->required()
-                    ->rows(5)
-                    ->columnSpanFull(),
-            ]),
-    ]);
-}
+                Tables\Columns\TextColumn::make('nombre')
+                    ->searchable()
+                    ->sortable()
+                    ->weight('bold'),
 
-public static function table(Table $table): Table
-{
-    return $table
-        ->columns([
-            ImageColumn::make('foto')->disk('public')->label('Foto')->circular(),
-            TextColumn::make('nombre')->searchable()->sortable(),
-            TextColumn::make('programa')->toggleable(),
-            IconColumn::make('activo')->boolean()->sortable(),
-            TextColumn::make('orden')->sortable(),
-        ])
-        ->defaultSort('orden')
-        ->actions([
-            Tables\Actions\EditAction::make(),
-        ])
-        ->bulkActions([
-            Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]),
-        ]);
-}
+                Tables\Columns\TextColumn::make('programa')
+                    ->searchable()
+                    ->toggleable(),
+
+                Tables\Columns\TextColumn::make('cargo')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                Tables\Columns\IconColumn::make('activo')
+                    ->boolean()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('orden')
+                    ->sortable(),
+            ])
+            ->defaultSort('orden')
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
 
     public static function getRelations(): array
     {

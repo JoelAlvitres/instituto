@@ -14,49 +14,59 @@ class DocenteResource extends Resource
 {
     protected static ?string $model = Docente::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationLabel = 'Docentes';
+    protected static ?string $navigationGroup = 'Académico';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\Section::make('Perfil del docente')
-                ->columns(2)
+            Forms\Components\Group::make()
                 ->schema([
-                    Forms\Components\TextInput::make('nombre')
-                        ->required()
-                        ->maxLength(120),
+                    Forms\Components\Section::make('Información Personal')
+                        ->schema([
+                            Forms\Components\TextInput::make('nombre')
+                                ->required()
+                                ->maxLength(120),
 
-                    Forms\Components\TextInput::make('cargo')
-                        ->label('Cargo / Rol')
-                        ->placeholder('Docente')
-                        ->maxLength(120),
+                            Forms\Components\TextInput::make('cargo')
+                                ->label('Cargo / Rol')
+                                ->placeholder('Ej: Docente Principal')
+                                ->maxLength(120),
 
-                    Forms\Components\TextInput::make('especialidad')
-                        ->label('Especialidad')
-                        ->placeholder('Ej: Matemática, Enfermería, Computación...')
-                        ->maxLength(160),
+                            Forms\Components\TextInput::make('especialidad')
+                                ->label('Especialidad')
+                                ->placeholder('Ej: Matemática, Enfermería...')
+                                ->maxLength(160)
+                                ->columnSpanFull(),
+                        ])->columns(2),
+                ])
+                ->columnSpan(['lg' => 2]),
 
-                    Forms\Components\TextInput::make('orden')
-                        ->numeric()
-                        ->default(0)
-                        ->minValue(0)
-                        ->helperText('Menor número = aparece primero'),
+            Forms\Components\Group::make()
+                ->schema([
+                    Forms\Components\Section::make('Foto y Estado')
+                        ->schema([
+                            Forms\Components\Toggle::make('activo')
+                                ->default(true)
+                                ->onColor('success'),
 
-                    Forms\Components\FileUpload::make('foto')
-                        ->disk('public')
-                        ->directory('docentes')
-                        ->image()
-                        ->imageEditor()
-                        ->imagePreviewHeight('200')
-                        ->maxSize(4096)
-                        ->columnSpanFull(),
+                            Forms\Components\TextInput::make('orden')
+                                ->numeric()
+                                ->default(0),
 
-                    Forms\Components\Toggle::make('activo')
-                        ->default(true)
-                        ->columnSpanFull(),
-                ]),
-        ]);
+                            Forms\Components\FileUpload::make('foto')
+                                ->disk('public')
+                                ->directory('docentes')
+                                ->image()
+                                ->imageEditor()
+                                ->imagePreviewHeight('200')
+                                ->maxSize(4096),
+                        ]),
+                ])
+                ->columnSpan(['lg' => 1]),
+        ])->columns(3);
     }
 
     public static function table(Table $table): Table
@@ -65,12 +75,17 @@ class DocenteResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('foto')
                     ->disk('public')
-                    ->label('Foto')
-                    ->circular(),
+                    ->circular()
+                    ->label('Foto'),
 
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->weight('bold'),
+
+                Tables\Columns\TextColumn::make('cargo')
+                    ->searchable()
+                    ->toggleable(),
 
                 Tables\Columns\TextColumn::make('especialidad')
                     ->searchable()
@@ -86,6 +101,7 @@ class DocenteResource extends Resource
             ->defaultSort('orden')
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

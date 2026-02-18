@@ -111,3 +111,7 @@ php -m
 node -v
 npm -v
 npm list --depth=0
+
+
+npm i -D @tailwindcss/typography
+npm i -D @tailwindcss/typography

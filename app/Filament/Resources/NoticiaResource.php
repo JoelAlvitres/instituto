@@ -3,105 +3,125 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\NoticiaResource\Pages;
-use App\Filament\Resources\NoticiaResource\RelationManagers;
 use App\Models\Noticia;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Toggle;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\TextColumn;
-
+use Illuminate\Support\Str;
 
 class NoticiaResource extends Resource
 {
     protected static ?string $model = Noticia::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-newspaper';
+    protected static ?string $navigationGroup = 'Gestión Web';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
-{
-    return $form->schema([
-        Section::make('Noticia')
-            ->columns(2)
-            ->schema([
-                TextInput::make('titulo')
-                    ->required()
-                    ->live(onBlur: true)
-                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Illuminate\Support\Str::slug($state))),
+    {
+        return $form->schema([
+            Forms\Components\Group::make()
+                ->schema([
+                    Forms\Components\Section::make('Contenido Principal')
+                        ->schema([
+                            Forms\Components\TextInput::make('titulo')
+                                ->required()
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
 
-                TextInput::make('slug')
-                    ->required()
-                    ->disabled()
-                    ->dehydrated()
-                    ->unique(ignoreRecord: true),
+                            Forms\Components\TextInput::make('slug')
+                                ->required()
+                                ->disabled()
+                                ->dehydrated()
+                                ->unique(ignoreRecord: true),
 
-                DatePicker::make('fecha_publicacion')
-                    ->label('Fecha de publicación')
-                    ->default(now()),
+                            Forms\Components\Textarea::make('resumen')
+                                ->rows(3)
+                                ->maxLength(300)
+                                ->columnSpanFull(),
 
-                TextInput::make('orden')
-                    ->numeric()
-                    ->default(0)
-                    ->helperText('Menor número = aparece primero.'),
+                            Forms\Components\RichEditor::make('contenido')
+                                ->columnSpanFull(),
+                        ])->columns(2),
+                ])
+                ->columnSpan(['lg' => 2]),
 
-                Toggle::make('publicada')->default(true),
-                Toggle::make('destacada')->default(false),
-            ]),
+            Forms\Components\Group::make()
+                ->schema([
+                    Forms\Components\Section::make('Detalles y Publicación')
+                        ->schema([
+                            Forms\Components\FileUpload::make('imagen')
+                                ->disk('public')
+                                ->directory('noticias')
+                                ->image()
+                                ->imageEditor()
+                                ->imagePreviewHeight('200')
+                                ->maxSize(4096),
 
-        Section::make('Contenido')
-            ->schema([
-                FileUpload::make('imagen')
+                            Forms\Components\DatePicker::make('fecha_publicacion')
+                                ->label('Fecha de publicación')
+                                ->default(now()),
+
+                            Forms\Components\Toggle::make('publicada')
+                                ->default(true)
+                                ->onColor('success'),
+
+                            Forms\Components\Toggle::make('destacada')
+                                ->default(false)
+                                ->onColor('warning'),
+
+                            Forms\Components\TextInput::make('orden')
+                                ->numeric()
+                                ->default(0),
+                        ]),
+                ])
+                ->columnSpan(['lg' => 1]),
+        ])->columns(3);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\ImageColumn::make('imagen')
                     ->disk('public')
-                    ->directory('noticias')
-                    ->image()
-                    ->imageEditor()
-                    ->imagePreviewHeight('200')
-                    ->maxSize(4096),
+                    ->label('Img')
+                    ->circular(),
 
-                Textarea::make('resumen')
-                    ->rows(3)
-                    ->maxLength(300)
-                    ->columnSpanFull(),
+                Tables\Columns\TextColumn::make('titulo')
+                    ->searchable()
+                    ->sortable()
+                    ->weight('bold')
+                    ->wrap(),
 
-                RichEditor::make('contenido')
-                    ->columnSpanFull(),
-            ]),
-    ]);
-}
+                Tables\Columns\TextColumn::make('fecha_publicacion')
+                    ->date()
+                    ->sortable(),
 
-public static function table(Table $table): Table
-{
-    return $table
-        ->columns([
-            ImageColumn::make('imagen')->disk('public')->label('Img')->circular(),
-            TextColumn::make('titulo')->searchable()->sortable()->wrap(),
-            TextColumn::make('fecha_publicacion')->date()->sortable(),
-            IconColumn::make('publicada')->boolean()->sortable(),
-            IconColumn::make('destacada')->boolean()->sortable(),
-            TextColumn::make('orden')->sortable(),
-        ])
-        ->defaultSort('orden')
-        ->actions([
-            Tables\Actions\EditAction::make(),
-        ])
-        ->bulkActions([
-            Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]),
-        ]);
-}           
+                Tables\Columns\IconColumn::make('publicada')
+                    ->boolean()
+                    ->sortable(),
+
+                Tables\Columns\IconColumn::make('destacada')
+                    ->boolean()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('orden')
+                    ->sortable(),
+            ])
+            ->defaultSort('fecha_publicacion', 'desc')
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
 
     public static function getRelations(): array
     {
