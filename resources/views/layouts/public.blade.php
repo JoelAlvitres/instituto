@@ -9,7 +9,7 @@
 
 <style>
 /* ===== INSTITUTO VON HUMBOLDT ===== */
-/* VERSIÓN CON MÁS ESPACIO ENTRE SECCIONES Y MÁRGENES AJUSTADOS */
+/* VERSIÓN CON CONTENIDO DESPLAZADO HACIA LA IZQUIERDA */
 
 :root {
   --primary: #6b4f8c;
@@ -53,27 +53,31 @@ main {
   width: 100%;
 }
 
-/* === UTILIDADES RESPONSIVE - MÁRGENES LIGERAMENTE REDUCIDOS === */
+/* === UTILIDADES RESPONSIVE - CONTENIDO MÁS A LA IZQUIERDA === */
 .container {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 0.9rem; /* Reducido de 1rem a 0.9rem */
+  padding: 0 0.5rem; /* Reducido de 1rem a 0.5rem */
 }
 
 @media (min-width: 640px) {
-  .container { padding: 0 1.3rem; } /* Reducido de 1.5rem a 1.3rem */
+  .container { padding: 0 0.8rem; } /* Reducido de 1.5rem a 0.8rem */
 }
 
 @media (min-width: 768px) {
-  .container { padding: 0 1.8rem; } /* Reducido de 2rem a 1.8rem */
+  .container { padding: 0 1rem; } /* Reducido de 2rem a 1rem */
 }
 
 @media (min-width: 1024px) {
-  .container { padding: 0 2.2rem; } /* Reducido de 2.5rem a 2.2rem */
+  .container { padding: 0 1.2rem; } /* Reducido de 2.5rem a 1.2rem */
 }
 
-/* === TOP BAR - CON MÁS ESPACIADO ENTRE ELEMENTOS === */
+@media (min-width: 1280px) {
+  .container { padding: 0 1.5rem; } /* Reducido para pantallas grandes */
+}
+
+/* === TOP BAR - CON CONTENIDO MÁS A LA IZQUIERDA === */
 .top-bar {
   background: var(--primary) !important;
   border-bottom: 3px solid var(--secondary) !important;
@@ -90,45 +94,45 @@ main {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem; /* Aumentado de 0.6rem a 1rem para más separación */
+  gap: 0.8rem; /* Reducido de 1rem a 0.8rem */
 }
 
 .top-bar-left {
   display: flex;
   align-items: center;
-  gap: 0.8rem; /* Aumentado de 0.5rem a 0.8rem */
+  gap: 0.5rem; /* Reducido de 0.8rem a 0.5rem */
   flex-wrap: wrap;
 }
 
 .top-bar-left .ies {
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem; /* Reducido ligeramente */
 }
 
 .top-bar-left .divider {
   display: none;
-  font-size: 1rem;
+  font-size: 0.9rem;
   opacity: 0.7;
 }
 
 .top-bar-left .instituto {
   display: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem; /* Reducido ligeramente */
   opacity: 0.9;
 }
 
 .top-bar-right {
   display: flex;
   align-items: center;
-  gap: 1.5rem; /* Aumentado de 1rem a 1.5rem */
+  gap: 1rem; /* Reducido de 1.5rem a 1rem */
   flex-wrap: wrap;
 }
 
 .top-bar-right span {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* Aumentado de 0.25rem a 0.5rem */
-  font-size: 0.85rem;
+  gap: 0.3rem; /* Reducido de 0.5rem a 0.3rem */
+  font-size: 0.8rem; /* Reducido ligeramente */
 }
 
 @media (min-width: 480px) {
@@ -142,11 +146,11 @@ main {
 
 @media (min-width: 640px) {
   .top-bar-right span {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 }
 
-/* === HEADER PRINCIPAL - CON MÁS ESPACIADO === */
+/* === HEADER PRINCIPAL - CONTENIDO MÁS A LA IZQUIERDA === */
 .main-header {
   background: white;
   border-bottom: 1px solid var(--gray-border);
@@ -161,30 +165,37 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.85rem;
-  padding-bottom: 0.85rem;
+  padding-top: 0.7rem; /* Reducido de 0.85rem a 0.7rem */
+  padding-bottom: 0.7rem; /* Reducido de 0.85rem a 0.7rem */
 }
 
-/* Logo - con más espacio entre elementos */
+/* Logo - más compacto */
 .logo-link {
   display: flex;
   align-items: center;
-  gap: 1rem; /* Aumentado de 0.75rem a 1rem */
+  gap: 0.6rem; /* Reducido de 1rem a 0.6rem */
   text-decoration: none;
-  margin-left: -10px;
+  margin-left: -5px; /* Pequeño margen negativo para acercar al borde */
 }
 
 @media (min-width: 480px) {
   .logo-link {
-    margin-left: -15px;
-    gap: 1.2rem; /* Aumentado de 1rem a 1.2rem */
+    gap: 0.8rem; /* Reducido de 1.2rem a 0.8rem */
+    margin-left: -8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .logo-link {
+    gap: 1rem; /* Reducido */
+    margin-left: -10px;
   }
 }
 
 .logo-image {
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
+  width: 42px; /* Reducido de 46px a 42px */
+  height: 42px; /* Reducido de 46px a 42px */
+  border-radius: 10px; /* Reducido */
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   flex-shrink: 0;
@@ -192,18 +203,17 @@ main {
 
 @media (min-width: 480px) {
   .logo-image {
-    width: 55px;
-    height: 55px;
-    border-radius: 14px;
+    width: 48px; /* Reducido de 55px a 48px */
+    height: 48px; /* Reducido de 55px a 48px */
+    border-radius: 12px;
   }
 }
 
 @media (min-width: 768px) {
   .logo-image {
-    width: 65px;
-    height: 65px;
-    border-radius: 16px;
-    box-shadow: var(--shadow-md);
+    width: 55px; /* Reducido de 65px a 55px */
+    height: 55px; /* Reducido de 65px a 55px */
+    border-radius: 14px;
   }
 }
 
@@ -216,57 +226,58 @@ main {
 .logo-text {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem; /* Pequeño espacio entre título y subtítulo */
+  gap: 0.1rem; /* Reducido de 0.15rem a 0.1rem */
 }
 
 .logo-title {
   color: var(--primary);
-  font-size: 1rem;
+  font-size: 0.95rem; /* Reducido de 1rem a 0.95rem */
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.1; /* Reducido */
   white-space: nowrap;
 }
 
 @media (min-width: 480px) {
   .logo-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Reducido de 1.2rem a 1.1rem */
   }
 }
 
 @media (min-width: 768px) {
   .logo-title {
-    font-size: 1.4rem;
+    font-size: 1.2rem; /* Reducido de 1.4rem a 1.2rem */
   }
 }
 
 .logo-subtitle {
   color: var(--primary-light);
-  font-size: 0.65rem;
+  font-size: 0.6rem; /* Reducido de 0.65rem a 0.6rem */
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px; /* Reducido */
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 @media (min-width: 480px) {
   .logo-subtitle {
-    font-size: 0.7rem;
-    letter-spacing: 1.2px;
+    font-size: 0.65rem; /* Reducido de 0.7rem a 0.65rem */
+    letter-spacing: 1px;
   }
 }
 
 @media (min-width: 768px) {
   .logo-subtitle {
-    font-size: 0.75rem;
-    letter-spacing: 1.5px;
+    font-size: 0.7rem; /* Reducido de 0.75rem a 0.7rem */
+    letter-spacing: 1.2px;
   }
 }
 
-/* === MENÚ DE ESCRITORIO - CON MÁS ESPACIADO === */
+/* === MENÚ DE ESCRITORIO - MÁS COMPACTO Y A LA IZQUIERDA === */
 .desktop-menu {
   display: none;
   align-items: center;
-  gap: 0.5rem; /* Aumentado de 0.27rem a 0.5rem */
+  gap: 0.4rem; 
+  margin-left: -15px; /* NUEVO: desplaza el menú a la izquierda */
 }
 
 @media (min-width: 1024px) {
@@ -275,12 +286,18 @@ main {
   }
 }
 
+@media (min-width: 1280px) {
+  .desktop-menu {
+    margin-left: -25px; /* Más negativo en pantallas grandes */
+  }
+}
+
 .desktop-menu a {
   color: var(--gray-text);
-  font-size: 0.97rem;
+  font-size: 0.93rem; /* Reducido de 0.97rem a 0.9rem */
   font-weight: 500;
-  padding: 0.5rem 0.8rem; /* Aumentado padding horizontal de 0.7rem a 0.8rem */
-  border-radius: 30px;
+  padding: 0.4rem 0.5rem; /* Reducido de 0.5rem 0.8rem a 0.4rem 0.5rem */
+  border-radius: 25px; /* Reducido */
   text-decoration: none;
   transition: all 0.2s ease;
   white-space: nowrap;
@@ -291,84 +308,181 @@ main {
   background: var(--primary-soft);
 }
 
-/* === BOTÓN AULA VIRTUAL - CON MEJOR ESPACIADO === */
+/* === BOTÓN AULA VIRTUAL MÁS COMPACTO === */
 .aula-virtual-btn {
   background: linear-gradient(145deg, var(--primary), var(--primary-light));
   color: white;
-  font-size: 0.65rem; /* Aumentado de 0.5rem a 0.65rem */
-  font-weight: 600;
-  padding: 0.55rem 0.6rem; /* Ajustado */
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  border-radius: 14px; /* Reducido de 18px a 14px */
+  padding: 0.35rem 0.4rem; /* Reducido */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.15rem; /* Aumentado de 0.1rem a 0.15rem */
-  transition: all 0.25s ease;
-  min-width: 58px; /* Aumentado de 55px a 58px */
-  line-height: 1.2;
-  text-decoration: none;
-  margin-right: 0;
+  gap: 0.1rem; /* Reducido */
+  min-width: 52px; /* Reducido de 60px a 52px */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  margin-right: -5px; /* Pequeño margen negativo para acercar al borde */
 }
 
 @media (min-width: 480px) {
   .aula-virtual-btn {
-    font-size: 0.75rem;
-    padding: 0.6rem 0.7rem;
-    min-width: 62px; /* Aumentado de 60px a 62px */
+    padding: 0.4rem 0.5rem;
+    min-width: 58px; /* Reducido de 68px a 58px */
+    border-radius: 16px;
+    gap: 0.15rem;
+    margin-right: -8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .aula-virtual-btn {
+    padding: 0.5rem 0.6rem;
+    min-width: 65px; /* Reducido de 75px a 65px */
     border-radius: 18px;
-    margin-right: -5px;
     gap: 0.2rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .aula-virtual-btn {
-    padding: 0.7rem 0.8rem;
-    min-width: 68px; /* Aumentado de 65px a 68px */
     margin-right: -10px;
-    gap: 0.25rem;
   }
 }
 
-.aula-virtual-btn span:first-child {
-  font-size: 1rem;
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+@media (min-width: 1024px) {
+  .aula-virtual-btn {
+    padding: 0.55rem 0.7rem;
+    min-width: 70px; /* Reducido de 80px a 70px */
+    gap: 0.25rem;
+    margin-right: -12px;
+  }
+}
+
+/* Contenedor de la imagen */
+.aula-virtual-icon {
+  width: 20px; /* Reducido de 24px a 20px */
+  height: 20px; /* Reducido de 24px a 20px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease;
 }
 
 @media (min-width: 480px) {
-  .aula-virtual-btn span:first-child {
-    font-size: 1.1rem;
+  .aula-virtual-icon {
+    width: 22px; /* Reducido de 26px a 22px */
+    height: 22px; /* Reducido de 26px a 22px */
   }
 }
 
 @media (min-width: 768px) {
-  .aula-virtual-btn span:first-child {
-    font-size: 1.2rem;
+  .aula-virtual-icon {
+    width: 24px; /* Reducido de 28px a 24px */
+    height: 24px; /* Reducido de 28px a 24px */
   }
 }
 
+/* Estilo para la imagen */
+.aula-virtual-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* Texto del botón */
+.aula-virtual-text {
+  font-size: 0.55rem; /* Reducido de 0.6rem a 0.55rem */
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: center;
+  letter-spacing: 0.2px; /* Reducido */
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 480px) {
+  .aula-virtual-text {
+    font-size: 0.6rem; /* Reducido de 0.65rem a 0.6rem */
+    letter-spacing: 0.3px;
+  }
+}
+
+@media (min-width: 768px) {
+  .aula-virtual-text {
+    font-size: 0.65rem; /* Reducido de 0.7rem a 0.65rem */
+    letter-spacing: 0.4px;
+  }
+}
+
+/* Efecto hover */
 .aula-virtual-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* Reducido de -3px a -2px */
   box-shadow: var(--shadow-md);
   background: linear-gradient(145deg, #7b5fa0, #9a82bc);
 }
 
-/* === MENÚ HAMBURGUESA - MANTENIDO === */
+.aula-virtual-btn:hover .aula-virtual-icon {
+  transform: scale(1.05); /* Reducido de 1.1 a 1.05 */
+}
+
+.aula-virtual-btn:hover .aula-virtual-icon img {
+  transform: scale(1.05); /* Reducido de 1.1 a 1.05 */
+}
+
+/* Efecto de brillo al hover */
+.aula-virtual-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.aula-virtual-btn:hover::before {
+  left: 100%;
+}
+
+/* Efecto de pulsación al hacer clic */
+.aula-virtual-btn:active {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Responsive para móviles pequeños */
+@media (max-width: 340px) {
+  .aula-virtual-btn {
+    min-width: 48px;
+    padding: 0.3rem 0.35rem;
+  }
+  
+  .aula-virtual-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .aula-virtual-text {
+    font-size: 0.5rem;
+  }
+}
+
+/* === MENÚ HAMBURGUESA - MÁS COMPACTO === */
 .menu-toggle {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 36px; /* Reducido de 40px a 36px */
+  height: 36px; /* Reducido de 40px a 36px */
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
-  margin-left: 0.5rem; /* Aumentado de 0.25rem a 0.5rem */
+  margin-left: 0.3rem; /* Reducido de 0.5rem a 0.3rem */
   z-index: 1001;
 }
 
@@ -380,16 +494,16 @@ main {
 
 .menu-toggle span {
   display: block;
-  width: 24px;
+  width: 22px; /* Reducido de 24px a 22px */
   height: 2px;
   background: var(--primary);
-  margin: 3px 0;
+  margin: 2.5px 0; /* Reducido de 3px a 2.5px */
   transition: all 0.3s ease;
   border-radius: 2px;
 }
 
 .menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg) translate(4px, 4px); /* Ajustado */
 }
 
 .menu-toggle.active span:nth-child(2) {
@@ -397,8 +511,25 @@ main {
 }
 
 .menu-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -6px);
+  transform: rotate(-45deg) translate(6px, -5px); /* Ajustado */
 }
+
+/* === HEADER ACTIONS - MÁS COMPACTO === */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem; /* Reducido de 0.8rem a 0.3rem */
+  margin-right: -5px; /* Desplaza a la derecha para compensar */
+}
+
+@media (min-width: 480px) {
+  .header-actions {
+    gap: 0.4rem; /* Reducido de 1rem a 0.4rem */
+    margin-right: -8px;
+  }
+}
+
+
 
 /* === MENÚ MÓVIL - MANTENIDO === */
 .mobile-menu {
@@ -484,7 +615,7 @@ main {
 .mobile-menu-nav {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem; /* Aumentado de 0.5rem a 0.7rem */
+  gap: 0.7rem;
 }
 
 .mobile-menu-nav a {
@@ -492,7 +623,7 @@ main {
   color: var(--gray-text);
   font-size: 1rem;
   font-weight: 500;
-  padding: 0.9rem 1rem; /* Aumentado padding vertical de 0.8rem a 0.9rem */
+  padding: 0.9rem 1rem;
   border-radius: 12px;
   transition: all 0.2s ease;
   text-decoration: none;
@@ -529,20 +660,7 @@ main {
   color: var(--primary);
 }
 
-/* === HEADER ACTIONS - CON MÁS ESPACIADO === */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem; /* Aumentado de 0.5rem a 0.8rem */
-}
-
-@media (min-width: 480px) {
-  .header-actions {
-    gap: 1rem; /* Aumentado de 0.75rem a 1rem */
-  }
-}
-
-/* === FOOTER - CON MEJOR ESPACIADO Y MÁRGENES AJUSTADOS === */
+/* === FOOTER - SIN CAMBIOS === */
 .main-footer {
   background: var(--footer-bg);
   border-top: 4px solid var(--secondary);
@@ -554,8 +672,8 @@ main {
 .footer-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.2rem; /* Aumentado de 2rem a 2.2rem */
-  padding: 2.5rem 0.9rem; /* Padding horizontal reducido */
+  gap: 2.2rem;
+  padding: 2.5rem 0.9rem;
 }
 
 @media (min-width: 480px) {
@@ -568,7 +686,7 @@ main {
 @media (min-width: 768px) {
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2.8rem; /* Aumentado de 2.5rem a 2.8rem */
+    gap: 2.8rem;
     padding: 3rem 1.8rem;
   }
 }
@@ -576,14 +694,14 @@ main {
 @media (min-width: 1024px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr 1.2fr 1.8fr;
-    gap: 1.8rem; /* Aumentado de 1.5rem a 1.8rem */
+    gap: 1.8rem;
     padding: 3.5rem 2.2rem;
   }
 }
 
 @media (min-width: 1280px) {
   .footer-grid {
-    gap: 2.2rem; /* Aumentado de 2rem a 2.2rem */
+    gap: 2.2rem;
     padding: 4rem 2.5rem;
   }
 }
@@ -594,13 +712,13 @@ main {
   font-weight: 600;
   position: relative;
   display: inline-block;
-  margin-bottom: 1.2rem; /* Aumentado de 1rem a 1.2rem */
+  margin-bottom: 1.2rem;
 }
 
 .footer-title::after {
   content: '';
   position: absolute;
-  bottom: -6px; /* Ajustado */
+  bottom: -6px;
   left: 0;
   width: 30px;
   height: 3px;
@@ -614,7 +732,7 @@ main {
 }
 
 .footer-links li {
-  margin-bottom: 0.6rem; /* Aumentado de 0.4rem a 0.6rem */
+  margin-bottom: 0.6rem;
 }
 
 .footer-links a {
@@ -635,16 +753,16 @@ main {
   color: white;
   text-decoration: underline;
   text-decoration-color: var(--secondary);
-  transform: translateX(5px); /* Aumentado de 4px a 5px */
+  transform: translateX(5px);
 }
 
 .footer-contact p {
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.85rem;
-  margin-bottom: 0.7rem; /* Aumentado de 0.5rem a 0.7rem */
+  margin-bottom: 0.7rem;
   display: flex;
   align-items: center;
-  gap: 0.6rem; /* Aumentado de 0.5rem a 0.6rem */
+  gap: 0.6rem;
 }
 
 @media (min-width: 768px) {
@@ -653,11 +771,11 @@ main {
   }
 }
 
-/* === REDES SOCIALES - CON MÁS ESPACIADO === */
+/* === REDES SOCIALES === */
 .social-icons {
   display: flex;
-  gap: 1rem; /* Aumentado de 0.8rem a 1rem */
-  margin-top: 1.2rem; /* Aumentado de 1rem a 1.2rem */
+  gap: 1rem;
+  margin-top: 1.2rem;
   flex-wrap: wrap;
 }
 
@@ -671,8 +789,8 @@ main {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px; /* Aumentado de 36px a 38px */
-  height: 38px; /* Aumentado de 36px a 38px */
+  width: 38px;
+  height: 38px;
   background: white;
   border-radius: 50%;
   transition: all 0.3s ease;
@@ -731,14 +849,14 @@ main {
   background-position: center;
 }
 
-/* === MAPA - MANTENIDO === */
+/* === MAPA === */
 .map-container {
   width: 100%;
   height: 150px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  margin-bottom: 0.6rem; /* Aumentado de 0.5rem a 0.6rem */
+  margin-bottom: 0.6rem;
 }
 
 @media (min-width: 768px) {
@@ -762,9 +880,9 @@ main {
 .location-text {
   color: rgba(255,255,255,0.8);
   font-size: 0.7rem;
-  line-height: 1.4; /* Aumentado de 1.3 a 1.4 */
+  line-height: 1.4;
   text-align: center;
-  margin-top: 0.4rem; /* Aumentado de 0.3rem a 0.4rem */
+  margin-top: 0.4rem;
   font-style: italic;
 }
 
@@ -774,10 +892,10 @@ main {
   }
 }
 
-/* === COPYRIGHT - MANTENIDO === */
+/* === COPYRIGHT === */
 .copyright {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 0.9rem 1rem; /* Aumentado de 0.8rem a 0.9rem */
+  padding: 0.9rem 1rem;
   text-align: center;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.7rem;
@@ -807,7 +925,7 @@ main {
   }
 }
 
-/* === RESPONSIVE EXTRA - MANTENIDO === */
+/* === RESPONSIVE EXTRA === */
 @media (max-width: 340px) {
   .logo-title {
     font-size: 0.9rem;
@@ -822,12 +940,6 @@ main {
   .aula-virtual-btn {
     min-width: 50px;
     padding: 0.4rem 0.5rem;
-  }
-  .aula-virtual-btn span:first-child {
-    font-size: 0.9rem;
-  }
-  .aula-virtual-btn span:last-child {
-    font-size: 0.6rem;
   }
 }
 </style>
@@ -878,15 +990,16 @@ main {
         <a href="{{ route('public.contacto') }}">Contacto</a>
       </nav>
 
-      {{-- BOTÓN AULA VIRTUAL Y HAMBURGUESA --}}
-      <div class="header-actions">
-        <a href="{{ config('app.moodle_url', '#') }}" 
-           class="aula-virtual-btn" 
-           target="_blank" 
-           rel="noopener">
-          <span>📘</span>
-          <span>Aula Virtual</span>
-        </a>
+     <a href="{{ route('public.aula') }}" 
+   class="aula-virtual-btn" 
+   target="_blank" 
+   rel="noopener">
+  <span class="aula-virtual-icon">
+    <img src="{{ asset('images/aula virtual.png') }}" alt="Moodle">
+  </span>
+  <span class="aula-virtual-text">Aula Virtual</span>
+</a>
+
 
         <button class="menu-toggle" id="menuToggle" aria-label="Menú">
           <span></span>
@@ -924,7 +1037,7 @@ main {
       <a href="#">Transparencia</a>
       <a href="#">Comunicaciones</a>
       <a href="{{ route('public.contacto') }}">Contacto</a>
-      <a href="{{ config('app.moodle_url', '#') }}" 
+      <a href="{{ route('public.aula') }}" 
          target="_blank" 
          style="margin-top: 1.2rem; background: var(--primary-soft); color: var(--primary); font-weight: 700; border-left-color: var(--secondary);">
         📘 Aula Virtual
@@ -958,7 +1071,7 @@ main {
           <ul class="footer-links">
             <li><a href="{{ route('public.carreras.index') }}">Programas</a></li>
             <li><a href="{{ route('public.admision') }}">Admisión</a></li>
-            <li><a href="{{ config('app.moodle_url', '#') }}" target="_blank">Aula Virtual</a></li>
+            <li><a href="{{ route('public.aula') }}" target="_blank">Aula Virtual</a></li>
           </ul>
         </div>
         

@@ -20,9 +20,12 @@
 
       <div class="mt-5 lg:mt-6">
         <a target="_blank" rel="noopener"
-           href="{{ config('app.moodle_url', '#') }}"
+           href="{{ route('public.aula') }}"
            class="btn-primary-moodle">
-          Aula Virtual (Moodle)
+          <svg class="moodle-logo" viewBox="0 0 40 40" fill="currentColor">
+            <path d="M20 0C8.96 0 0 8.96 0 20s8.96 20 20 20 20-8.96 20-20S31.04 0 20 0zm0 4c3.44 0 6.24 2.8 6.24 6.24s-2.8 6.24-6.24 6.24-6.24-2.8-6.24-6.24S16.56 4 20 4zm0 24.8c-4.8 0-9.12 2.12-12 5.44-1.44-3.08-4.04-5.56-7.28-6.8 1.48-4.44 5.64-7.64 10.56-7.64h17.44c4.92 0 9.08 3.2 10.56 7.64-3.24 1.24-5.84 3.72-7.28 6.8-2.88-3.32-7.2-5.44-12-5.44z"/>
+          </svg>
+          <span>Aula Virtual (Moodle)</span>
         </a>
       </div>
     </div>
@@ -38,16 +41,23 @@
   </div>
 </section>
 
-{{-- ACCESOS RÁPIDOS --}}
+{{-- ACCESOS RÁPIDOS CON IMAGEN PARA MOODLE --}}
 <section class="quick-access-section">
   <div class="max-w-6xl mx-auto px-4 -mt-4">
     <div class="quick-access-grid">
       @php
         $quick = [
-          ['icon'=>'🎓','title'=>'Programas','sub'=>'de Estudio','href'=>route('public.carreras.index')],
-          ['icon'=>'🗓️','title'=>'Admisión','sub'=>'2026','href'=>route('public.admision')],
-          ['icon'=>'🧩','title'=>'Servicios','sub'=>'Estudiantiles','href'=>'#'],
-          ['icon'=>'🏫','title'=>'Aula Virtual','sub'=>'(Moodle)','href'=>config('app.moodle_url', '#'), 'blank'=>true],
+          ['type' => 'emoji', 'icon' => '🎓', 'title' => 'Programas', 'sub' => 'de Estudio', 'href' => route('public.carreras.index')],
+          ['type' => 'emoji', 'icon' => '🗓️', 'title' => 'Admisión', 'sub' => '2026', 'href' => route('public.admision')],
+          ['type' => 'emoji', 'icon' => '🧩', 'title' => 'Servicios', 'sub' => 'Estudiantiles', 'href' => '#'],
+          [
+            'type' => 'image',
+            'image' => 'images/aula virtual.png',
+            'title' => 'Aula Virtual',
+            'sub' => '(Moodle)',
+            'href' => route('public.aula'),
+            'blank' => true
+          ],
         ];
       @endphp
 
@@ -56,7 +66,14 @@
            @if(($q['blank'] ?? false) === true) target="_blank" rel="noopener" @endif
            class="quick-access-card">
           <div class="quick-access-icon">
-            {{ $q['icon'] }}
+            @if($q['type'] === 'image')
+              <img src="{{ asset($q['image']) }}" 
+                   alt="{{ $q['title'] }}"
+                   class="quick-access-img"
+                   loading="lazy">
+            @else
+              <span class="quick-access-emoji">{{ $q['icon'] }}</span>
+            @endif
           </div>
           <div>
             <div class="quick-access-title">{{ $q['title'] }}</div>
@@ -73,7 +90,12 @@
   <div class="max-w-6xl mx-auto px-4 py-8 lg:py-10">
     <div class="section-header">
       <h2 class="section-title">Últimas Noticias</h2>
-      <a class="section-header-link" href="#">Ver todas →</a>
+      <a class="section-header-link" href="#">
+        <span>Ver todas</span>
+        <svg class="section-header-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </a>
     </div>
 
     <div class="news-grid">
@@ -83,7 +105,8 @@
             @if($n->imagen)
               <img src="{{ asset('storage/'.$n->imagen) }}"
                    alt="{{ $n->titulo }}"
-                   class="w-full h-full object-cover">
+                   class="w-full h-full object-cover"
+                   loading="lazy">
             @endif
           </div>
 
@@ -118,7 +141,7 @@
     @if($noticias->count() > 0)
     <div class="text-center mt-6 lg:mt-8">
       <a class="btn-primary" href="#">
-        Ver todas las noticias
+        <span>Ver todas las noticias</span>
         <svg class="btn-primary-icon" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
@@ -141,7 +164,8 @@
               @if($t->foto)
                 <img src="{{ asset('storage/'.$t->foto) }}"
                      class="w-full h-full object-cover"
-                     alt="{{ $t->nombre }}">
+                     alt="{{ $t->nombre }}"
+                     loading="lazy">
               @endif
             </div>
 
@@ -196,19 +220,25 @@
 @section('styles')
 <style>
 /* ===== ESTILOS EXCLUSIVOS PARA LA PÁGINA DE INICIO ===== */
-/* Márgenes generales reducidos y banner más grande */
-
 :root {
     --primary: #4a2c5f;
     --primary-light: #6b4b7e;
+    --primary-dark: #3a234b;
     --secondary: #c49a2b;
+    --secondary-light: #d4b15c;
     --accent: #e67e22;
     --gray-border: #e8e0ec;
     --gray-text: #5f4b6a;
     --gray-bg: #faf7fc;
+    --whatsapp: #25D366;
+    --whatsapp-dark: #128C7E;
+    --shadow-sm: 0 4px 6px rgba(74, 44, 95, 0.05);
+    --shadow-md: 0 10px 25px -8px rgba(74, 44, 95, 0.1);
+    --shadow-lg: 0 20px 40px -12px rgba(74, 44, 95, 0.15);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* === MÁRGENES GENERALES REDUCIDOS === */
+/* === MÁRGENES GENERALES === */
 section {
     margin-bottom: 1.5rem !important;
 }
@@ -242,13 +272,31 @@ section {
     }
 }
 
-/* === HERO CON BANNER MÁS GRANDE === */
+/* === HERO SECTION === */
 .hero-section {
     background: linear-gradient(135deg, #f0e7f9 0%, #ffffff 100%) !important;
     border-bottom: 1px solid #e8e0ec;
     width: 100%;
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(196,154,43,0.03) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 @media (min-width: 768px) {
@@ -265,6 +313,7 @@ section {
     margin-bottom: 0.75rem !important;
     font-weight: 800 !important;
     position: relative !important;
+    animation: fadeInUp 0.8s ease;
 }
 
 @media (min-width: 768px) {
@@ -287,6 +336,12 @@ section {
     background: linear-gradient(90deg, var(--secondary), var(--accent));
     border-radius: 2px;
     margin-top: 0.5rem;
+    animation: expandWidth 1s ease 0.3s both;
+}
+
+@keyframes expandWidth {
+    from { width: 0; }
+    to { width: 80px; }
 }
 
 .hero-description {
@@ -294,15 +349,98 @@ section {
     font-size: 1rem !important;
     line-height: 1.5 !important;
     max-width: 90% !important;
+    animation: fadeInUp 0.8s ease 0.2s both;
 }
 
-/* BANNER MÁS GRANDE - PROPORCIONAL */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === BOTÓN PRINCIPAL MOODLE MEJORADO === */
+.btn-primary-moodle {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 0.8rem 2rem !important;
+    border-radius: 50px !important;
+    border: none !important;
+    transition: var(--transition) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.8rem !important;
+    font-size: 1rem !important;
+    text-decoration: none !important;
+    box-shadow: var(--shadow-md) !important;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.btn-primary-moodle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-primary-moodle:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: var(--shadow-lg) !important;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+.btn-primary-moodle:hover::before {
+    left: 100%;
+}
+
+.btn-primary-moodle:active {
+    transform: translateY(-1px) !important;
+}
+
+.moodle-logo {
+    width: 24px !important;
+    height: 24px !important;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* === HERO IMAGE === */
 .hero-image {
     height: 280px !important;
     width: 100% !important;
-    border-radius: 16px !important;
+    border-radius: 20px !important;
     overflow: hidden !important;
-    box-shadow: 0 25px 40px -15px rgba(74, 44, 95, 0.2) !important;
+    box-shadow: var(--shadow-lg) !important;
+    position: relative;
+    animation: fadeInRight 0.8s ease;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @media (min-width: 640px) {
@@ -314,7 +452,7 @@ section {
 @media (min-width: 768px) {
     .hero-image {
         height: 380px !important;
-        border-radius: 20px !important;
+        border-radius: 24px !important;
     }
 }
 
@@ -328,11 +466,11 @@ section {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    transition: transform 0.5s ease !important;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .hero-image:hover img {
-    transform: scale(1.03) !important;
+    transform: scale(1.05) !important;
 }
 
 .hero-image-decoration {
@@ -344,8 +482,14 @@ section {
     background: linear-gradient(145deg, var(--secondary), #b3892c) !important;
     border: 3px solid white !important;
     border-radius: 16px !important;
-    box-shadow: 0 15px 25px rgba(196, 154, 43, 0.15) !important;
+    box-shadow: var(--shadow-md) !important;
     display: none !important;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 @media (min-width: 768px) {
@@ -361,99 +505,16 @@ section {
         content: '★' !important;
         font-size: 2.5rem !important;
         color: white !important;
+        animation: spin 10s linear infinite;
     }
 }
 
-/* === BOTONES MEJORADOS CON ICONOS === */
-.btn-primary-moodle {
-    background: var(--primary) !important;
-    color: white !important;
-    font-weight: 600 !important;
-    padding: 0.7rem 1.8rem !important;
-    border-radius: 40px !important;
-    border: 2px solid transparent !important;
-    transition: all 0.3s ease !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 0.95rem !important;
-    text-decoration: none !important;
-    box-shadow: 0 4px 10px rgba(74, 44, 95, 0.1) !important;
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-.btn-primary-moodle:hover {
-    background: var(--primary-light) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 20px rgba(74, 44, 95, 0.15) !important;
-}
-
-.btn-primary {
-    background: var(--primary) !important;
-    color: white !important;
-    font-weight: 600 !important;
-    padding: 0.7rem 1.8rem !important;
-    border-radius: 40px !important;
-    border: 2px solid transparent !important;
-    transition: all 0.3s ease !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0.5rem !important;
-    font-size: 0.95rem !important;
-    text-decoration: none !important;
-    box-shadow: 0 4px 10px rgba(74, 44, 95, 0.1) !important;
-}
-
-.btn-primary-icon {
-    width: 18px !important;
-    height: 18px !important;
-}
-
-.btn-primary:hover {
-    background: var(--primary-light) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 20px rgba(74, 44, 95, 0.15) !important;
-}
-
-/* === BOTÓN LEER MÁS - TIPO BOTONCITO === */
-.news-card-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0.4rem !important;
-    background: transparent !important;
-    color: var(--primary) !important;
-    font-weight: 600 !important;
-    font-size: 0.85rem !important;
-    padding: 0.5rem 1rem !important;
-    border-radius: 30px !important;
-    border: 2px solid var(--primary) !important;
-    transition: all 0.3s ease !important;
-    text-decoration: none !important;
-    margin-top: 0.75rem !important;
-    align-self: flex-start !important;
-    width: auto !important;
-}
-
-.news-card-btn-icon {
-    width: 16px !important;
-    height: 16px !important;
-    transition: transform 0.3s ease !important;
-}
-
-.news-card-btn:hover {
-    background: var(--primary) !important;
-    color: white !important;
-    border-color: var(--primary) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 4px 10px rgba(74, 44, 95, 0.15) !important;
-}
-
-.news-card-btn:hover .news-card-btn-icon {
-    transform: translateX(4px) !important;
-}
-
-/* === QUICK ACCESS - MÁS COMPACTO === */
+/* === QUICK ACCESS MEJORADO === */
 .quick-access-section {
     margin-bottom: 1.5rem !important;
 }
@@ -479,50 +540,118 @@ section {
 .quick-access-card {
     background: white !important;
     border: 1px solid #e8e0ec !important;
-    border-radius: 14px !important;
-    padding: 0.9rem 0.5rem !important;
-    transition: all 0.3s ease !important;
+    border-radius: 16px !important;
+    padding: 1rem 0.5rem !important;
+    transition: var(--transition) !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    gap: 0.4rem !important;
+    gap: 0.5rem !important;
     text-decoration: none !important;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease;
+    animation-fill-mode: both;
+}
+
+.quick-access-card:nth-child(1) { animation-delay: 0.1s; }
+.quick-access-card:nth-child(2) { animation-delay: 0.2s; }
+.quick-access-card:nth-child(3) { animation-delay: 0.3s; }
+.quick-access-card:nth-child(4) { animation-delay: 0.4s; }
+
+.quick-access-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    transition: height 0.3s ease;
+    opacity: 0.1;
+}
+
+.quick-access-card:hover {
+    transform: translateY(-5px) !important;
+    border-color: var(--secondary) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.quick-access-card:hover::before {
+    height: 100%;
 }
 
 @media (min-width: 640px) {
     .quick-access-card {
-        padding: 1.2rem 0.75rem !important;
-        border-radius: 16px !important;
+        padding: 1.5rem 0.75rem !important;
+        border-radius: 20px !important;
     }
 }
 
 .quick-access-icon {
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 12px !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 14px !important;
     background: #faf7fc !important;
     border: 1px solid #e8e0ec !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 1.4rem !important;
-    transition: all 0.3s ease !important;
+    transition: var(--transition) !important;
+    position: relative;
+    z-index: 1;
 }
 
 @media (min-width: 640px) {
     .quick-access-icon {
-        width: 56px !important;
-        height: 56px !important;
-        font-size: 1.8rem !important;
-        border-radius: 14px !important;
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 16px !important;
     }
 }
 
 .quick-access-card:hover .quick-access-icon {
-    background: #d4b15c !important;
-    border-color: var(--secondary) !important;
-    color: white !important;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%) !important;
+    border-color: transparent !important;
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 10px 20px -5px rgba(196, 154, 43, 0.3);
+}
+
+.quick-access-emoji {
+    font-size: 1.8rem !important;
+    line-height: 1 !important;
+    transition: transform 0.3s ease;
+}
+
+@media (min-width: 640px) {
+    .quick-access-emoji {
+        font-size: 2.2rem !important;
+    }
+}
+
+.quick-access-card:hover .quick-access-emoji {
+    transform: scale(1.1);
+}
+
+.quick-access-img {
+    width: 28px !important;
+    height: 28px !important;
+    object-fit: contain !important;
+    transition: transform 0.3s ease !important;
+    filter: brightness(0.8);
+}
+
+@media (min-width: 640px) {
+    .quick-access-img {
+        width: 34px !important;
+        height: 34px !important;
+    }
+}
+
+.quick-access-card:hover .quick-access-img {
+    transform: scale(1.2) rotate(5deg);
+    filter: brightness(1) drop-shadow(0 4px 6px rgba(0,0,0,0.1));
 }
 
 .quick-access-title {
@@ -530,6 +659,9 @@ section {
     font-size: 0.9rem !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 @media (min-width: 640px) {
@@ -538,10 +670,17 @@ section {
     }
 }
 
+.quick-access-card:hover .quick-access-title {
+    color: var(--secondary) !important;
+}
+
 .quick-access-subtitle {
     color: var(--primary-light) !important;
     font-size: 0.7rem !important;
     font-weight: 500 !important;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 @media (min-width: 640px) {
@@ -550,9 +689,200 @@ section {
     }
 }
 
-/* === NOTICIAS - MÁS COMPACTAS === */
+.quick-access-card:hover .quick-access-subtitle {
+    color: var(--secondary-light) !important;
+}
+
+/* === BOTONES GENERALES MEJORADOS === */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 0.8rem 2rem !important;
+    border-radius: 50px !important;
+    border: none !important;
+    transition: var(--transition) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    font-size: 0.95rem !important;
+    text-decoration: none !important;
+    box-shadow: var(--shadow-sm) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: var(--shadow-lg) !important;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%) !important;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) !important;
+}
+
+.btn-primary-icon {
+    width: 18px !important;
+    height: 18px !important;
+    transition: transform 0.3s ease !important;
+}
+
+.btn-primary:hover .btn-primary-icon {
+    transform: translateX(4px) !important;
+}
+
+/* === BOTÓN LEER MÁS MEJORADO === */
+.news-card-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    background: transparent !important;
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    padding: 0.6rem 1.2rem !important;
+    border-radius: 30px !important;
+    border: 2px solid var(--primary) !important;
+    transition: var(--transition) !important;
+    text-decoration: none !important;
+    margin-top: 0.75rem !important;
+    align-self: flex-start !important;
+    width: auto !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.news-card-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.news-card-btn-icon {
+    width: 16px !important;
+    height: 16px !important;
+    transition: transform 0.3s ease !important;
+}
+
+.news-card-btn:hover {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%) !important;
+    color: white !important;
+    border-color: transparent !important;
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.news-card-btn:hover::before {
+    left: 100%;
+}
+
+.news-card-btn:hover .news-card-btn-icon {
+    transform: translateX(4px) !important;
+}
+
+.news-card-btn:active {
+    transform: translateY(0) !important;
+}
+
+/* === NOTICIAS MEJORADAS === */
 .news-section {
     margin-bottom: 1.5rem !important;
+}
+
+.section-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.section-title {
+    color: var(--primary) !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    position: relative !important;
+    display: inline-block !important;
+    margin-bottom: 0 !important;
+}
+
+@media (min-width: 768px) {
+    .section-title {
+        font-size: 1.8rem !important;
+    }
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary), var(--accent));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.section-title:hover::after {
+    width: 80px;
+}
+
+.section-header-link {
+    color: var(--primary) !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    padding: 0.4rem 1rem !important;
+    border-radius: 30px !important;
+    border: 2px solid var(--primary) !important;
+    transition: var(--transition) !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.4rem !important;
+}
+
+.section-header-icon {
+    width: 16px !important;
+    height: 16px !important;
+    transition: transform 0.3s ease !important;
+}
+
+.section-header-link:hover {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%) !important;
+    color: white !important;
+    border-color: transparent !important;
+    transform: translateX(4px) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.section-header-link:hover .section-header-icon {
+    transform: translateX(4px) !important;
 }
 
 .news-grid {
@@ -577,45 +907,68 @@ section {
 .news-card {
     background: white !important;
     border: 1px solid #e8e0ec !important;
-    border-radius: 16px !important;
+    border-radius: 20px !important;
     overflow: hidden !important;
-    transition: all 0.3s ease !important;
+    transition: var(--transition) !important;
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
+    animation: fadeInUp 0.6s ease;
+    animation-fill-mode: both;
 }
+
+.news-card:nth-child(1) { animation-delay: 0.1s; }
+.news-card:nth-child(2) { animation-delay: 0.2s; }
+.news-card:nth-child(3) { animation-delay: 0.3s; }
 
 .news-card:hover {
     border-color: var(--secondary) !important;
-    box-shadow: 0 15px 30px -10px rgba(74, 44, 95, 0.1) !important;
-    transform: translateY(-4px) !important;
+    box-shadow: var(--shadow-lg) !important;
+    transform: translateY(-8px) !important;
 }
 
 .news-card-image {
-    height: 150px !important;
+    height: 160px !important;
     background: linear-gradient(145deg, #f0eaf5, #e5dceb) !important;
     overflow: hidden !important;
+    position: relative;
 }
 
 @media (min-width: 640px) {
     .news-card-image {
-        height: 170px !important;
+        height: 180px !important;
     }
+}
+
+.news-card-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(74, 44, 95, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.news-card:hover .news-card-image::after {
+    opacity: 1;
 }
 
 .news-card-image img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    transition: transform 0.5s ease !important;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .news-card:hover .news-card-image img {
-    transform: scale(1.05) !important;
+    transform: scale(1.1) !important;
 }
 
 .news-card-content {
-    padding: 1rem !important;
+    padding: 1.25rem !important;
     flex: 1 !important;
     display: flex !important;
     flex-direction: column !important;
@@ -627,6 +980,7 @@ section {
     font-weight: 500 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
+    margin-bottom: 0.25rem;
 }
 
 .news-card-title {
@@ -634,18 +988,23 @@ section {
     font-size: 1rem !important;
     font-weight: 700 !important;
     line-height: 1.4 !important;
-    margin: 0.35rem 0 0.35rem !important;
+    margin: 0.35rem 0 0.5rem !important;
+    transition: color 0.3s ease;
+}
+
+.news-card:hover .news-card-title {
+    color: var(--secondary) !important;
 }
 
 .news-card-excerpt {
     color: #5f4b6a !important;
     font-size: 0.8rem !important;
     line-height: 1.4 !important;
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0.75rem !important;
     flex: 1 !important;
 }
 
-/* === TESTIMONIOS MÁS COMPACTOS === */
+/* === TESTIMONIOS MEJORADOS === */
 .testimonials-section {
     margin-bottom: 1.5rem !important;
 }
@@ -673,35 +1032,59 @@ section {
 .testimonial-card {
     background: white !important;
     border: 1px solid #e8e0ec !important;
-    border-radius: 14px !important;
-    padding: 1rem !important;
+    border-radius: 16px !important;
+    padding: 1.25rem !important;
     display: flex !important;
     gap: 0.75rem !important;
-    transition: all 0.3s ease !important;
+    transition: var(--transition) !important;
     border-left: 4px solid var(--secondary) !important;
+    animation: fadeInLeft 0.6s ease;
+    animation-fill-mode: both;
+}
+
+.testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+.testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+.testimonial-card:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .testimonial-card:hover {
-    box-shadow: 0 10px 25px -8px rgba(74, 44, 95, 0.1) !important;
-    transform: translateX(4px) !important;
+    box-shadow: var(--shadow-md) !important;
+    transform: translateX(8px) !important;
+    border-left-width: 6px;
 }
 
 .testimonial-avatar {
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 12px !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 14px !important;
     border: 2px solid #e8e0ec !important;
     overflow: hidden !important;
     flex-shrink: 0 !important;
     background: #f0eaf5 !important;
+    transition: var(--transition) !important;
 }
 
 @media (min-width: 640px) {
     .testimonial-avatar {
-        width: 50px !important;
-        height: 50px !important;
-        border-radius: 14px !important;
+        width: 56px !important;
+        height: 56px !important;
+        border-radius: 16px !important;
     }
+}
+
+.testimonial-card:hover .testimonial-avatar {
+    border-color: var(--secondary) !important;
+    transform: scale(1.05);
 }
 
 .testimonial-name {
@@ -725,60 +1108,94 @@ section {
     font-style: italic !important;
 }
 
-/* === TARJETA DE CONTACTO === */
+/* === TARJETA DE CONTACTO MEJORADA === */
 .contact-card {
     background: linear-gradient(145deg, #ffffff, #faf5ff) !important;
     border: 1px solid #e8e0ec !important;
-    border-radius: 18px !important;
-    padding: 1.25rem !important;
+    border-radius: 24px !important;
+    padding: 1.5rem !important;
     border-top: 4px solid var(--secondary) !important;
     height: fit-content !important;
+    animation: fadeInRight 0.8s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(196,154,43,0.05) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
 }
 
 .contact-card-title {
     font-weight: 700 !important;
     color: var(--primary) !important;
-    font-size: 1.1rem !important;
-    margin-bottom: 0.4rem !important;
+    font-size: 1.2rem !important;
+    margin-bottom: 0.5rem !important;
+    position: relative;
 }
 
 .contact-card-text {
     color: #5f4b6a !important;
-    font-size: 0.85rem !important;
-    line-height: 1.4 !important;
-    margin-bottom: 1rem !important;
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.25rem !important;
+    position: relative;
 }
 
 .contact-card-buttons {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.6rem !important;
+    gap: 0.75rem !important;
+    position: relative;
 }
 
 .btn-whatsapp, .btn-outline {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 0.5rem !important;
-    padding: 0.6rem 1.2rem !important;
-    border-radius: 40px !important;
+    gap: 0.6rem !important;
+    padding: 0.8rem 1.2rem !important;
+    border-radius: 50px !important;
     font-weight: 600 !important;
-    font-size: 0.9rem !important;
+    font-size: 0.95rem !important;
     text-decoration: none !important;
-    transition: all 0.3s ease !important;
+    transition: var(--transition) !important;
     width: 100% !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-whatsapp::before, .btn-outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
 }
 
 .btn-whatsapp {
-    background: #25D366 !important;
+    background: linear-gradient(135deg, var(--whatsapp) 0%, #34c759 100%) !important;
     color: white !important;
-    border: 2px solid transparent !important;
+    border: none !important;
 }
 
 .btn-whatsapp:hover {
-    background: #128C7E !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 15px 30px -8px rgba(37, 211, 102, 0.3) !important;
+    background: linear-gradient(135deg, var(--whatsapp-dark) 0%, var(--whatsapp) 100%) !important;
+}
+
+.btn-whatsapp:hover::before {
+    left: 100%;
 }
 
 .btn-outline {
@@ -788,83 +1205,42 @@ section {
 }
 
 .btn-outline:hover {
-    background: var(--primary) !important;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%) !important;
     color: white !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 20px rgba(74, 44, 95, 0.15) !important;
+    border-color: transparent !important;
+    transform: translateY(-3px) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.btn-outline:hover::before {
+    left: 100%;
 }
 
 .btn-icon {
-    width: 18px !important;
-    height: 18px !important;
+    width: 20px !important;
+    height: 20px !important;
+    transition: transform 0.3s ease !important;
 }
 
-/* === SECCIÓN HEADER === */
-.section-header {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    flex-wrap: wrap !important;
-    gap: 0.5rem !important;
-    margin-bottom: 0.75rem !important;
-}
-
-.section-title {
-    color: var(--primary) !important;
-    font-size: 1.4rem !important;
-    font-weight: 700 !important;
-    position: relative !important;
-    display: inline-block !important;
-    margin-bottom: 0 !important;
-}
-
-@media (min-width: 768px) {
-    .section-title {
-        font-size: 1.8rem !important;
-    }
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 50px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--secondary), var(--accent));
-    border-radius: 2px;
-}
-
-.section-header-link {
-    color: var(--primary) !important;
-    font-size: 0.85rem !important;
-    font-weight: 600 !important;
-    text-decoration: none !important;
-    padding: 0.3rem 0.8rem !important;
-    border-radius: 30px !important;
-    border: 1px solid var(--primary) !important;
-    transition: all 0.3s ease !important;
-    white-space: nowrap !important;
-}
-
-.section-header-link:hover {
-    background: var(--primary) !important;
-    color: white !important;
+.btn-whatsapp:hover .btn-icon,
+.btn-outline:hover .btn-icon {
+    transform: scale(1.1);
 }
 
 /* === ESTADO VACÍO === */
 .empty-state {
     background: white !important;
-    border: 1px dashed var(--primary-light) !important;
-    border-radius: 16px !important;
-    padding: 2rem !important;
+    border: 2px dashed var(--primary-light) !important;
+    border-radius: 24px !important;
+    padding: 2.5rem !important;
     text-align: center !important;
     grid-column: 1 / -1 !important;
+    animation: pulse 2s infinite;
 }
 
 .empty-message {
     color: var(--primary-light) !important;
-    font-size: 0.95rem !important;
+    font-size: 1rem !important;
     font-style: italic !important;
     margin: 0 !important;
 }
@@ -880,9 +1256,17 @@ section {
     }
     
     .quick-access-icon {
-        width: 40px !important;
-        height: 40px !important;
-        font-size: 1.3rem !important;
+        width: 44px !important;
+        height: 44px !important;
+    }
+    
+    .quick-access-emoji {
+        font-size: 1.6rem !important;
+    }
+    
+    .quick-access-img {
+        width: 26px !important;
+        height: 26px !important;
     }
     
     .quick-access-title {
@@ -894,7 +1278,50 @@ section {
     }
     
     .empty-state {
-        padding: 1.5rem !important;
+        padding: 2rem !important;
+    }
+    
+    .btn-primary-moodle {
+        padding: 0.7rem 1.5rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .moodle-logo {
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
+
+/* === ANIMACIONES ADICIONALES === */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.loading {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(to right, #f0eaf5 4%, #e5dceb 25%, #f0eaf5 36%);
+    background-size: 1000px 100%;
+}
+
+/* === TOUCH DEVICES OPTIMIZACIÓN === */
+@media (hover: none) {
+    .quick-access-card:hover,
+    .news-card:hover,
+    .testimonial-card:hover,
+    .btn-primary:hover,
+    .btn-primary-moodle:hover {
+        transform: none !important;
+    }
+    
+    .quick-access-card:active,
+    .news-card:active,
+    .testimonial-card:active {
+        transform: scale(0.98) !important;
     }
 }
 </style>
