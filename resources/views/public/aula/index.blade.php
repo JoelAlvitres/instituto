@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Instituto Von Humboldt - Plataforma Estudiantil')</title>
+     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -978,7 +979,7 @@
             </div>
             
             <main class="login-section">
-                <h1 class="title">@yield('page-title', 'Accede al Sistema')</h1>
+                <h1 class="title">@yield('page-title', 'Accede al Aula Virtual')</h1>
                 <p class="subtitle">@yield('page-subtitle', 'Plataforma exclusiva para nuestros estudiantes. Ingresa con tus credenciales para acceder a materiales, calificaciones y más.')</p>
                 
                 <button class="btn-primary" id="accederBtn">
@@ -1054,7 +1055,7 @@
             </div>
             
             <div class="social-media">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://web.facebook.com/institutovonhumboldt/?locale=es_LA&_rdc=1&_rdr#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>

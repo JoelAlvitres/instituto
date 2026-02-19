@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OfertaLaboral extends Model
 {
-    protected $table = 'oferta_laborals';
+    protected $table = 'ofertas_laborales';
 
     protected $fillable = [
         'titulo',

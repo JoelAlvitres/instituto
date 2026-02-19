@@ -1,6 +1,7 @@
 @extends('layouts.public')
 @section('title', $carrera->nombre)
 
+
 @php
   // Normalizar campo_laboral (Filament repeater guarda [{item:"..."}, ...])
   $campo = $carrera->campo_laboral ?? [];

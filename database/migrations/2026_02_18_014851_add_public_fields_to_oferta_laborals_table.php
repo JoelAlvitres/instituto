@@ -7,44 +7,44 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('oferta_laborals', function (Blueprint $table) {
-            if (!Schema::hasColumn('oferta_laborals', 'titulo')) {
+        Schema::table('ofertas_laborales', function (Blueprint $table) {
+            if (!Schema::hasColumn('ofertas_laborales', 'titulo')) {
                 $table->string('titulo');
             }
 
-            if (!Schema::hasColumn('oferta_laborals', 'empresa')) {
+            if (!Schema::hasColumn('ofertas_laborales', 'empresa')) {
                 $table->string('empresa')->nullable();
             }
 
-            if (!Schema::hasColumn('oferta_laborals', 'ubicacion')) {
+            if (!Schema::hasColumn('ofertas_laborales', 'ubicacion')) {
                 $table->string('ubicacion')->nullable();
             }
 
-            if (!Schema::hasColumn('oferta_laborals', 'tipo')) {
+            if (!Schema::hasColumn('ofertas_laborales', 'tipo')) {
                 $table->string('tipo')->nullable();
             }
 
-            if (!Schema::hasColumn('oferta_laborals', 'fecha_cierre')) {
+            if (!Schema::hasColumn('ofertas_laborales', 'fecha_cierre')) {
                 $table->date('fecha_cierre')->nullable();
             }
 
-            if (!Schema::hasColumn('oferta_laborals', 'resumen')) {
+            if (!Schema::hasColumn('ofertas_laborales', 'resumen')) {
                 $table->text('resumen')->nullable();
             }
 
-            if (!Schema::hasColumn('oferta_laborals', 'descripcion')) {
+            if (!Schema::hasColumn('ofertas_laborales', 'descripcion')) {
                 $table->longText('descripcion')->nullable();
             }
 
-            if (!Schema::hasColumn('oferta_laborals', 'enlace_postulacion')) {
+            if (!Schema::hasColumn('ofertas_laborales', 'enlace_postulacion')) {
                 $table->string('enlace_postulacion')->nullable();
             }
 
-            if (!Schema::hasColumn('oferta_laborals', 'activa')) {
+            if (!Schema::hasColumn('ofertas_laborales', 'activa')) {
                 $table->boolean('activa')->default(true);
             }
 
-            if (!Schema::hasColumn('oferta_laborals', 'orden')) {
+            if (!Schema::hasColumn('ofertas_laborales', 'orden')) {
                 $table->unsignedInteger('orden')->default(0);
             }
         });
@@ -52,7 +52,7 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::table('oferta_laborals', function (Blueprint $table) {
+        Schema::table('ofertas_laborales', function (Blueprint $table) {
             $cols = [
                 'titulo',
                 'empresa',
@@ -67,7 +67,7 @@ return new class extends Migration {
             ];
 
             foreach ($cols as $col) {
-                if (Schema::hasColumn('oferta_laborals', $col)) {
+                if (Schema::hasColumn('ofertas_laborales', $col)) {
                     $table->dropColumn($col);
                 }
             }
