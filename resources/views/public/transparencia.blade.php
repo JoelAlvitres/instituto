@@ -27,9 +27,7 @@
                     Acceso a la información, documentos de gestión, convenios y estadísticas al alcance de la comunidad.
                 </p>
 
-           
-    
-    {{-- BOTÓN DE AULA VIRTUAL MEJORADO --}}
+                {{-- BOTÓN DE AULA VIRTUAL MEJORADO --}}
                 <a target="_blank" rel="noopener"
                    href="{{ route('public.aula') }}" 
                    class="group relative inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-[#4a2e6e] to-[#6b3f8c] text-white font-semibold rounded-xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-300 border border-[#c9a227]/30 hover:border-[#c9a227]">
@@ -52,8 +50,8 @@
                     {{-- Flecha animada --}}
                     <span class="relative text-xl opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all duration-300">→</span>
                 </a>
-            
             </div>
+
             {{-- Imagen derecha --}}
             <div class="relative animate-fade-in-right">
                 <div class="relative group perspective-1000">
@@ -96,27 +94,27 @@
             <div class="w-24 h-1 bg-gradient-to-r from-[#c9a227] to-[#e67e22] mx-auto rounded-full"></div>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             {{-- COLUMNA 1: DOCUMENTOS DE GESTIÓN --}}
             <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-[#6b3f8c]/10 overflow-hidden flex flex-col h-full">
                 <div class="h-2 bg-gradient-to-r from-[#c9a227] to-[#e67e22]"></div>
-                <div class="p-8 flex flex-col h-full">
+                <div class="p-6 lg:p-8 flex flex-col h-full">
                     <div class="text-center mb-6">
-                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#faf5ff] to-[#6b3f8c]/10 flex items-center justify-center text-4xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-[#faf5ff] to-[#6b3f8c]/10 flex items-center justify-center text-3xl lg:text-4xl mx-auto mb-4 group-hover:scale-110 transition-transform">
                             📄
                         </div>
-                        <h3 class="text-2xl font-bold text-[#4a2e6e] mb-2">Documentos de Gestión</h3>
-                        <p class="text-sm text-gray-500">Descargables en PDF con información institucional.</p>
+                        <h3 class="text-xl lg:text-2xl font-bold text-[#4a2e6e] mb-2">Documentos de Gestión</h3>
+                        <p class="text-xs lg:text-sm text-gray-500">Descargables en PDF con información institucional.</p>
                     </div>
 
                     <div class="space-y-3 flex-1">
                         @forelse($gestion as $index => $doc)
-                            <div class="group/item bg-gradient-to-r from-[#faf5ff] to-white p-4 rounded-xl border border-[#c9a227]/10 hover:border-[#c9a227]/30 hover:shadow-lg transition-all duration-300">
+                            <div class="group/item bg-gradient-to-r from-[#faf5ff] to-white p-3 lg:p-4 rounded-xl border border-[#c9a227]/10 hover:border-[#c9a227]/30 hover:shadow-lg transition-all duration-300">
                                 <div class="flex items-start gap-3">
-                                    <div class="text-2xl text-[#e67e22] group-hover/item:scale-110 transition-transform">📄</div>
+                                    <div class="text-xl lg:text-2xl text-[#e67e22] group-hover/item:scale-110 transition-transform">📄</div>
                                     <div class="flex-1">
-                                        <h4 class="font-semibold text-[#4a2e6e] text-sm leading-tight group-hover/item:text-[#c9a227] transition-colors">{{ $doc->titulo }}</h4>
+                                        <h4 class="font-semibold text-[#4a2e6e] text-xs lg:text-sm leading-tight group-hover/item:text-[#c9a227] transition-colors">{{ $doc->titulo }}</h4>
                                         @if($doc->descripcion)
                                             <p class="text-xs text-gray-500 mt-1">{{ Str::limit($doc->descripcion, 60) }}</p>
                                         @endif
@@ -143,7 +141,7 @@
                     </div>
                     
                     <div class="mt-6 text-center pt-4 border-t border-gray-100">
-                        <a href="#" class="inline-flex items-center gap-2 text-[#6b3f8c] hover:text-[#c9a227] font-semibold transition-colors">
+                        <a href="#" class="inline-flex items-center gap-2 text-[#6b3f8c] hover:text-[#c9a227] font-semibold transition-colors text-sm lg:text-base">
                             Datos infográficos
                             <span class="text-lg">→</span>
                         </a>
@@ -154,23 +152,23 @@
             {{-- COLUMNA 2: CONVENIOS INSTITUCIONALES --}}
             <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-[#6b3f8c]/10 overflow-hidden flex flex-col h-full">
                 <div class="h-2 bg-gradient-to-r from-[#6b3f8c] to-[#8f55b5]"></div>
-                <div class="p-8 flex flex-col h-full">
+                <div class="p-6 lg:p-8 flex flex-col h-full">
                     <div class="text-center mb-6">
-                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#faf5ff] to-[#6b3f8c]/10 flex items-center justify-center text-4xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-[#faf5ff] to-[#6b3f8c]/10 flex items-center justify-center text-3xl lg:text-4xl mx-auto mb-4 group-hover:scale-110 transition-transform">
                             🤝
                         </div>
-                        <h3 class="text-2xl font-bold text-[#4a2e6e] mb-2">Convenios Institucionales</h3>
-                        <p class="text-sm text-gray-500">Acuerdos con instituciones aliadas.</p>
+                        <h3 class="text-xl lg:text-2xl font-bold text-[#4a2e6e] mb-2">Convenios Institucionales</h3>
+                        <p class="text-xs lg:text-sm text-gray-500">Acuerdos con instituciones aliadas.</p>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4 flex-1 content-start">
+                    <div class="grid grid-cols-2 gap-3 lg:gap-4 flex-1 content-start">
                         @forelse($convenios as $conv)
-                            <div class="group/item flex flex-col items-center p-4 bg-gradient-to-br from-[#faf5ff] to-white rounded-xl border border-[#c9a227]/10 hover:border-[#c9a227]/30 hover:shadow-lg transition-all duration-300">
+                            <div class="group/item flex flex-col items-center p-3 lg:p-4 bg-gradient-to-br from-[#faf5ff] to-white rounded-xl border border-[#c9a227]/10 hover:border-[#c9a227]/30 hover:shadow-lg transition-all duration-300">
                                 @if($conv->archivo)
                                     <img src="{{ asset('storage/'.$conv->archivo) }}" alt="{{ $conv->titulo }}" 
-                                         class="h-16 w-16 object-contain mb-3 group-hover/item:scale-110 transition-transform">
+                                         class="h-12 w-12 lg:h-16 lg:w-16 object-contain mb-3 group-hover/item:scale-110 transition-transform">
                                 @else
-                                    <div class="h-16 w-16 bg-gradient-to-br from-[#6b3f8c] to-[#4a2e6e] rounded-2xl flex items-center justify-center text-white text-xl mb-3">
+                                    <div class="h-12 w-12 lg:h-16 lg:w-16 bg-gradient-to-br from-[#6b3f8c] to-[#4a2e6e] rounded-2xl flex items-center justify-center text-white text-xl lg:text-2xl mb-3">
                                         🤝
                                     </div>
                                 @endif
@@ -186,7 +184,7 @@
                     </div>
 
                     <div class="mt-6 text-center pt-4 border-t border-gray-100">
-                        <a href="#" class="inline-flex items-center gap-2 text-[#6b3f8c] hover:text-[#c9a227] font-semibold transition-colors">
+                        <a href="#" class="inline-flex items-center gap-2 text-[#6b3f8c] hover:text-[#c9a227] font-semibold transition-colors text-sm lg:text-base">
                             Detalles de acuerdos
                             <span class="text-lg">→</span>
                         </a>
@@ -197,23 +195,23 @@
             {{-- COLUMNA 3: ESTADÍSTICAS --}}
             <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-[#6b3f8c]/10 overflow-hidden flex flex-col h-full">
                 <div class="h-2 bg-gradient-to-r from-[#e67e22] to-[#c9a227]"></div>
-                <div class="p-8 flex flex-col h-full">
+                <div class="p-6 lg:p-8 flex flex-col h-full">
                     <div class="text-center mb-6">
-                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#faf5ff] to-[#6b3f8c]/10 flex items-center justify-center text-4xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-[#faf5ff] to-[#6b3f8c]/10 flex items-center justify-center text-3xl lg:text-4xl mx-auto mb-4 group-hover:scale-110 transition-transform">
                             📊
                         </div>
-                        <h3 class="text-2xl font-bold text-[#4a2e6e] mb-2">Estadísticas Clave</h3>
-                        <p class="text-sm text-gray-500">Infografías de indicadores institucionales.</p>
+                        <h3 class="text-xl lg:text-2xl font-bold text-[#4a2e6e] mb-2">Estadísticas Clave</h3>
+                        <p class="text-xs lg:text-sm text-gray-500">Infografías de indicadores institucionales.</p>
                     </div>
 
                     <div class="space-y-4 flex-1">
                         @forelse($estadisticas as $est)
                             <div class="group/item bg-gradient-to-br from-[#faf5ff] to-white rounded-xl border border-[#c9a227]/10 hover:border-[#c9a227]/30 hover:shadow-lg transition-all duration-300 overflow-hidden">
-                                <h4 class="text-sm font-bold text-center text-[#4a2e6e] py-2 bg-[#faf5ff]">{{ $est->titulo }}</h4>
+                                <h4 class="text-xs lg:text-sm font-bold text-center text-[#4a2e6e] py-2 bg-[#faf5ff]">{{ $est->titulo }}</h4>
                                 @if($est->archivo)
-                                    <div class="p-3">
+                                    <div class="p-2 lg:p-3">
                                         <img src="{{ asset('storage/'.$est->archivo) }}" 
-                                             class="w-full rounded-lg h-32 object-cover transform group-hover/item:scale-105 transition-transform duration-500">
+                                             class="w-full rounded-lg h-24 lg:h-32 object-cover transform group-hover/item:scale-105 transition-transform duration-500">
                                     </div>
                                 @endif
                             </div>
@@ -223,7 +221,7 @@
                     </div>
 
                     <div class="mt-6 text-center pt-4 border-t border-gray-100">
-                        <a href="#" class="inline-flex items-center gap-2 text-[#6b3f8c] hover:text-[#c9a227] font-semibold transition-colors">
+                        <a href="#" class="inline-flex items-center gap-2 text-[#6b3f8c] hover:text-[#c9a227] font-semibold transition-colors text-sm lg:text-base">
                             Ver todas las estadísticas
                             <span class="text-lg">→</span>
                         </a>
@@ -236,83 +234,29 @@
 
 {{-- RECURSOS Y DATOS ABIERTOS --}}
 <section class="bg-white py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div class="animate-fade-in-up">
-                <span class="text-sm uppercase tracking-[0.3em] text-[#6b3f8c] font-semibold">DATOS ABIERTOS</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-[#4a2e6e] mt-4 mb-6">Recursos y Datos Abiertos</h2>
-                <p class="text-gray-600 text-lg mb-8 leading-relaxed">
-                    Accede a recursos de información institucional, datos abiertos y herramientas para la comunidad educativa.
-                </p>
-                
-                <div class="space-y-4">
-                    @forelse($recursos as $rec)
-                        <a href="{{ $rec->enlace ?? asset('storage/'.$rec->archivo) }}" target="_blank" 
-                           class="group/item flex items-center gap-4 p-4 bg-gradient-to-r from-[#faf5ff] to-white rounded-xl border border-[#c9a227]/10 hover:border-[#c9a227]/30 hover:shadow-lg transition-all duration-300">
-                            <span class="text-3xl group-hover/item:scale-110 transition-transform">📂</span>
-                            <span class="flex-1 font-semibold text-[#4a2e6e] group-hover/item:text-[#c9a227] transition-colors">{{ $rec->titulo }}</span>
-                            <span class="text-[#c9a227] opacity-0 group-hover/item:opacity-100 transition-opacity">→</span>
-                        </a>
-                    @empty
-                        <p class="text-gray-400 italic text-center py-8">No hay recursos adicionales disponibles.</p>
-                    @endforelse
-                </div>
-            </div>
-
-            {{-- ASISTENTE VIRTUAL MEJORADO --}}
-            <div class="relative animate-fade-in-right">
-                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-[#c9a227]/20 max-w-md mx-auto transform hover:scale-105 transition-transform duration-500">
-                    {{-- Cabecera del asistente --}}
-                    <div class="bg-gradient-to-r from-[#4a2e6e] to-[#6b3f8c] p-4 flex justify-between items-center text-white">
-                        <div class="flex items-center gap-2">
-                            <span class="text-2xl">🤖</span>
-                            <span class="font-bold">Asistente Virtual</span>
-                        </div>
-                        <div class="flex gap-2">
-                            <span class="cursor-pointer hover:text-[#c9a227] transition-colors">↗</span>
-                            <span class="cursor-pointer hover:text-[#c9a227] transition-colors">×</span>
-                        </div>
-                    </div>
-                    
-                    {{-- Cuerpo del chat --}}
-                    <div class="p-6 h-64 bg-gradient-to-b from-[#faf5ff] to-white flex flex-col justify-end">
-                        <div class="bg-white p-4 rounded-2xl shadow-lg text-sm text-gray-700 mb-4 border-l-4 border-[#c9a227] max-w-[80%] animate-float">
-                            <span class="text-[#c9a227] text-xl mr-2">💬</span>
-                            ¡Hola! ¿En qué puedo ayudarte hoy?
-                        </div>
-                        
-                        {{-- Mensaje de ejemplo del usuario --}}
-                        <div class="bg-gradient-to-r from-[#6b3f8c] to-[#4a2e6e] text-white p-3 rounded-2xl self-end max-w-[80%] mb-4 shadow-lg">
-                            Me gustaría consultar sobre...
-                        </div>
-                        
-                        {{-- Input de mensaje --}}
-                        <div class="flex gap-2 mt-2">
-                            <input type="text" 
-                                   placeholder="Escribe tu mensaje..." 
-                                   class="flex-1 text-sm border-2 border-gray-200 rounded-xl px-4 py-3 focus:border-[#c9a227] focus:ring-4 focus:ring-[#c9a227]/20 outline-none transition-all">
-                            <button class="bg-gradient-to-r from-[#c9a227] to-[#e67e22] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                                Enviar
-                            </button>
-                        </div>
-                    </div>
-                    
-                    {{-- Pie del asistente --}}
-                    <div class="p-3 bg-[#faf5ff] flex justify-end items-center gap-2 border-t border-[#c9a227]/20">
-                        <span class="text-xs text-gray-500">Atendido 24/7</span>
-                        <span class="text-2xl animate-pulse">🤖</span>
-                    </div>
-                </div>
-                
-                {{-- Elementos decorativos --}}
-                <div class="absolute -top-4 -right-4 w-24 h-24 bg-[#c9a227] opacity-10 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-[#6b3f8c] opacity-10 rounded-full blur-3xl"></div>
-            </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="text-sm uppercase tracking-[0.3em] text-[#6b3f8c] font-semibold">DATOS ABIERTOS</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-[#4a2e6e] mt-4 mb-6">Recursos y Datos Abiertos</h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+                Accede a recursos de información institucional, datos abiertos y herramientas para la comunidad educativa.
+            </p>
+        </div>
+        
+        <div class="space-y-4 max-w-2xl mx-auto">
+            @forelse($recursos as $rec)
+                <a href="{{ $rec->enlace ?? asset('storage/'.$rec->archivo) }}" target="_blank" 
+                   class="group/item flex items-center gap-4 p-5 bg-gradient-to-r from-[#faf5ff] to-white rounded-xl border border-[#c9a227]/10 hover:border-[#c9a227]/30 hover:shadow-lg transition-all duration-300">
+                    <span class="text-3xl group-hover/item:scale-110 transition-transform">📂</span>
+                    <span class="flex-1 font-semibold text-[#4a2e6e] group-hover/item:text-[#c9a227] transition-colors">{{ $rec->titulo }}</span>
+                    <span class="text-[#c9a227] opacity-0 group-hover/item:opacity-100 transition-opacity text-xl">→</span>
+                </a>
+            @empty
+                <p class="text-gray-400 italic text-center py-8">No hay recursos adicionales disponibles.</p>
+            @endforelse
         </div>
     </div>
 </section>
-
-
 @endsection
 
 @section('styles')
@@ -368,15 +312,6 @@
     100% { background-position: 0% 50%; }
 }
 
-@keyframes shimmer {
-    0% {
-        transform: translateX(-100%) skewX(-15deg);
-    }
-    100% {
-        transform: translateX(200%) skewX(-15deg);
-    }
-}
-
 .animate-fade-in-up {
     animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
@@ -398,19 +333,15 @@
     animation: gradient 4s ease infinite;
 }
 
-.animate-shimmer {
-    animation: shimmer 2s infinite;
-}
-
 /* === ESTILOS DE ENTRADA === */
-.grid.md\:grid-cols-3 > div {
+.grid.md\:grid-cols-2.lg\:grid-cols-3 > div {
     opacity: 0;
     animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-.grid.md\:grid-cols-3 > div:nth-child(1) { animation-delay: 0.1s; }
-.grid.md\:grid-cols-3 > div:nth-child(2) { animation-delay: 0.2s; }
-.grid.md\:grid-cols-3 > div:nth-child(3) { animation-delay: 0.3s; }
+.grid.md\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) { animation-delay: 0.1s; }
+.grid.md\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) { animation-delay: 0.2s; }
+.grid.md\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) { animation-delay: 0.3s; }
 
 /* === EFECTOS 3D === */
 .perspective-1000 {
@@ -434,7 +365,6 @@
 .group:hover .group-hover\:scale-110 {
     transform: scale(1.1);
 }
-
 
 /* === LINE-CLAMP UTILITY === */
 .line-clamp-2 {
@@ -477,11 +407,11 @@
         font-size: 2.5rem;
     }
     
-    .grid.md\:grid-cols-3 {
+    .grid.md\:grid-cols-2.lg\:grid-cols-3 {
         gap: 1.5rem;
     }
     
-    .p-8 {
+    .p-6 {
         padding: 1.5rem;
     }
     
@@ -491,25 +421,6 @@
     
     .grid.md\:grid-cols-2 {
         gap: 2rem;
-    }
-    
-    .aula-virtual-btn {
-        padding: 0.75rem 1.5rem;
-        gap: 0.75rem;
-    }
-    
-    .aula-virtual-icon {
-        width: 2rem;
-        height: 2rem;
-    }
-    
-    .aula-virtual-icon img {
-        width: 1.25rem;
-        height: 1.25rem;
-    }
-    
-    .aula-virtual-text {
-        font-size: 1rem;
     }
 }
 
@@ -523,7 +434,7 @@
         letter-spacing: 0.2em;
     }
     
-    .grid.md\:grid-cols-3 {
+    .grid.md\:grid-cols-2.lg\:grid-cols-3 {
         grid-template-columns: 1fr;
     }
     
@@ -537,11 +448,6 @@
     
     .grid.grid-cols-2 {
         grid-template-columns: 1fr;
-    }
-    
-    .aula-virtual-btn {
-        width: 100%;
-        justify-content: center;
     }
 }
 

@@ -138,7 +138,7 @@
                                 <span class="text-2xl text-[#c9a227]">📍</span>
                                 <div>
                                     <h4 class="font-bold text-[#4a2e6e] text-sm uppercase tracking-wider">DIRECCIÓN</h4>
-                                    <p class="text-gray-600">Av. Revolución 4123, Ciudad</p>
+                                    <p class="text-gray-600">Calle Tupac Yupanqui 273, frente a la plazuela Pinillos - TRUJILLO</p>
                                 </div>
                             </div>
 
@@ -146,7 +146,7 @@
                                 <span class="text-2xl text-[#c9a227]">📞</span>
                                 <div>
                                     <h4 class="font-bold text-[#4a2e6e] text-sm uppercase tracking-wider">TELÉFONOS</h4>
-                                    <p class="text-gray-600">+51 123 456 789 / +51 987 654 321</p>
+                                    <p class="text-gray-600">044 345 333/ 948 516 839</p>
                                 </div>
                             </div>
 
@@ -210,7 +210,7 @@
                     <div class="absolute inset-0 bg-gradient-to-br from-[#c9a227]/5 to-[#e67e22]/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity"></div>
                     <div class="relative">
                         <div class="h-20 flex items-center justify-center mb-4">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Ministerio_de_Educaci%C3%B3n_del_Per%C3%BA_-_Logo_2024.svg/2560px-Ministerio_de_Educaci%C3%B3n_del_Per%C3%BA_-_Logo_2024.svg.png"
+                            <img src="https://static.wixstatic.com/media/9604c8_b3968c176697494092aa5ecdd301cc6a~mv2.png/v1/fill/w_3334,h_3334,al_c/minedu.png"
                                  class="h-14 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
                         </div>
                         <span class="text-sm font-bold text-gray-700 group-hover:text-[#4a2e6e] transition-colors block">

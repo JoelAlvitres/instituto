@@ -100,23 +100,31 @@
           @endif
         </div>
 
-        {{-- Estadísticas o datos clave --}}
-        <div class="grid grid-cols-3 gap-6 mt-12">
-          <div class="text-center border-r border-white/20 pr-6 last:border-0">
+        {{-- Estadísticas o datos clave - VERSIÓN MEJORADA --}}
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-12 text-center">
+          {{-- 3 Años --}}
+          <div class="relative px-4 py-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 sm:border-0 sm:bg-transparent sm:backdrop-blur-none sm:rounded-none sm:p-0">
+            <div class="sm:hidden absolute left-0 top-1/2 -translate-y-1/2 w-1 h-10 bg-gradient-to-b from-[#c9a227] to-[#e67e22] rounded-r-full"></div>
             <div class="text-3xl font-bold text-[#c9a227] mb-1">3</div>
             <div class="text-sm text-white/60 uppercase tracking-wider">Años</div>
           </div>
-          <div class="text-center border-r border-white/20 pr-6 last:border-0">
+
+          {{-- Modalidad Presencial --}}
+          <div class="relative px-4 py-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 sm:border-0 sm:bg-transparent sm:backdrop-blur-none sm:rounded-none sm:p-0 sm:border-l sm:border-r sm:border-white/20">
+            <div class="sm:hidden absolute left-0 top-1/2 -translate-y-1/2 w-1 h-10 bg-gradient-to-b from-[#c9a227] to-[#e67e22] rounded-r-full"></div>
             <div class="text-3xl font-bold text-[#c9a227] mb-1">Presencial</div>
             <div class="text-sm text-white/60 uppercase tracking-wider">Modalidad</div>
           </div>
-          <div class="text-center">
+
+          {{-- Inicio Marzo --}}
+          <div class="relative px-4 py-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 sm:border-0 sm:bg-transparent sm:backdrop-blur-none sm:rounded-none sm:p-0">
+            <div class="sm:hidden absolute left-0 top-1/2 -translate-y-1/2 w-1 h-10 bg-gradient-to-b from-[#c9a227] to-[#e67e22] rounded-r-full"></div>
             <div class="text-3xl font-bold text-[#c9a227] mb-1">Marzo</div>
             <div class="text-sm text-white/60 uppercase tracking-wider">Inicio</div>
           </div>
         </div>
       </div>
-
+      
       {{-- COLUMNA DERECHA: IMAGEN CON MARCO INSTITUCIONAL --}}
       @if(!empty($carrera->imagen))
         <div class="flex-shrink-0 w-full max-w-[400px] mx-auto animate-float">
@@ -295,25 +303,15 @@
             </div>
             <h4 class="text-xl font-bold text-[#4a2e6e]">VON HUMBOLDT</h4>
           </div>
-          
-        {{-- Buscador funcional con JavaScript --}}
-<div class="relative mb-6">
-    <input type="text" 
-           id="programSearch"
-           placeholder="Buscar programa..." 
-           class="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-[#c9a227] focus:ring-4 focus:ring-[#c9a227]/20 outline-none transition-all pl-14 bg-gray-50 text-gray-800">
-    <span class="absolute left-5 top-4 text-gray-400 text-xl">🔍</span>
-</div>
 
-          {{-- Lista de programas institucional con filtro en tiempo real --}}
+          {{-- Lista de programas institucional --}}
           <div class="space-y-3 max-h-[350px] overflow-y-auto pr-2 custom-scrollbar" id="programList">
             @foreach($programasSidebar as $p)
               <a href="{{ route('public.carreras.show', $p->slug) }}" 
-                 class="program-item flex items-center gap-3 px-5 py-4 rounded-xl transition-all duration-300 group
+                 class="flex items-center gap-3 px-5 py-4 rounded-xl transition-all duration-300 group
                         {{ $p->id === $carrera->id 
                             ? 'bg-gradient-to-r from-[#faf5ff] to-white border-l-4 border-[#c9a227] shadow-md' 
-                            : 'hover:bg-[#faf5ff] hover:border-l-4 hover:border-[#c9a227]/50' }}"
-                 data-program-name="{{ strtolower($p->nombre) }}">
+                            : 'hover:bg-[#faf5ff] hover:border-l-4 hover:border-[#c9a227]/50' }}">
                 <span class="w-2 h-2 rounded-full {{ $p->id === $carrera->id ? 'bg-[#c9a227]' : 'bg-gray-300 group-hover:bg-[#c9a227]' }} transition-all"></span>
                 <span class="flex-1 {{ $p->id === $carrera->id ? 'text-[#4a2e6e] font-semibold' : 'text-gray-800 group-hover:text-[#4a2e6e]' }}">
                   {{ $p->nombre }}
@@ -325,9 +323,17 @@
             @endforeach
           </div>
 
-          {{-- Mensaje cuando no hay resultados --}}
-          <div id="noResults" class="hidden text-center py-8 text-gray-500 italic">
-            No se encontraron programas
+          {{-- Botón Otros Programas --}}
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <a href="{{ route('public.carreras.index') }}" 
+               class="group relative flex items-center justify-center gap-3 w-full px-6 py-4 bg-gradient-to-r from-[#6b3f8c] to-[#4a2e6e] text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+              <span class="absolute inset-0 bg-gradient-to-r from-[#c9a227] to-[#e67e22] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span class="relative flex items-center gap-2">
+                <span class="text-xl group-hover:scale-110 transition-transform">📚</span>
+                <span>Otros Programas</span>
+                <span class="text-xl group-hover:translate-x-1 transition-transform">→</span>
+              </span>
+            </a>
           </div>
 
           {{-- Botones de acción institucionales --}}
@@ -705,51 +711,54 @@ a:active::after, button:active::after {
     box-shadow: 0 15px 25px -8px rgba(0, 0, 0, 0.3);
 }
 
-/* === MEJORAS PARA EL BUSCADOR === */
-#programSearch {
-    transition: all 0.3s ease;
-}
-
-#programSearch:focus {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px -5px rgba(201, 162, 39, 0.3);
-}
-
-#noResults {
-    text-align: center;
-    padding: 2rem;
-    color: #6b3f8c;
-    font-style: italic;
-    background: linear-gradient(135deg, #faf5ff, white);
-    border-radius: 1rem;
-    margin-top: 1rem;
-    border: 2px dashed #c9a227;
-    animation: fadeIn 0.5s ease;
-}
-
-/* Animación para resultados */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+/* === MEJORAS RESPONSIVE PARA ESTADÍSTICAS === */
+@media (max-width: 480px) {
+    .grid.grid-cols-1.sm\:grid-cols-3 {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    
+    .grid.grid-cols-1.sm\:grid-cols-3 > div {
+        width: 100%;
+        text-align: left;
+        padding-left: 1.5rem;
+    }
+    
+    .grid.grid-cols-1.sm\:grid-cols-3 > div .text-3xl {
+        font-size: 1.75rem;
+    }
+    
+    .grid.grid-cols-1.sm\:grid-cols-3 > div .text-sm {
+        font-size: 0.7rem;
     }
 }
 
-.program-item[style*="display: flex"] {
-    animation: fadeIn 0.3s ease forwards;
+/* Ajuste para pantallas muy pequeñas (menos de 360px) */
+@media (max-width: 360px) {
+    .grid.grid-cols-1.sm\:grid-cols-3 > div {
+        padding: 0.75rem 1rem 0.75rem 1.5rem;
+    }
+    
+    .grid.grid-cols-1.sm\:grid-cols-3 > div .text-3xl {
+        font-size: 1.5rem;
+    }
 }
 
-/* Contador de resultados (opcional) */
-.search-stats {
-    font-size: 0.75rem;
-    color: #6b3f8c;
-    margin-top: 0.5rem;
-    text-align: right;
-    opacity: 0.7;
+/* === MEJORAS PARA PANTALLAS MUY PEQUEÑAS === */
+@media (max-width: 380px) {
+    .flex.flex-col.items-center.space-y-4 > div {
+        max-width: 240px;
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .flex.flex-col.items-center.space-y-4 > div .text-3xl {
+        font-size: 1.5rem;
+    }
+    
+    .flex.flex-col.items-center.space-y-4 > div .text-xs {
+        font-size: 0.6rem;
+    }
 }
 </style>
 @endsection
@@ -757,109 +766,21 @@ a:active::after, button:active::after {
 @section('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔍 Buscador iniciado'); // Para verificar que funciona
+    console.log('✅ Página cargada correctamente');
     
-    const searchInput = document.getElementById('programSearch');
-    const programContainer = document.getElementById('programList');
-    const noResults = document.getElementById('noResults');
-    
-    if (!searchInput) {
-        console.error('❌ No se encontró el input de búsqueda');
-        return;
-    }
-    
-    // Obtener todos los programas (incluyendo el actual)
-    const programItems = document.querySelectorAll('#programList a[data-program-name]');
-    console.log('📋 Programas encontrados:', programItems.length);
-    
-    if (programItems.length === 0) {
-        console.warn('⚠️ No hay elementos con data-program-name');
-    }
-    
-    // Función de búsqueda
-    function filterPrograms() {
-        const searchTerm = searchInput.value.toLowerCase().trim();
-        console.log('🔎 Buscando:', searchTerm);
-        
-        let visibleCount = 0;
-        
-        programItems.forEach(item => {
-            // Obtener el nombre del programa del atributo data
-            let programName = item.getAttribute('data-program-name');
-            
-            // Si no tiene data-program-name, obtener del texto
-            if (!programName) {
-                const nameSpan = item.querySelector('.flex-1');
-                programName = nameSpan ? nameSpan.textContent.toLowerCase().trim() : '';
-                // Guardarlo para futuras búsquedas
-                if (programName) {
-                    item.setAttribute('data-program-name', programName);
-                }
+    // Smooth scroll para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             }
-            
-            // Determinar si debe mostrarse
-            const shouldShow = searchTerm === '' || programName.includes(searchTerm);
-            
-            // Mostrar u ocultar
-            item.style.display = shouldShow ? 'flex' : 'none';
-            
-            if (shouldShow) {
-                visibleCount++;
-                
-                // Resaltar texto (opcional, mejora UX)
-                if (searchTerm !== '' && item.querySelector('.flex-1')) {
-                    const nameSpan = item.querySelector('.flex-1');
-                    const originalText = nameSpan.textContent;
-                    
-                    if (!item.hasAttribute('data-original')) {
-                        item.setAttribute('data-original', originalText);
-                    }
-                    
-                    const regex = new RegExp(`(${searchTerm})`, 'gi');
-                    nameSpan.innerHTML = originalText.replace(
-                        regex, 
-                        '<span style="background-color: #c9a22730; color: #4a2e6e; font-weight: 700; padding: 0 2px; border-radius: 2px;">$1</span>'
-                    );
-                } else {
-                    // Restaurar texto original
-                    const nameSpan = item.querySelector('.flex-1');
-                    const originalText = item.getAttribute('data-original');
-                    if (originalText && nameSpan) {
-                        nameSpan.textContent = originalText;
-                    }
-                }
-            }
-        });
-        
-        // Mostrar/ocultar mensaje de no resultados
-        if (noResults) {
-            if (visibleCount === 0 && searchTerm !== '') {
-                noResults.classList.remove('hidden');
-                console.log('📭 Sin resultados');
-            } else {
-                noResults.classList.add('hidden');
-            }
-        }
-        
-        console.log(`✅ ${visibleCount} resultados visibles`);
-    }
-    
-    // Agregar evento de búsqueda
-    searchInput.addEventListener('input', filterPrograms);
-    searchInput.addEventListener('keyup', filterPrograms);
-    
-    // Ejecutar una vez al inicio para asegurar que todo está bien
-    setTimeout(filterPrograms, 100);
-    
-    // Limpiar búsqueda al hacer click en un programa
-    programItems.forEach(item => {
-        item.addEventListener('click', function() {
-            searchInput.value = '';
-            filterPrograms();
         });
     });
-    
-    console.log('✅ Buscador listo');
 });
 </script>
 @endsection

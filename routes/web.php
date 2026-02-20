@@ -64,3 +64,7 @@ Route::get('/aula', function () {
 })->name('public.aula');
 
 
+use App\Http\Controllers\ChatController;
+
+// Ruta para el chat
+Route::post('/chat', [ChatController::class, 'chat']);
