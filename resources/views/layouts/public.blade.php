@@ -934,6 +934,225 @@ main {
     width: 35px;
     height: 35px;
   }
+
+}
+
+/* === ESTILOS PARA FUNCIONALIDAD DE VOZ === */
+.chat-voice-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    border: 2px solid var(--secondary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+}
+
+.chat-voice-btn:hover {
+    transform: scale(1.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.chat-voice-btn.recording {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    animation: pulse-recording 1.5s infinite;
+}
+
+.chat-voice-btn.recording svg {
+    animation: pulse-opacity 1.5s infinite;
+}
+
+.chat-voice-status {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5rem 1rem;
+    background: var(--primary-soft);
+    border-radius: 30px;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--primary-dark);
+    border: 2px solid var(--secondary);
+    animation: slideDown 0.3s ease;
+}
+
+.voice-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #dc2626;
+    border-radius: 50%;
+    animation: pulse-recording 1.5s infinite;
+}
+
+.voice-cancel {
+    background: transparent;
+    border: none;
+    color: var(--primary-dark);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    margin-left: auto;
+}
+
+.voice-cancel:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+@keyframes pulse-recording {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes pulse-opacity {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajuste del input container para el nuevo botón */
+.chat-input-container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* === ESTILOS PARA CONTROL DE VOZ === */
+.chat-voice-btn, .chat-stop-voice-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    border: 2px solid var(--secondary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.chat-voice-btn:hover, .chat-stop-voice-btn:hover {
+    transform: scale(1.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.chat-voice-btn.recording {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    animation: pulse-recording 1.5s infinite;
+}
+
+.chat-stop-voice-btn {
+    background: linear-gradient(135deg, #f97316, #c2410c);
+    border-color: #ffffff;
+}
+
+.chat-stop-voice-btn:hover {
+    background: linear-gradient(135deg, #fb923c, #ea580c);
+}
+
+.voice-controls {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+
+.chat-voice-status {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5rem 1rem;
+    background: var(--primary-soft);
+    border-radius: 30px;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--primary-dark);
+    border: 2px solid var(--secondary);
+    animation: slideDown 0.3s ease;
+}
+
+.voice-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #dc2626;
+    border-radius: 50%;
+    animation: pulse-recording 1.5s infinite;
+}
+
+.voice-cancel {
+    background: transparent;
+    border: none;
+    color: var(--primary-dark);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    margin-left: auto;
+}
+
+.voice-cancel:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+@keyframes pulse-recording {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajuste del input container */
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 /* === MENÚ MÓVIL - MANTENIDO === */
@@ -1609,16 +1828,23 @@ main {
     </div>
   </div>
 
-  <script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Inicializando chat...');
+    console.log('🚀 Inicializando chat con funcionalidad de voz...');
     
+    // ===== ELEMENTOS DEL DOM =====
     const chatButton = document.getElementById('chatButton');
     const chatWindow = document.getElementById('chatWindow');
     const chatClose = document.getElementById('chatClose');
     const chatInput = document.getElementById('chatInput');
     const chatSend = document.getElementById('chatSend');
     const chatBody = document.getElementById('chatBody');
+    
+    // NUEVOS elementos para voz
+    let voiceButton = null;
+    let stopVoiceButton = null;  // Botón para detener la voz
+    let voiceStatus = null;
+    let cancelVoice = null;
     
     console.log('Elementos encontrados:', {
         boton: chatButton ? '✅' : '❌',
@@ -1634,56 +1860,314 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
+    // ===== VARIABLES DE ESTADO =====
     let isOpen = false;
     
-    // Abrir/cerrar chat
-    chatButton.onclick = function(e) {
-        e.preventDefault();
-        console.log('🖱️ Click en botón');
-        isOpen = !isOpen;
-        chatWindow.classList.toggle('open');
-        if (isOpen && chatInput) {
-            chatInput.focus();
-            // Mensaje de bienvenida si no hay mensajes
-            if (chatBody.children.length === 0) {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = 'message bot';
-                msgDiv.innerHTML = `
-                    <div class="message-avatar">🤖</div>
-                    <div class="message-content">
-                        <p>¡Hola! Soy el asistente virtual del Instituto Von Humboldt. ¿En qué puedo ayudarte? Puedo informarte sobre nuestras carreras de Contabilidad y Enfermería Técnica.</p>
-                        <span class="message-time">${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}</span>
-                    </div>
-                `;
-                chatBody.appendChild(msgDiv);
+    // ===== VARIABLES PARA VOZ =====
+    let isRecording = false;
+    let recognition = null;
+    let voiceSupported = false;
+    let isSpeaking = false;  // NUEVO: indica si está hablando
+    
+    // ===== INICIALIZAR API DE VOZ =====
+    function initVoiceAPI() {
+        // Verificar soporte de reconocimiento de voz
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'es-PE'; // Español de Perú
+            
+            // Configurar eventos
+            recognition.onresult = handleSpeechResult;
+            recognition.onerror = handleSpeechError;
+            recognition.onend = handleSpeechEnd;
+            
+            voiceSupported = true;
+            console.log('✅ Reconocimiento de voz disponible');
+        } else {
+            console.warn('❌ Reconocimiento de voz no soportado');
+        }
+        
+        // Verificar soporte de síntesis de voz
+        if ('speechSynthesis' in window) {
+            console.log('✅ Síntesis de voz disponible');
+        } else {
+            console.warn('❌ Síntesis de voz no soportada');
+        }
+    }
+    
+    // ===== FUNCIONES DE VOZ =====
+    function handleSpeechResult(event) {
+        const transcript = Array.from(event.results)
+            .map(result => result[0].transcript)
+            .join('');
+        
+        const isFinal = event.results[0].isFinal;
+        
+        // Actualizar el input con el texto reconocido
+        if (chatInput) {
+            chatInput.value = transcript;
+            
+            // Si es resultado final, enviar automáticamente
+            if (isFinal && transcript.trim().length > 0) {
+                enviarMensaje();
+                stopRecording();
             }
         }
-    };
-    
-    // Cerrar con botón X
-    if (chatClose) {
-        chatClose.onclick = function(e) {
-            e.preventDefault();
-            console.log('❌ Cerrar chat');
-            isOpen = false;
-            chatWindow.classList.remove('open');
-        };
+        
+        // Actualizar estado visual
+        if (voiceStatus) {
+            const statusText = voiceStatus.querySelector('span:not(.voice-indicator)');
+            if (statusText) {
+                statusText.textContent = isFinal ? 'Procesando...' : 'Escuchando...';
+            }
+        }
     }
     
-    // Enviar mensaje
-    if (chatSend && chatInput) {
-        chatSend.onclick = function() {
-            enviarMensaje();
+    function handleSpeechError(event) {
+        console.error('Error de reconocimiento de voz:', event.error);
+        
+        let errorMessage = 'Error al reconocer la voz';
+        switch (event.error) {
+            case 'not-allowed':
+                errorMessage = 'Por favor, permite el acceso al micrófono';
+                break;
+            case 'no-speech':
+                errorMessage = 'No se detectó voz. ¿Quieres intentar de nuevo?';
+                break;
+            case 'network':
+                errorMessage = 'Error de conexión. Verifica tu internet';
+                break;
+            case 'aborted':
+                return; // No mostrar mensaje si fue cancelado por el usuario
+        }
+        
+        // Mostrar error temporal
+        showTemporaryMessage(errorMessage);
+        stopRecording();
+    }
+    
+    function handleSpeechEnd() {
+        stopRecording();
+    }
+    
+    function startRecording() {
+        if (!voiceSupported || !recognition) {
+            alert('Tu navegador no soporta reconocimiento de voz. Prueba con Chrome o Edge.');
+            return;
+        }
+        
+        if (isRecording) return;
+        
+        // 🎯 NUEVO: Detener cualquier voz que esté sonando
+        stopSpeaking();
+        
+        try {
+            recognition.start();
+            isRecording = true;
+            
+            // Actualizar UI
+            if (voiceButton) {
+                voiceButton.classList.add('recording');
+                voiceButton.title = 'Detener grabación';
+            }
+            if (voiceStatus) {
+                voiceStatus.style.display = 'flex';
+            }
+            
+            console.log('🎤 Grabando...');
+        } catch (error) {
+            console.error('Error al iniciar grabación:', error);
+        }
+    }
+    
+    function stopRecording() {
+        if (!isRecording || !recognition) return;
+        
+        try {
+            recognition.stop();
+        } catch (error) {
+            console.error('Error al detener grabación:', error);
+        }
+        
+        isRecording = false;
+        
+        // Actualizar UI
+        if (voiceButton) {
+            voiceButton.classList.remove('recording');
+            voiceButton.title = 'Entrada por voz';
+        }
+        if (voiceStatus) {
+            voiceStatus.style.display = 'none';
+        }
+        
+        console.log('⏹️ Grabación detenida');
+    }
+    
+    // 🎯 NUEVA FUNCIÓN: Detener la voz
+    function stopSpeaking() {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            isSpeaking = false;
+            
+            // Actualizar UI del botón stop
+            if (stopVoiceButton) {
+                stopVoiceButton.style.display = 'none';
+            }
+            
+            console.log('🔇 Voz detenida');
+        }
+    }
+    
+    // 🎯 FUNCIÓN MODIFICADA: Hablar texto con control
+    function speakText(text) {
+        if (!('speechSynthesis' in window)) {
+            console.warn('Síntesis de voz no soportada');
+            return;
+        }
+        
+        // Detener cualquier síntesis en curso
+        stopSpeaking();
+        
+        // Si no hay texto o está vacío, no hacer nada
+        if (!text || text.trim() === '') return;
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-PE';
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+        
+        // Obtener voz en español
+        const voices = window.speechSynthesis.getVoices();
+        const spanishVoice = voices.find(voice => voice.lang.includes('es'));
+        if (spanishVoice) {
+            utterance.voice = spanishVoice;
+        }
+        
+        // Eventos de síntesis
+        utterance.onstart = () => {
+            isSpeaking = true;
+            // Mostrar botón de stop
+            if (stopVoiceButton) {
+                stopVoiceButton.style.display = 'flex';
+            }
+            console.log('🗣️ Hablando...');
         };
         
-        chatInput.onkeypress = function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                enviarMensaje();
+        utterance.onend = () => {
+            isSpeaking = false;
+            // Ocultar botón de stop
+            if (stopVoiceButton) {
+                stopVoiceButton.style.display = 'none';
+            }
+            console.log('✅ Síntesis completada');
+        };
+        
+        utterance.onerror = (e) => {
+            console.error('Error de síntesis:', e);
+            isSpeaking = false;
+            if (stopVoiceButton) {
+                stopVoiceButton.style.display = 'none';
             }
         };
+        
+        window.speechSynthesis.speak(utterance);
     }
     
+    function showTemporaryMessage(message) {
+        if (!chatBody) return;
+        
+        const tempDiv = document.createElement('div');
+        tempDiv.className = 'message bot';
+        tempDiv.innerHTML = `
+            <div class="message-avatar">🤖</div>
+            <div class="message-content">
+                <p><em>${escapeHtml(message)}</em></p>
+            </div>
+        `;
+        chatBody.appendChild(tempDiv);
+        chatBody.scrollTop = chatBody.scrollHeight;
+        
+        // Eliminar después de 3 segundos
+        setTimeout(() => {
+            tempDiv.remove();
+        }, 3000);
+    }
+    
+    // ===== CREAR ELEMENTOS DE VOZ =====
+    function createVoiceElements() {
+        const chatFooter = document.querySelector('.chat-footer');
+        const inputContainer = document.querySelector('.chat-input-container');
+        
+        if (!chatFooter || !inputContainer) return;
+        
+        // Crear contenedor para botones de voz
+        const voiceControls = document.createElement('div');
+        voiceControls.className = 'voice-controls';
+        voiceControls.style.display = 'flex';
+        voiceControls.style.gap = '0.5rem';
+        voiceControls.style.alignItems = 'center';
+        
+        // Crear botón de micrófono
+        voiceButton = document.createElement('button');
+        voiceButton.id = 'voiceButton';
+        voiceButton.className = 'chat-voice-btn';
+        voiceButton.title = 'Entrada por voz';
+        voiceButton.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+        `;
+        
+        // 🎯 NUEVO: Botón para detener la voz
+        stopVoiceButton = document.createElement('button');
+        stopVoiceButton.id = 'stopVoiceButton';
+        stopVoiceButton.className = 'chat-stop-voice-btn';
+        stopVoiceButton.title = 'Detener voz';
+        stopVoiceButton.style.display = 'none'; // Oculto inicialmente
+        stopVoiceButton.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="6" y="6" width="12" height="12" fill="currentColor"/>
+                <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none"/>
+            </svg>
+        `;
+        
+        // Evento para detener voz
+        stopVoiceButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            stopSpeaking();
+        });
+        
+        // Crear estado de voz
+        voiceStatus = document.createElement('div');
+        voiceStatus.id = 'voiceStatus';
+        voiceStatus.className = 'chat-voice-status';
+        voiceStatus.style.display = 'none';
+        voiceStatus.innerHTML = `
+            <span class="voice-indicator"></span>
+            <span>Escuchando...</span>
+            <button class="voice-cancel" id="cancelVoice">✕</button>
+        `;
+        
+        cancelVoice = voiceStatus.querySelector('#cancelVoice');
+        
+        // Insertar botones en el contenedor
+        voiceControls.appendChild(voiceButton);
+        voiceControls.appendChild(stopVoiceButton);
+        
+        // Insertar controles al inicio del input container
+        inputContainer.insertBefore(voiceControls, inputContainer.firstChild);
+        
+        // Agregar estado de voz al footer
+        chatFooter.appendChild(voiceStatus);
+    }
+    
+    // ===== FUNCIÓN PRINCIPAL DE ENVÍO =====
     function enviarMensaje() {
         const mensaje = chatInput.value.trim();
         if (!mensaje) return;
@@ -1744,6 +2228,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `;
                 chatBody.appendChild(botMsg);
+                
+                // 🎵 Leer la respuesta en voz alta
+                speakText(data.reply);
             }
             chatBody.scrollTop = chatBody.scrollHeight;
         })
@@ -1765,21 +2252,112 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // ===== FUNCIÓN ESCAPE HTML =====
     function escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
     }
     
-    // Cerrar con ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && isOpen) {
-            isOpen = false;
-            chatWindow.classList.remove('open');
+    // ===== INICIALIZAR TODO =====
+    function init() {
+        // Inicializar API de voz
+        initVoiceAPI();
+        
+        // Crear elementos de voz en el DOM
+        createVoiceElements();
+        
+        // ===== EVENTOS PRINCIPALES =====
+        
+        // Abrir/cerrar chat
+        chatButton.onclick = function(e) {
+            e.preventDefault();
+            console.log('🖱️ Click en botón');
+            isOpen = !isOpen;
+            chatWindow.classList.toggle('open');
+            if (isOpen && chatInput) {
+                chatInput.focus();
+                // Mensaje de bienvenida si no hay mensajes
+                if (chatBody.children.length === 0) {
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = 'message bot';
+                    msgDiv.innerHTML = `
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-content">
+                            <p>¡Hola! Soy el asistente virtual del Instituto Von Humboldt. ¿En qué puedo ayudarte? Puedo informarte sobre nuestras carreras de Contabilidad y Enfermería Técnica.</p>
+                            <span class="message-time">${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                    `;
+                    chatBody.appendChild(msgDiv);
+                }
+            } else if (!isOpen) {
+                // Si se cierra el chat, detener cualquier voz
+                stopSpeaking();
+            }
+        };
+        
+        // Cerrar con botón X
+        if (chatClose) {
+            chatClose.onclick = function(e) {
+                e.preventDefault();
+                console.log('❌ Cerrar chat');
+                isOpen = false;
+                chatWindow.classList.remove('open');
+                stopSpeaking(); // Detener voz al cerrar
+            };
         }
-    });
+        
+        // Enviar mensaje
+        if (chatSend && chatInput) {
+            chatSend.onclick = function() {
+                enviarMensaje();
+            };
+            
+            chatInput.onkeypress = function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    enviarMensaje();
+                }
+            };
+        }
+        
+        // Eventos de voz
+        if (voiceButton) {
+            voiceButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (isRecording) {
+                    stopRecording();
+                } else {
+                    startRecording();
+                }
+            });
+        }
+        
+        if (cancelVoice) {
+            cancelVoice.addEventListener('click', function(e) {
+                e.preventDefault();
+                stopRecording();
+            });
+        }
+        
+        // Cerrar con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isOpen) {
+                isOpen = false;
+                chatWindow.classList.remove('open');
+                // También detener grabación si está activa
+                if (isRecording) {
+                    stopRecording();
+                }
+                stopSpeaking(); // Detener voz
+            }
+        });
+        
+        console.log('✅ Chat inicializado correctamente con funcionalidad de voz');
+    }
     
-    console.log('✅ Chat inicializado correctamente');
+    // Iniciar todo
+    init();
 });
 </script>
 </body>
