@@ -17,10 +17,11 @@ class ChatController extends Controller
         }
 
         $mensajeUsuario = $request->message;
-        $apiKey = env('OPENROUTER_API_KEY');
+        $apiKey = env('GROQ_API_KEY');
+        $model = env('GROQ_MODEL', 'llama-3.3-70b-versatile');
 
         if (!$apiKey) {
-            Log::error('OPENROUTER_API_KEY no está configurada');
+            Log::error('GROQ_API_KEY no está configurada');
             return response()->json([
                 'error' => 'Error de configuración del servidor'
             ], 500);
@@ -32,33 +33,30 @@ class ChatController extends Controller
 
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $apiKey,
-                'HTTP-Referer' => request()->getSchemeAndHttpHost(),
-                'X-Title' => 'Instituto Von Humboldt Chatbot',
                 'Content-Type' => 'application/json'
-            ])->timeout(30)->post('https://openrouter.ai/api/v1/chat/completions', [
-                'model' => 'nvidia/nemotron-3-nano-30b-a3b:free',
-                'messages' => [
-                    ['role' => 'system', 'content' => $systemPrompt],
-                    ['role' => 'user', 'content' => $mensajeUsuario]
-                ],
-                'temperature' => 0.7, // Controla la creatividad (0.0-1.0)
-                'top_p' => 0.9, // Nucleus sampling
-                'max_tokens' => 800 // Límite de respuesta
-            ]);
+            ])->timeout(45)->post('https://api.groq.com/openai/v1/chat/completions', [
+                        'model' => $model,
+                        'messages' => [
+                            ['role' => 'system', 'content' => $systemPrompt],
+                            ['role' => 'user', 'content' => $mensajeUsuario]
+                        ],
+                        'temperature' => 0.7,
+                        'max_tokens' => 1000
+                    ]);
 
             if ($response->failed()) {
-                Log::error('Error en OpenRouter', [
+                Log::error('Error en Groq AI', [
                     'status' => $response->status(),
                     'body' => $response->body()
                 ]);
-                
+
                 return response()->json([
                     'error' => 'Error al comunicarse con el servicio'
                 ], 500);
             }
 
             $respuesta = $response->json();
-            
+
             return response()->json([
                 'reply' => $respuesta['choices'][0]['message']['content'] ?? 'Lo siento, no pude procesar tu mensaje.'
             ]);
@@ -68,7 +66,7 @@ class ChatController extends Controller
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
-            
+
             return response()->json([
                 'error' => 'Error interno del servidor'
             ], 500);
@@ -78,9 +76,9 @@ class ChatController extends Controller
     /**
      * Prompt del sistema con información completa del instituto
      */
-private function getSystemPrompt(): string
-{
-    return <<<EOT
+    private function getSystemPrompt(): string
+    {
+        return <<<EOT
 Eres un asistente virtual amable y profesional del Instituto Von Humboldt. 
 Tu personalidad es acogedora, clara y servicial. Hablas como un asesor educativo real.
 
@@ -127,5 +125,5 @@ EJEMPLO DE BUENA RESPUESTA:
 
 RECUERDA: No leas la información textualmente. Interprétala y comunícala de forma natural.
 EOT;
-}
+    }
 }

@@ -9,6 +9,8 @@ use App\Http\Controllers\Public\AdmisionController;
 use App\Http\Controllers\Public\EgresadosController;
 use App\Http\Controllers\Public\TransparenciaController;
 use App\Http\Controllers\Public\ServicioPublicController;
+use App\Http\Controllers\Public\ContactController;
+use App\Http\Controllers\Public\NoticiaController;
 
 
 
@@ -31,7 +33,10 @@ Route::get('/programas/{carrera:slug}', [CarreraController::class, 'show'])->nam
 Route::get('/admision', [AdmisionController::class, 'index'])->name('public.admision');
 Route::get('/egresados', [EgresadosController::class, 'index'])->name('public.egresados');
 Route::get('/transparencia', [TransparenciaController::class, 'index'])->name('public.transparencia');
-Route::view('/contacto', 'public.contacto')->name('public.contacto');
+Route::get('/contacto', [ContactController::class, 'index'])->name('public.contacto');
+Route::post('/contacto', [ContactController::class, 'send'])->name('public.contacto.send');
+Route::get('/noticias', [NoticiaController::class, 'index'])->name('public.noticias.index');
+Route::get('/noticias/{noticia:slug}', [NoticiaController::class, 'show'])->name('public.noticias.show');
 
 
 Route::get('/dashboard', function () {
@@ -57,7 +62,7 @@ Route::middleware(['auth', 'role:admin'])->get('/admin-only', function () {
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/aula', function () {
     return view('public.aula.index');

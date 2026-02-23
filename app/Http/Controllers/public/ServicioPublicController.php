@@ -17,14 +17,14 @@ class ServicioPublicController extends Controller
     }
 
     public function biblioteca()
-{
-    $libros = BibliotecaArchivo::query()
-        ->where('activo', true)
-        ->orderBy('orden')
-        ->get();
+    {
+        $archivos = BibliotecaArchivo::query()
+            ->where('activo', true)
+            ->orderBy('orden')
+            ->get();
 
-    return view('public.servicios.biblioteca', compact('libros'));
-}
+        return view('public.servicios.biblioteca', compact('archivos'));
+    }
 
 
     public function bienestar()
@@ -38,33 +38,33 @@ class ServicioPublicController extends Controller
     }
 
     public function bolsa()
-{
-    $ofertas = \App\Models\OfertaLaboral::query()
-        ->where('activa', true)
-        ->orderBy('orden')
-        ->get();
+    {
+        $ofertas = OfertaLaboral::query()
+            ->where('activa', true)
+            ->orderBy('orden')
+            ->get();
 
-    return view('public.servicios.bolsa', compact('ofertas'));
-}
+        return view('public.servicios.bolsa', compact('ofertas'));
+    }
 
 
     // visor PDF biblioteca (inline)
     public function verPdf(BibliotecaArchivo $archivo)
-{
-    abort_unless($archivo->activo, 404);
+    {
+        abort_unless($archivo->activo, 404);
 
-    $path = $archivo->archivo_pdf;
+        $path = $archivo->archivo_pdf;
 
-    abort_unless(Storage::disk('public')->exists($path), 404);
+        abort_unless(Storage::disk('public')->exists($path), 404);
 
-    return response()->file(
-        Storage::disk('public')->path($path),
-        [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="'.basename($path).'"',
-            'X-Content-Type-Options' => 'nosniff',
-        ]
-    );
-}
+        return response()->file(
+            Storage::disk('public')->path($path),
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="' . basename($path) . '"',
+                'X-Content-Type-Options' => 'nosniff',
+            ]
+        );
+    }
 
 }
