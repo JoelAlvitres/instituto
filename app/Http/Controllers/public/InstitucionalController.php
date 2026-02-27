@@ -16,9 +16,24 @@ class InstitucionalController extends Controller
             ['titulo' => 'Institucional']
         );
 
-        $docentes = Docente::where('activo', true)->orderBy('orden')->get();
+        // Fetch carreras with their active docentes
+        $carreras = \App\Models\Carrera::where('activa', true)
+            ->with([
+                'docentes' => function ($query) {
+                    $query->where('activo', true)->orderBy('orden');
+                }
+            ])
+            ->orderBy('orden')
+            ->get();
+
+        // Teachers without a carrera (general/admin)
+        $docentesGenerales = Docente::where('activo', true)
+            ->whereNull('carrera_id')
+            ->orderBy('orden')
+            ->get();
+
         $autoridades = Autoridad::where('activo', true)->orderBy('orden')->get();
 
-        return view('public.institucional.index', compact('pagina','docentes','autoridades'));
+        return view('public.institucional.index', compact('pagina', 'carreras', 'docentesGenerales', 'autoridades'));
     }
 }

@@ -38,7 +38,18 @@ class DocenteResource extends Resource
                             Forms\Components\TextInput::make('especialidad')
                                 ->label('Especialidad')
                                 ->placeholder('Ej: Matemática, Enfermería...')
-                                ->maxLength(160)
+                                ->maxLength(160),
+
+                            Forms\Components\TextInput::make('email')
+                                ->label('Correo Electrónico')
+                                ->email()
+                                ->maxLength(120),
+
+                            Forms\Components\Select::make('carrera_id')
+                                ->label('Carrera / Programa')
+                                ->relationship('carrera', 'nombre')
+                                ->searchable()
+                                ->preload()
                                 ->columnSpanFull(),
                         ])->columns(2),
                 ])
@@ -63,6 +74,13 @@ class DocenteResource extends Resource
                                 ->imageEditor()
                                 ->imagePreviewHeight('200')
                                 ->maxSize(4096),
+
+                            Forms\Components\FileUpload::make('cv_pdf')
+                                ->label('Hoja de Vida (PDF)')
+                                ->disk('public')
+                                ->directory('docentes/cvs')
+                                ->acceptedFileTypes(['application/pdf'])
+                                ->maxSize(10240),
                         ]),
                 ])
                 ->columnSpan(['lg' => 1]),
@@ -90,6 +108,15 @@ class DocenteResource extends Resource
                 Tables\Columns\TextColumn::make('especialidad')
                     ->searchable()
                     ->toggleable(),
+
+                Tables\Columns\TextColumn::make('carrera.nombre')
+                    ->label('Carrera')
+                    ->sortable()
+                    ->placeholder('General / Administrativo'),
+
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\IconColumn::make('activo')
                     ->boolean()

@@ -90,6 +90,29 @@ class CarreraResource extends Resource
                                         ->maxSize(10240)
                                         ->downloadable(),
                                 ])->columns(2),
+
+                            Forms\Components\Tabs\Tab::make('Horarios')
+                                ->schema([
+                                    Forms\Components\Repeater::make('itinerario')
+                                        ->label('Horarios de Atención Académica')
+                                        ->schema([
+                                            Forms\Components\TextInput::make('sede')
+                                                ->label('Sede/Filial')
+                                                ->placeholder('Ej: SEDE PRINCIPAL')
+                                                ->required(),
+                                            Forms\Components\TextInput::make('turno')
+                                                ->label('Turno')
+                                                ->placeholder('Ej: VESPERTINO')
+                                                ->required(),
+                                            Forms\Components\TextInput::make('horario')
+                                                ->label('Horario')
+                                                ->placeholder('Ej: 15.00 PM - 19.00 PM')
+                                                ->required(),
+                                        ])
+                                        ->defaultItems(1)
+                                        ->grid(1)
+                                        ->columnSpanFull(),
+                                ]),
                         ]),
                 ])
                 ->columnSpan(['lg' => 2]),

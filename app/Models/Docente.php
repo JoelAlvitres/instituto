@@ -12,10 +12,18 @@ class Docente extends Model
         'nombre',
         'cargo',
         'especialidad',
+        'email',
+        'cv_pdf',
         'foto',
+        'carrera_id',
         'activo',
         'orden',
     ];
+
+    public function carrera()
+    {
+        return $this->belongsTo(Carrera::class);
+    }
 
     protected $casts = [
         'activo' => 'boolean',
