@@ -18,12 +18,24 @@ class ServicioPublicController extends Controller
 
     public function biblioteca()
     {
+        if (!auth()->check()) {
+            return redirect()->route('public.biblioteca.login');
+        }
+
         $archivos = BibliotecaArchivo::query()
             ->where('activo', true)
             ->orderBy('orden')
             ->get();
 
         return view('public.servicios.biblioteca', compact('archivos'));
+    }
+
+    public function libraryLogin()
+    {
+        if (auth()->check()) {
+            return redirect()->route('public.servicios.biblioteca');
+        }
+        return view('public.servicios.biblioteca-login');
     }
 
 
@@ -51,6 +63,10 @@ class ServicioPublicController extends Controller
     // visor PDF biblioteca (inline)
     public function verPdf(BibliotecaArchivo $archivo)
     {
+        if (!auth()->check()) {
+            return redirect()->route('public.biblioteca.login');
+        }
+
         abort_unless($archivo->activo, 404);
 
         $path = $archivo->archivo_pdf;

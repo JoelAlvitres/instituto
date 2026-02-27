@@ -69,20 +69,72 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       {{-- Header de sección --}}
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-12">
-        <div class="text-center md:text-left">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-12 text-center md:text-left">
+        <div>
           <span class="text-sm uppercase tracking-[0.3em] text-[#6b3f8c] font-semibold">RECURSOS DIGITALES</span>
           <h2 class="text-2xl md:text-3xl font-bold text-[#4a2e6e] mt-2">Repositorio de Archivos</h2>
         </div>
 
-        {{-- Estadística rápida --}}
-        <div class="flex items-center gap-4 justify-center md:justify-end">
-          <div class="px-4 py-2 bg-white rounded-xl shadow-md border border-[#c9a227]/20">
-            <span class="text-sm text-gray-600">Disponibles:</span>
-            <span class="ml-2 font-bold text-[#c9a227]">{{ count($archivos) }}</span>
+        @auth
+          {{-- Perfil de usuario logueado --}}
+          <div
+            class="flex items-center gap-4 justify-center md:justify-end bg-white px-4 py-2 rounded-2xl shadow-sm border border-[#6b3f8c]/10">
+            <div class="text-right hidden sm:block">
+              <p class="text-xs text-gray-500 font-medium">Conectado como:</p>
+              <p class="text-sm font-bold text-[#4a2e6e]">{{ auth()->user()->email }}</p>
+            </div>
+            <div
+              class="w-10 h-10 rounded-full bg-[#6b3f8c]/10 flex items-center justify-center text-lg border-2 border-[#c9a227]/40 shadow-inner">
+              👤
+            </div>
+            <form action="{{ route('logout') }}" method="POST" class="inline">
+              @csrf
+              <button type="submit" class="p-2 text-gray-400 hover:text-red-500 transition-colors title=" Cerrar sesión">
+                <span class="text-xl">✕</span>
+              </button>
+            </form>
+          </div>
+        @else
+          {{-- Botón de login con Google --}}
+          <div class="flex items-center gap-4 justify-center md:justify-end">
+            <a href="{{ route('auth.google') }}"
+              class="group relative flex items-center gap-3 px-6 py-3 bg-white text-[#4a2e6e] font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-[#c9a227]/20 hover:border-[#c9a227]">
+              <img src="https://www.google.com/favicon.ico" class="w-5 h-5 group-hover:scale-110 transition-transform"
+                alt="Google">
+              <span>Login Institucional</span>
+            </a>
+          </div>
+        @endauth
+      </div>
+
+      {{-- Alertas de error --}}
+      @if(session('error'))
+        <div class="max-w-3xl mx-auto mb-12 animate-fade-in-up">
+          <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-2xl shadow-md">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">⚠️</span>
+              <div>
+                <h3 class="text-red-800 font-bold text-lg">Acceso Denegado</h3>
+                <p class="text-red-700">{{ session('error') }}</p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      @endif
+
+      @if(session('success'))
+        <div class="max-w-3xl mx-auto mb-12 animate-fade-in-up">
+          <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-2xl shadow-md">
+            <div class="flex items-center gap-4">
+              <span class="text-3xl">✅</span>
+              <div>
+                <h3 class="text-green-800 font-bold text-lg">Éxito</h3>
+                <p class="text-green-700">{{ session('success') }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      @endif
 
       {{-- Grid de archivos --}}
       @if(count($archivos) > 0)
@@ -135,16 +187,26 @@
                 </div>
 
                 {{-- Botón de lectura --}}
-                <a href="{{ route('public.biblioteca.ver', $a) }}" target="_blank" rel="noopener"
-                  class="group/btn relative inline-flex items-center gap-2 mt-6 px-6 py-3 bg-gradient-to-r from-[#6b3f8c] to-[#4a2e6e] text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center">
-                  <span
-                    class="absolute inset-0 bg-gradient-to-r from-[#c9a227] to-[#e67e22] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
-                  <span class="relative flex items-center gap-2">
-                    <span class="text-lg group-hover/btn:scale-110 transition-transform">📄</span>
-                    Ver Documento
-                    <span class="text-lg group-hover/btn:translate-x-1 transition-transform">→</span>
-                  </span>
-                </a>
+                @auth
+                  <a href="{{ route('public.biblioteca.ver', $a) }}" target="_blank" rel="noopener"
+                    class="group/btn relative inline-flex items-center gap-2 mt-6 px-6 py-3 bg-gradient-to-r from-[#6b3f8c] to-[#4a2e6e] text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center">
+                    <span
+                      class="absolute inset-0 bg-gradient-to-r from-[#c9a227] to-[#e67e22] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
+                    <span class="relative flex items-center gap-2">
+                      <span class="text-lg group-hover/btn:scale-110 transition-transform">📄</span>
+                      Ver Documento
+                      <span class="text-lg group-hover/btn:translate-x-1 transition-transform">→</span>
+                    </span>
+                  </a>
+                @else
+                  <div class="mt-6 p-4 bg-gray-50 rounded-xl border border-dashed border-gray-300 text-center">
+                    <p class="text-xs text-gray-500 mb-3">Inicie sesión para visualizar</p>
+                    <a href="{{ route('auth.google') }}"
+                      class="inline-flex items-center gap-2 text-sm font-bold text-[#6b3f8c] hover:text-[#c9a227] transition-colors">
+                      🚀 Login Institucional
+                    </a>
+                  </div>
+                @endauth
               </div>
             </div>
           @endforeach

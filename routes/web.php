@@ -48,14 +48,22 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/servicios', [ServicioPublicController::class, 'index'])->name('public.servicios.index');
+use App\Http\Controllers\Auth\SocialController;
 
+// Rutas de Autenticación Social (Google)
+Route::get('/auth/google', [SocialController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/auth/google/callback', [SocialController::class, 'handleGoogleCallback']);
+
+Route::get('/servicios', [ServicioPublicController::class, 'index'])->name('public.servicios.index');
 Route::get('/servicios/biblioteca', [ServicioPublicController::class, 'biblioteca'])->name('public.servicios.biblioteca');
+Route::get('/servicios/biblioteca/login', [ServicioPublicController::class, 'libraryLogin'])->name('public.biblioteca.login');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/biblioteca/ver/{archivo}', [ServicioPublicController::class, 'verPdf'])->name('public.biblioteca.ver');
+});
+
 Route::get('/servicios/bienestar', [ServicioPublicController::class, 'bienestar'])->name('public.servicios.bienestar');
 Route::get('/servicios/bolsa-trabajo', [ServicioPublicController::class, 'bolsa'])->name('public.servicios.bolsa');
-
-Route::get('/biblioteca/ver/{archivo}', [ServicioPublicController::class, 'verPdf'])
-    ->name('public.biblioteca.ver');
 
 Route::middleware(['auth', 'role:admin'])->get('/admin-only', function () {
     return '✅ Acceso permitido: eres admin';
