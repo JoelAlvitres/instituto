@@ -737,8 +737,8 @@
 
 .preview-card:hover {
     transform: translateY(-5px);
-    border-color: var(--secondary);
-    box-shadow: 0 15px 25px -10px rgba(74, 44, 95, 0.1);
+    border-color: var(--primary); 
+    box-shadow: 0 15px 25px -10px rgba(74, 44, 95, 0.84);
 }
 
 .preview-image {
