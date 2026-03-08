@@ -173,8 +173,7 @@
                                     <span class="text-2xl text-[#c9a227]">📍</span>
                                     <div>
                                         <h4 class="font-bold text-[#4a2e6e] text-sm uppercase tracking-wider">DIRECCIÓN</h4>
-                                        <p class="text-gray-600">Calle Tupac Yupanqui 273, frente a la plazuela Pinillos -
-                                            TRUJILLO</p>
+                                        <p class="text-gray-600">Calle Tupac Yupanqui 544-555, TRUJILLO</p>
                                     </div>
                                 </div>
 
@@ -183,7 +182,7 @@
                                     <span class="text-2xl text-[#c9a227]">📞</span>
                                     <div>
                                         <h4 class="font-bold text-[#4a2e6e] text-sm uppercase tracking-wider">TELÉFONOS</h4>
-                                        <p class="text-gray-600">044 345 333/ 948 516 839</p>
+                                        <p class="text-gray-600">044 345 333 / 044 662 953 / 922 022 800</p>
                                     </div>
                                 </div>
 
@@ -216,12 +215,12 @@
                                 <div
                                     class="flex justify-between items-center p-4 bg-gradient-to-r from-[#faf5ff] to-white rounded-xl border border-[#c9a227]/10">
                                     <span class="font-semibold text-gray-700">Lunes a Viernes</span>
-                                    <span class="text-[#4a2e6e] font-bold">8:00 AM - 8:00 PM</span>
+                                    <span class="text-[#4a2e6e] font-bold">8:00 AM - 7:00 PM</span>
                                 </div>
                                 <div
                                     class="flex justify-between items-center p-4 bg-gradient-to-r from-[#faf5ff] to-white rounded-xl border border-[#c9a227]/10">
                                     <span class="font-semibold text-gray-700">Sábados</span>
-                                    <span class="text-[#4a2e6e] font-bold">9:00 AM - 2:00 PM</span>
+                                    <span class="text-[#4a2e6e] font-bold">8:00 AM - 2:00 PM</span>
                                 </div>
                                 <div
                                     class="flex justify-between items-center p-4 bg-gradient-to-r from-[#faf5ff] to-white rounded-xl border border-[#c9a227]/10">
@@ -236,94 +235,105 @@
         </div>
     </section>
 
-    {{-- ENLACES ÚTILES --}}
-    <section class="bg-white py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <span class="text-sm uppercase tracking-[0.3em] text-[#6b3f8c] font-semibold">RECURSOS EXTERNOS</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-[#4a2e6e] mt-4 mb-6">Enlaces Útiles</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-[#c9a227] to-[#e67e22] mx-auto rounded-full"></div>
+    {{-- ENLACES ÚTILES - REDISEÑO PREMIUM DARK --}}
+    <section class="bg-[#0f1115] py-20 relative overflow-hidden">
+        {{-- Efectos de fondo --}}
+        <div class="absolute top-0 left-1/4 w-64 h-64 bg-[#6b3f8c]/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-[#c9a227]/5 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-sm uppercase tracking-[0.4em] text-[#b27fd6] font-bold">RECURSOS EXTERNOS</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 mb-6">Enlaces Útiles</h2>
+                <div
+                    class="w-32 h-1.5 bg-gradient-to-r from-[#c9a227] to-[#e67e22] mx-auto rounded-full shadow-[0_0_15px_rgba(201,162,39,0.5)]">
+                </div>
             </div>
 
-            <div
-                class="bg-gradient-to-br from-[#faf5ff] to-white rounded-3xl shadow-xl p-8 lg:p-12 border border-[#6b3f8c]/10">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    {{-- MINEDU --}}
-                    <a href="https://www.gob.pe/minedu" target="_blank"
-                        class="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#c9a227]/20 hover:border-[#c9a227] text-center">
+            <div class="bg-[#1a1d23]/80 backdrop-blur-md rounded-[2.5rem] shadow-2xl p-8 lg:p-14 border border-white/5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {{-- REGISTRA --}}
+                    <a href="https://registra.minedu.gob.pe/#!/" target="_blank"
+                        class="group relative bg-[#23272f] rounded-3xl p-8 transition-all duration-500 border border-white/5 hover:border-[#c9a227]/30 hover:bg-[#2a2f39] hover:-translate-y-2 flex flex-col items-center justify-center gap-6 shadow-xl">
                         <div
-                            class="absolute inset-0 bg-gradient-to-br from-[#c9a227]/5 to-[#e67e22]/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity">
+                            class="absolute inset-0 bg-gradient-to-br from-[#c9a227]/5 to-transparent opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500">
                         </div>
+
                         <div class="relative">
-                            <div class="h-20 flex items-center justify-center mb-4">
+                            <div
+                                class="w-24 h-24 rounded-full bg-[#1a1d23] border-4 border-[#323842] group-hover:border-[#c9a227]/50 flex items-center justify-center transition-all duration-500 overflow-hidden shadow-inner">
                                 <img src="https://static.wixstatic.com/media/9604c8_b3968c176697494092aa5ecdd301cc6a~mv2.png/v1/fill/w_3334,h_3334,al_c/minedu.png"
-                                    class="h-14 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300">
+                                    class="w-16 h-16 object-contain brightness-100 group-hover:scale-110 transition-transform duration-500">
                             </div>
-                            <span
-                                class="text-sm font-bold text-gray-700 group-hover:text-[#4a2e6e] transition-colors block">
-                                MINEDU
-                            </span>
                         </div>
+
+                        <span
+                            class="relative text-lg font-extrabold text-[#e2e8f0] group-hover:text-white transition-colors tracking-wide text-center uppercase">
+                            Registra
+                        </span>
                     </a>
 
-                    {{-- AGENCIA --}}
-                    <a href="#" target="_blank"
-                        class="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#c9a227]/20 hover:border-[#c9a227] text-center">
+                    {{-- TITULA --}}
+                    <a href="https://titula.minedu.gob.pe/" target="_blank"
+                        class="group relative bg-[#23272f] rounded-3xl p-8 transition-all duration-500 border border-white/5 hover:border-[#8f55b5]/30 hover:bg-[#2a2f39] hover:-translate-y-2 flex flex-col items-center justify-center gap-6 shadow-xl">
                         <div
-                            class="absolute inset-0 bg-gradient-to-br from-[#c9a227]/5 to-[#e67e22]/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity">
+                            class="absolute inset-0 bg-gradient-to-br from-[#8f55b5]/5 to-transparent opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500">
                         </div>
+
                         <div class="relative">
-                            <div class="h-20 flex items-center justify-center mb-4">
-                                <div
-                                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#4a2e6e] to-[#6b3f8c] flex items-center justify-center text-4xl text-white">
-                                    🏛️
-                                </div>
+                            <div
+                                class="w-24 h-24 rounded-full bg-[#1a1d23] border-4 border-[#323842] group-hover:border-[#8f55b5]/50 flex items-center justify-center transition-all duration-500 shadow-inner">
+                                <span
+                                    class="text-5xl group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_10px_rgba(143,85,181,0.3)]">🏛️</span>
                             </div>
-                            <span
-                                class="text-sm font-bold text-gray-700 group-hover:text-[#4a2e6e] transition-colors block">
-                                Agencia
-                            </span>
                         </div>
+
+                        <span
+                            class="relative text-lg font-extrabold text-[#e2e8f0] group-hover:text-white transition-colors tracking-wide text-center uppercase">
+                            Titula
+                        </span>
                     </a>
 
-                    {{-- SIAGIE --}}
-                    <a href="#" target="_blank"
-                        class="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#c9a227]/20 hover:border-[#c9a227] text-center">
+                    {{-- CONECTA --}}
+                    <a href="https://conecta.minedu.gob.pe/" target="_blank"
+                        class="group relative bg-[#23272f] rounded-3xl p-8 transition-all duration-500 border border-white/5 hover:border-[#c9a227]/30 hover:bg-[#2a2f39] hover:-translate-y-2 flex flex-col items-center justify-center gap-6 shadow-xl">
                         <div
-                            class="absolute inset-0 bg-gradient-to-br from-[#c9a227]/5 to-[#e67e22]/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity">
+                            class="absolute inset-0 bg-gradient-to-br from-[#c9a227]/5 to-transparent opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500">
                         </div>
+
                         <div class="relative">
-                            <div class="h-20 flex items-center justify-center mb-4">
-                                <div
-                                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#c9a227] to-[#e67e22] flex items-center justify-center text-4xl text-white">
-                                    🎓
-                                </div>
+                            <div
+                                class="w-24 h-24 rounded-full bg-[#1a1d23] border-4 border-[#323842] group-hover:border-[#c9a227]/50 flex items-center justify-center transition-all duration-500 shadow-inner">
+                                <span
+                                    class="text-5xl group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_10px_rgba(201,162,39,0.3)]">🎓</span>
                             </div>
-                            <span
-                                class="text-sm font-bold text-gray-700 group-hover:text-[#4a2e6e] transition-colors block">
-                                Siagie
-                            </span>
                         </div>
+
+                        <span
+                            class="relative text-lg font-extrabold text-[#e2e8f0] group-hover:text-white transition-colors tracking-wide text-center uppercase">
+                            Conecta
+                        </span>
                     </a>
 
-                    {{-- SÍSEVE --}}
-                    <a href="#" target="_blank"
-                        class="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#c9a227]/20 hover:border-[#c9a227] text-center">
+                    {{-- AVANZA --}}
+                    <a href="https://avanza.minedu.gob.pe/" target="_blank"
+                        class="group relative bg-[#23272f] rounded-3xl p-8 transition-all duration-500 border border-white/5 hover:border-[#6b3f8c]/30 hover:bg-[#2a2f39] hover:-translate-y-2 flex flex-col items-center justify-center gap-6 shadow-xl">
                         <div
-                            class="absolute inset-0 bg-gradient-to-br from-[#c9a227]/5 to-[#e67e22]/5 opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity">
+                            class="absolute inset-0 bg-gradient-to-br from-[#6b3f8c]/5 to-transparent opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500">
                         </div>
+
                         <div class="relative">
-                            <div class="h-20 flex items-center justify-center mb-4">
-                                <div
-                                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#6b3f8c] to-[#8f55b5] flex items-center justify-center text-4xl text-white">
-                                    👁️
-                                </div>
+                            <div
+                                class="w-24 h-24 rounded-full bg-[#1a1d23] border-4 border-[#323842] group-hover:border-[#6b3f8c]/50 flex items-center justify-center transition-all duration-500 shadow-inner">
+                                <span
+                                    class="text-5xl group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_10px_rgba(107,63,140,0.3)]">👁️</span>
                             </div>
-                            <span
-                                class="text-sm font-bold text-gray-700 group-hover:text-[#4a2e6e] transition-colors block">
-                                SíseVe
-                            </span>
                         </div>
+
+                        <span
+                            class="relative text-lg font-extrabold text-[#e2e8f0] group-hover:text-white transition-colors tracking-wide text-center uppercase">
+                            Avanza
+                        </span>
                     </a>
                 </div>
             </div>

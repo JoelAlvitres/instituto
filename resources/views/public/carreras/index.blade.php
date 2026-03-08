@@ -343,8 +343,8 @@
                   ⏰
                 </div>
                 <div>
-                  <h3 class="text-2xl md:text-3xl font-bold text-[#4a2e6e]">Horarios de Atención</h3>
-                  <p class="text-sm text-[#6b3f8c] mt-1">Turnos y sedes disponibles</p>
+                  <h3 class="text-2xl md:text-3xl font-bold text-[#4a2e6e]">Itinerarios Académicos</h3>
+                  <p class="text-sm text-[#6b3f8c] mt-1">Horarios de atención, sedes y turnos</p>
                 </div>
               </div>
 
@@ -397,7 +397,7 @@
             <div class="space-y-3 max-h-[350px] overflow-y-auto pr-2 custom-scrollbar" id="programList">
               @foreach($programasSidebar as $p)
                         <a href="{{ route('public.carreras.show', $p->slug) }}" class="flex items-center gap-3 px-5 py-4 rounded-xl transition-all duration-300 group
-                                    {{ $p->id === $carrera->id
+                                                {{ $p->id === $carrera->id
                 ? 'bg-gradient-to-r from-[#faf5ff] to-white border-l-4 border-[#c9a227] shadow-md'
                 : 'hover:bg-[#faf5ff] hover:border-l-4 hover:border-[#c9a227]/50' }}">
                           <span

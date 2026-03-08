@@ -12,7 +12,7 @@ class CarreraController extends Controller
         $programasSidebar = Carrera::query()
             ->where('activa', true)
             ->orderBy('orden')
-            ->get(['id', 'nombre', 'slug', 'imagen', 'descripcion', 'perfil_profesional', 'campo_laboral', 'malla_pdf', 'malla_imagen', 'plan_estudios_pdf']);
+            ->get(['id', 'nombre', 'slug', 'imagen', 'descripcion', 'perfil_profesional', 'campo_laboral', 'malla_pdf', 'malla_imagen', 'plan_estudios_pdf', 'itinerario']);
 
         $carrera = $programasSidebar->first();
 
@@ -31,7 +31,7 @@ class CarreraController extends Controller
         $programasSidebar = Carrera::query()
             ->where('activa', true)
             ->orderBy('orden')
-            ->get(['id', 'nombre', 'slug']);
+            ->get(['id', 'nombre', 'slug', 'itinerario']);
 
         return view('public.carreras.index', compact('carrera', 'programasSidebar'));
     }

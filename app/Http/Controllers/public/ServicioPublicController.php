@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\BibliotecaArchivo;
-use App\Models\BibliotecaLibro;
 use App\Models\BienestarServicio;
 use App\Models\OfertaLaboral;
 use Illuminate\Support\Facades\Storage;
@@ -61,13 +60,15 @@ class ServicioPublicController extends Controller
 
 
     // visor PDF biblioteca (inline)
-    public function verPdf(BibliotecaArchivo $archivo)
+    public function verPdf($id)
     {
         if (!auth()->check()) {
             return redirect()->route('public.biblioteca.login');
         }
 
-        abort_unless($archivo->activo, 404);
+        $archivo = BibliotecaArchivo::find($id);
+
+        abort_unless($archivo && $archivo->activo, 404);
 
         $path = $archivo->archivo_pdf;
 

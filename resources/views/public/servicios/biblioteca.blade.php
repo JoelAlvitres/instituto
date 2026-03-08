@@ -136,7 +136,13 @@
         </div>
       @endif
 
+      {{-- Grid de Libros (NUEVO) --}}
       {{-- Grid de archivos --}}
+      <div class="mb-8 flex items-center gap-3">
+        <div class="h-8 w-1 bg-[#6b3f8c] rounded-full"></div>
+        <h3 class="text-xl md:text-2xl font-bold text-[#4a2e6e]">Repositorio de Archivos</h3>
+      </div>
+
       @if(count($archivos) > 0)
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           @foreach($archivos as $index => $a)
@@ -157,7 +163,7 @@
                 {{-- Icono grande --}}
                 <div class="absolute inset-0 flex items-center justify-center">
                   <span
-                    class="text-7xl transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">📖</span>
+                    class="text-7xl transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">📄</span>
                 </div>
 
                 {{-- Overlay en hover --}}
@@ -188,7 +194,7 @@
 
                 {{-- Botón de lectura --}}
                 @auth
-                  <a href="{{ route('public.biblioteca.ver', $a) }}" target="_blank" rel="noopener"
+                  <a href="{{ route('public.biblioteca.ver', ['archivo' => $a->id]) }}" target="_blank" rel="noopener"
                     class="group/btn relative inline-flex items-center gap-2 mt-6 px-6 py-3 bg-gradient-to-r from-[#6b3f8c] to-[#4a2e6e] text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center">
                     <span
                       class="absolute inset-0 bg-gradient-to-r from-[#c9a227] to-[#e67e22] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
@@ -212,7 +218,7 @@
           @endforeach
         </div>
       @else
-        {{-- Mensaje cuando no hay archivos --}}
+        {{-- Mensaje cuando no hay ni archivos --}}
         <div class="bg-white rounded-3xl shadow-xl border-2 border-dashed border-[#c9a227]/30 p-16 text-center">
           <div class="max-w-md mx-auto">
             <div class="text-8xl mb-6 opacity-30 animate-float">📄</div>

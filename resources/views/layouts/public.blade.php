@@ -27,7 +27,7 @@
         <span class="instituto">Instituto de Educación Superior</span>
       </div>
       <div class="top-bar-right">
-        <span>📞 972 33 9876</span>
+        <span>📞 922 022 800</span>
         <span>✉️ informes@instituto.edu.pe</span>
       </div>
     </div>
@@ -143,7 +143,7 @@
         <div>
           <h4 class="footer-title">Contáctanos</h4>
           <div class="footer-contact">
-            <p>📞 972 33 9876</p>
+            <p>📞 044-345333 / 922 022 800</p>
             <p>✉️ informes@instituto.edu.pe</p>
           </div>
 
@@ -166,7 +166,7 @@
             </iframe>
           </div>
           <div class="location-text">
-            Tupac Yupanqui #273, frente a la plazuela Pinillos - TRUJILLO
+            Calle Tupac Yupanqui #544-555, TRUJILLO
           </div>
         </div>
       </div>

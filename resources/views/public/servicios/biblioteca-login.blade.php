@@ -81,6 +81,38 @@
         </div>
     </section>
 
+    {{-- ENLACES EXTERNOS (Basado en el screenshot) --}}
+    <section class="pb-20 px-4">
+        <div class="max-w-md mx-auto">
+            <h4 class="text-gray-800 font-bold mb-6 text-lg">Accesos a otras Bibliotecas Virtuales:</h4>
+
+            <ol class="space-y-4">
+                <li class="flex items-start gap-3 group">
+                    <span class="text-gray-600 font-medium">1.</span>
+                    <a href="https://biblio.iteso.mx/colecciones/electronicas/abiertos/biblioteca-digital-mundial"
+                        target="_blank"
+                        class="text-[#1e88e5] hover:text-[#1565c0] hover:underline transition-colors font-medium">
+                        Biblioteca Digital Mundial
+                    </a>
+                </li>
+                <li class="flex items-start gap-3 group">
+                    <span class="text-gray-600 font-medium">2.</span>
+                    <a href="https://elibro.net" target="_blank"
+                        class="text-[#1e88e5] hover:text-[#1565c0] hover:underline transition-colors font-medium">
+                        E-Libro
+                    </a>
+                </li>
+                <li class="flex items-start gap-3 group">
+                    <span class="text-gray-600 font-medium">3.</span>
+                    <a href="https://www.scopus.com/sources" target="_blank"
+                        class="text-[#1e88e5] hover:text-[#1565c0] hover:underline transition-colors font-medium">
+                        Scopus
+                    </a>
+                </li>
+            </ol>
+        </div>
+    </section>
+
     <style>
         /* Estilos adicionales para matching exacto */
         @keyframes fadeInUp {
