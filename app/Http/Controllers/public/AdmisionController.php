@@ -15,6 +15,11 @@ class AdmisionController extends Controller
         $cronograma = AdmisionCronograma::where('activo', true)->orderBy('orden')->get();
         $costos = AdmisionCosto::where('activo', true)->orderBy('orden')->get();
 
-        return view('public.admision', compact('requisitos','cronograma','costos'));
+        return view('public.admision', compact('requisitos', 'cronograma', 'costos'));
+    }
+
+    public function postular()
+    {
+        return view('public.postulacion');
     }
 }

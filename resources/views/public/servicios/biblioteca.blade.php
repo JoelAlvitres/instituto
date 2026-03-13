@@ -143,9 +143,25 @@
         <h3 class="text-xl md:text-2xl font-bold text-[#4a2e6e]">Repositorio de Archivos</h3>
       </div>
 
-      @if(count($archivos) > 0)
+      @php
+        $mergedItems = $archivos->map(fn($item) => (object) [
+          'id' => $item->id,
+          'titulo' => $item->titulo,
+          'descripcion' => $item->descripcion ?? 'Documento disponible para lectura en línea.',
+          'archivo_pdf' => $item->archivo_pdf,
+          'type' => 'archivo'
+        ])->concat($libros->map(fn($item) => (object) [
+                'id' => $item->id,
+                'titulo' => $item->titulo,
+                'descripcion' => $item->descripcion ?? ($item->autor ? "Por: {$item->autor}" : 'Libro disponible para lectura en línea.'),
+                'archivo_pdf' => $item->archivo_pdf,
+                'type' => 'libro'
+              ]))->sortBy('orden');
+      @endphp
+
+      @if(count($mergedItems) > 0)
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          @foreach($archivos as $index => $a)
+          @foreach($mergedItems as $index => $item)
             <div
               class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-[#6b3f8c]/10 overflow-hidden animate-fade-in-up"
               style="animation-delay: {{ $index * 0.1 }}s">
@@ -162,45 +178,41 @@
 
                 {{-- Icono grande --}}
                 <div class="absolute inset-0 flex items-center justify-center">
-                  <span
-                    class="text-7xl transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">📄</span>
+                  <span class="text-7xl transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                    {{ $item->type === 'libro' ? '📚' : '📄' }}
+                  </span>
                 </div>
 
                 {{-- Overlay en hover --}}
                 <div
                   class="absolute inset-0 bg-gradient-to-t from-[#4a2e6e]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-start p-6">
-                  <span class="text-white text-sm font-light">Repositorio digital</span>
+                  <span class="text-white text-sm font-light">
+                    {{ $item->type === 'libro' ? 'Libro' : 'Repositorio' }} digital
+                  </span>
                 </div>
               </div>
 
               {{-- Contenido --}}
               <div class="p-6">
                 <h3 class="text-xl font-bold text-[#4a2e6e] group-hover:text-[#c9a227] transition-colors line-clamp-2">
-                  {{ $a->titulo }}
+                  {{ $item->titulo }}
                 </h3>
 
-
                 <div class="mt-4 h-16">
-                  @if($a->descripcion)
-                    <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed">{{ $a->descripcion }}</p>
-                  @else
-                    <p class="text-sm text-gray-500 italic line-clamp-3">Documento disponible para lectura en línea.</p>
-                  @endif
-                </div>
-
-                {{-- Metadatos --}}
-                <div class="mt-4 flex items-center gap-3 text-xs text-gray-500">
+                  <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed">{{ $item->descripcion }}</p>
                 </div>
 
                 {{-- Botón de lectura --}}
                 @auth
-                  <a href="{{ route('public.biblioteca.ver', ['archivo' => $a->id]) }}" target="_blank" rel="noopener"
+                  <a href="{{ route('public.biblioteca.ver', ['archivo' => $item->id]) }}" target="_blank" rel="noopener"
                     class="group/btn relative inline-flex items-center gap-2 mt-6 px-6 py-3 bg-gradient-to-r from-[#6b3f8c] to-[#4a2e6e] text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center">
                     <span
                       class="absolute inset-0 bg-gradient-to-r from-[#c9a227] to-[#e67e22] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
                     <span class="relative flex items-center gap-2">
-                      <span class="text-lg group-hover/btn:scale-110 transition-transform">📄</span>
-                      Ver Documento
+                      <span class="text-lg group-hover/btn:scale-110 transition-transform">
+                        {{ $item->type === 'libro' ? '📖' : '📄' }}
+                      </span>
+                      Ver {{ $item->type === 'libro' ? 'Libro' : 'Documento' }}
                       <span class="text-lg group-hover/btn:translate-x-1 transition-transform">→</span>
                     </span>
                   </a>

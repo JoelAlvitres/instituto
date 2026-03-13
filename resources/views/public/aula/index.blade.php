@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Instituto Von Humboldt - Plataforma Estudiantil')</title>
-     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
-    
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     {{-- Swiper CSS --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
-    
+
     {{-- Estilos personalizados (exactamente como en tu original) --}}
     <style>
         :root {
@@ -55,7 +56,8 @@
         }
 
         /* --- Textura de Ondas Superior e Inferior --- */
-        .wave-top, .wave-bottom {
+        .wave-top,
+        .wave-bottom {
             position: fixed;
             left: 0;
             width: 100%;
@@ -68,7 +70,7 @@
             height: 40vh;
             max-height: 400px;
             min-height: 200px;
-            background: 
+            background:
                 radial-gradient(circle at 20% 30%, rgba(123, 31, 162, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 10%, rgba(255, 152, 0, 0.1) 0%, transparent 50%),
                 linear-gradient(180deg, rgba(123, 31, 162, 0.1) 0%, transparent 60%);
@@ -80,7 +82,7 @@
             height: 30vh;
             max-height: 300px;
             min-height: 150px;
-            background: 
+            background:
                 radial-gradient(circle at 10% 90%, rgba(255, 152, 0, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 90% 70%, rgba(123, 31, 162, 0.08) 0%, transparent 50%),
                 linear-gradient(0deg, rgba(255, 152, 0, 0.08) 0%, transparent 70%);
@@ -231,7 +233,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 
+            box-shadow:
                 0 15px 35px rgba(0, 0, 0, 0.2),
                 inset 0 5px 15px rgba(255, 255, 255, 0.8);
             z-index: 2;
@@ -248,19 +250,19 @@
             bottom: 0;
             border-radius: 50%;
             padding: 8px;
-            background: linear-gradient(135deg, 
-                #ff9800 0%, 
-                #ff9800 33%, 
-                #7b1fa2 33%, 
-                #7b1fa2 66%, 
-                #e0e0e0 66%, 
-                #e0e0e0 100%);
-            -webkit-mask: 
-                linear-gradient(#fff 0 0) content-box, 
+            background: linear-gradient(135deg,
+                    #ff9800 0%,
+                    #ff9800 33%,
+                    #7b1fa2 33%,
+                    #7b1fa2 66%,
+                    #e0e0e0 66%,
+                    #e0e0e0 100%);
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
                 linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
-            mask: 
-                linear-gradient(#fff 0 0) content-box, 
+            mask:
+                linear-gradient(#fff 0 0) content-box,
                 linear-gradient(#fff 0 0);
             mask-composite: exclude;
         }
@@ -273,11 +275,11 @@
             left: -8px;
             right: -8px;
             bottom: -8px;
-            background: linear-gradient(45deg, 
-                rgba(255, 152, 0, 0.3), 
-                rgba(123, 31, 162, 0.3), 
-                rgba(74, 20, 140, 0.3), 
-                rgba(255, 152, 0, 0.3));
+            background: linear-gradient(45deg,
+                    rgba(255, 152, 0, 0.3),
+                    rgba(123, 31, 162, 0.3),
+                    rgba(74, 20, 140, 0.3),
+                    rgba(255, 152, 0, 0.3));
             border-radius: 50%;
             z-index: -2;
             filter: blur(12px);
@@ -292,7 +294,7 @@
             position: relative;
             z-index: 1;
             border: 2px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 
+            box-shadow:
                 inset 0 2px 10px rgba(0, 0, 0, 0.1),
                 0 2px 10px rgba(0, 0, 0, 0.1);
         }
@@ -304,12 +306,10 @@
             left: 10%;
             width: 80%;
             height: 80%;
-            background: radial-gradient(
-                ellipse at 30% 30%,
-                rgba(255, 255, 255, 0.8) 0%,
-                rgba(255, 255, 255, 0.4) 30%,
-                transparent 70%
-            );
+            background: radial-gradient(ellipse at 30% 30%,
+                    rgba(255, 255, 255, 0.8) 0%,
+                    rgba(255, 255, 255, 0.4) 30%,
+                    transparent 70%);
             border-radius: 50%;
             z-index: 0;
         }
@@ -444,7 +444,8 @@
         }
 
         /* Controles de navegación */
-        .swiper-button-next, .swiper-button-prev {
+        .swiper-button-next,
+        .swiper-button-prev {
             background-color: rgba(255, 255, 255, 0.8);
             width: 40px;
             height: 40px;
@@ -453,13 +454,15 @@
             transition: var(--transition);
         }
 
-        .swiper-button-next::after, .swiper-button-prev::after {
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
             font-size: 1.2rem;
             color: var(--primary-purple);
             font-weight: bold;
         }
 
-        .swiper-button-next:hover, .swiper-button-prev:hover {
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
             background-color: var(--white);
             transform: scale(1.1);
         }
@@ -557,8 +560,13 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
         }
 
-        .card-purple { background: linear-gradient(135deg, var(--primary-purple-light), var(--primary-purple-dark)); }
-        .card-orange { background: linear-gradient(135deg, var(--primary-orange-light), var(--primary-orange-dark)); }
+        .card-purple {
+            background: linear-gradient(135deg, var(--primary-purple-light), var(--primary-purple-dark));
+        }
+
+        .card-orange {
+            background: linear-gradient(135deg, var(--primary-orange-light), var(--primary-orange-dark));
+        }
 
         .card-icon {
             font-size: 2.2rem;
@@ -688,67 +696,67 @@
         /* =========================================
            MEDIA QUERIES RESPONSIVE
            ========================================= */
-        
+
         /* Pantallas medianas (tabletas) */
         @media (min-width: 768px) {
             html {
                 font-size: 17px;
             }
-            
+
             .header-container {
                 flex-wrap: nowrap;
             }
-            
+
             .header-logo-container {
                 justify-content: flex-start;
             }
-            
+
             .institute-title {
                 text-align: left;
             }
-            
+
             .header-contact-info {
                 text-align: right;
                 width: auto;
             }
-            
+
             .header-contact-item {
                 justify-content: flex-end;
             }
-            
+
             .logo-overlay-circle {
                 width: 200px;
                 height: 200px;
                 top: -120px;
             }
-            
+
             .login-section {
                 padding: 120px 40px 60px;
                 margin-top: 100px;
             }
-            
+
             .title {
                 font-size: 2.5rem;
             }
-            
+
             .subtitle {
                 font-size: 1.1rem;
             }
-            
+
             .btn-primary {
                 padding: 18px 60px;
                 font-size: 1.2rem;
             }
-            
+
             .banner-section {
                 height: 400px;
             }
-            
+
             .card {
                 flex: 1 1 calc(50% - 20px);
                 max-width: calc(50% - 20px);
             }
-            
+
             .contact-item {
                 flex: 1 1 calc(50% - 15px);
                 min-width: calc(50% - 15px);
@@ -761,61 +769,61 @@
                 margin: 100px auto 50px;
                 padding: 0 40px;
             }
-            
+
             .header-logo-circle {
                 width: 80px;
                 height: 80px;
             }
-            
+
             .institute-main-title {
                 font-size: 1.8rem;
             }
-            
+
             .logo-overlay-circle {
                 width: 220px;
                 height: 220px;
                 top: -140px;
             }
-            
+
             .login-section {
                 padding: 140px 60px 70px;
             }
-            
+
             .title {
                 font-size: 2.8rem;
             }
-            
+
             .subtitle {
                 font-size: 1.2rem;
                 margin-bottom: 40px;
             }
-            
+
             .btn-primary {
                 padding: 20px 80px;
                 font-size: 1.3rem;
             }
-            
+
             .banner-section {
                 height: 450px;
                 margin: 60px 0;
             }
-            
+
             .section-title {
                 font-size: 2.3rem;
                 margin-bottom: 40px;
             }
-            
+
             .card {
                 flex: 1 1 calc(50% - 30px);
                 max-width: calc(50% - 30px);
                 padding: 30px;
             }
-            
+
             .contact-item {
                 flex: 1 1 calc(33.333% - 20px);
                 min-width: calc(33.333% - 20px);
             }
-            
+
             .footer-section {
                 padding: 40px 30px;
             }
@@ -826,7 +834,7 @@
             .banner-section {
                 height: 500px;
             }
-            
+
             .card {
                 max-width: 380px;
             }
@@ -837,83 +845,84 @@
             html {
                 font-size: 15px;
             }
-            
+
             .header-container {
                 flex-direction: column;
                 text-align: center;
                 gap: 15px;
             }
-            
+
             .header-logo-container {
                 flex-direction: column;
                 text-align: center;
                 gap: 10px;
             }
-            
+
             .header-contact-info {
                 max-width: 100%;
             }
-            
+
             .logo-overlay-circle {
                 width: 160px;
                 height: 160px;
                 top: -90px;
             }
-            
+
             .login-section {
                 padding: 90px 15px 40px;
                 border-radius: 15px;
             }
-            
+
             .title {
                 font-size: 1.8rem;
             }
-            
+
             .btn-primary {
                 padding: 14px 30px;
                 font-size: 1rem;
                 min-width: 180px;
             }
-            
+
             .banner-section {
                 height: 250px;
                 border-radius: 15px;
                 margin: 30px 0;
             }
-            
+
             .swiper {
                 border-radius: 15px;
             }
-            
-            .swiper-button-next, .swiper-button-prev {
+
+            .swiper-button-next,
+            .swiper-button-prev {
                 display: none;
             }
-            
+
             .section-title {
                 font-size: 1.6rem;
             }
-            
+
             .card {
                 padding: 20px 15px;
                 border-radius: 15px;
             }
-            
+
             .card-icon {
                 width: 60px;
                 height: 60px;
                 font-size: 1.8rem;
                 margin-right: 15px;
             }
-            
+
             .card-career {
                 font-size: 1.3rem;
             }
-            
+
             .social-media {
                 gap: 10px;
                 font-size: 1.6rem;
             }
-            
+
             .social-media a {
                 width: 50px;
                 height: 50px;
@@ -922,21 +931,23 @@
 
         /* Para orientación landscape en móviles */
         @media (max-height: 600px) and (orientation: landscape) {
-            .wave-top, .wave-bottom {
+
+            .wave-top,
+            .wave-bottom {
                 height: 30vh;
             }
-            
+
             .logo-overlay-circle {
                 width: 120px;
                 height: 120px;
                 top: -70px;
             }
-            
+
             .login-section {
                 padding-top: 70px;
                 margin-top: 50px;
             }
-            
+
             .banner-section {
                 height: 250px;
             }
@@ -957,12 +968,13 @@
             }
         }
     </style>
-    
+
     {{-- Vite para assets locales (opcional, comentar si no se usa) --}}
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-    
+
     @stack('styles')
 </head>
+
 <body>
 
     <div class="wave-top"></div>
@@ -977,11 +989,13 @@
                 <div class="logo-inner-glow"></div>
                 <img src="{{ asset('images/logo1.png') }}" alt="Logo Instituto Von Humboldt" class="logo-overlay-img">
             </div>
-            
+
             <main class="login-section">
                 <h1 class="title">@yield('page-title', 'Accede al Aula Virtual')</h1>
-                <p class="subtitle">@yield('page-subtitle', 'Plataforma exclusiva para nuestros estudiantes. Ingresa con tus credenciales para acceder a materiales, calificaciones y más.')</p>
-                
+                <p class="subtitle">
+                    @yield('page-subtitle', 'Plataforma exclusiva para nuestros estudiantes. Ingresa con tus credenciales para acceder a materiales, calificaciones y más.')
+                </p>
+
                 <button class="btn-primary" id="accederBtn">
                     Acceder <i class="fas fa-chevron-right"></i>
                 </button>
@@ -993,13 +1007,16 @@
             <div class="swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="{{ asset('images/baner1.png') }}" alt="Excelencia Educativa - Instituto Von Humboldt" class="slide-img">
+                        <img src="{{ asset('images/baner1.png') }}" alt="Excelencia Educativa - Instituto Von Humboldt"
+                            class="slide-img">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('images/baner2.png') }}" alt="Infraestructura Moderna - Instituto Von Humboldt" class="slide-img">
+                        <img src="{{ asset('images/baner2.png') }}"
+                            alt="Infraestructura Moderna - Instituto Von Humboldt" class="slide-img">
                     </div>
                     <div class="swiper-slide">
-                        <img src="{{ asset('images/baner3.png') }}" alt="Docentes Especializados - Instituto Von Humboldt" class="slide-img">
+                        <img src="{{ asset('images/baner3.png') }}"
+                            alt="Docentes Especializados - Instituto Von Humboldt" class="slide-img">
                     </div>
                 </div>
                 <!-- Controles de navegación -->
@@ -1013,7 +1030,7 @@
         <!-- Sección Carreras -->
         <section class="careers-section">
             <h2 class="section-title">@yield('careers-title', 'Carreras Técnicas')</h2>
-            
+
             <div class="cards-container">
                 <div class="card card-purple" id="enfermeriaCard">
                     <div class="card-icon">
@@ -1046,28 +1063,29 @@
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
-                    <span>+044-3455333 / +51 987 654321</span>
+                    <span>044-345333 / 044-662953 / 922 022 800</span>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
-                    <span>info@vonhumboldt.edu.pe</span>
+                    <span>informes@vonhumboldt.edu.pe</span>
                 </div>
             </div>
-            
+
             <div class="social-media">
-                <a href="https://web.facebook.com/institutovonhumboldt/?locale=es_LA&_rdc=1&_rdr#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://web.facebook.com/institutovonhumboldt/?locale=es_LA&_rdc=1&_rdr#"
+                    aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             </div>
-            
+
             <p class="copyright">© {{ date('Y') }} Instituto Von Humboldt. Todos los derechos reservados.</p>
         </footer>
     </div>
 
     {{-- Scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Inicializar el carrusel
@@ -1095,7 +1113,7 @@
                 centeredSlides: true,
                 slidesPerView: 1,
             });
-            
+
             // Referencias a los elementos
             const btnAcceder = document.getElementById('accederBtn');
             const cards = document.querySelectorAll('.card');
@@ -1107,7 +1125,7 @@
                     btnAcceder.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Accediendo...';
                     btnAcceder.disabled = true;
                     btnAcceder.style.opacity = '0.8';
-                    
+
                     // Simular proceso de login
                     setTimeout(() => {
                         // Crear modal de éxito
@@ -1126,7 +1144,7 @@
                             animation: fadeIn 0.4s ease;
                             padding: 20px;
                         `;
-                        
+
                         modal.innerHTML = `
                             <div style="background: linear-gradient(135deg, #fff, #f9f5ff); padding: 30px; border-radius: 20px; text-align: center; max-width: 550px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.6); position: relative;">
                                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 8px; background: linear-gradient(90deg, #ff9800, #7b1fa2); border-radius: 20px 20px 0 0;"></div>
@@ -1138,9 +1156,9 @@
                                 </button>
                             </div>
                         `;
-                        
+
                         document.body.appendChild(modal);
-                        
+
                         // Cerrar modal
                         const closeModalBtn = document.getElementById('closeModal');
                         closeModalBtn.addEventListener('click', () => {
@@ -1149,7 +1167,7 @@
                             btnAcceder.disabled = false;
                             btnAcceder.style.opacity = '1';
                         });
-                        
+
                         // Cerrar modal haciendo clic fuera
                         modal.addEventListener('click', (e) => {
                             if (e.target === modal) {
@@ -1170,20 +1188,20 @@
                         card.style.transform = "translateY(-10px)";
                     }
                 });
-                
+
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = "translateY(0)";
                 });
-                
+
                 card.addEventListener('click', () => {
                     const carrera = card.querySelector('.card-career').innerText;
-                    
+
                     // Efecto visual al hacer clic
                     card.style.transform = "scale(0.95)";
                     setTimeout(() => {
                         card.style.transform = "scale(1)";
                     }, 200);
-                    
+
                     // Mostrar información de la carrera
                     const modalInfo = document.createElement('div');
                     modalInfo.style.cssText = `
@@ -1201,10 +1219,10 @@
                         padding: 20px;
                         overflow-y: auto;
                     `;
-                    
+
                     let carreraInfo = '';
                     let duracion = '';
-                    
+
                     if (carrera === 'Enfermería') {
                         carreraInfo = 'Formación técnica especializada en cuidados de salud, primeros auxilios, enfermería general y atención al paciente.';
                         duracion = '3 años';
@@ -1212,7 +1230,7 @@
                         carreraInfo = 'Formación en gestión contable, tributación, costos y finanzas empresariales.';
                         duracion = '3 años';
                     }
-                    
+
                     modalInfo.innerHTML = `
                         <div style="background: linear-gradient(135deg, #fff, #f9f5ff); padding: 25px; border-radius: 20px; text-align: center; max-width: 650px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.6); position: relative; margin: auto;">
                             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 8px; background: linear-gradient(90deg, #7b1fa2, #ff9800); border-radius: 20px 20px 0 0;"></div>
@@ -1234,8 +1252,8 @@
                             
                             <div style="background: #f3e5f5; padding: 20px; border-radius: 12px; margin-bottom: 25px; text-align: left;">
                                 <h4 style="color: #7b1fa2; margin-bottom: 12px; font-size: 1.2rem;">Información de Contacto:</h4>
-                                <p style="margin-bottom: 8px; font-size: 1rem;"><i class="fas fa-phone-alt" style="color: #ff9800; margin-right: 8px;"></i> +044-3455333 / +51 987 654321</p>
-                                <p style="font-size: 1rem;"><i class="fas fa-envelope" style="color: #ff9800; margin-right: 8px;"></i> admision@vonhumboldt.edu.pe</p>
+                                <p style="margin-bottom: 8px; font-size: 1rem;"><i class="fas fa-phone-alt" style="color: #ff9800; margin-right: 8px;"></i> 044-345333 / 044-662953 / 922 022 800</p>
+                                <p style="font-size: 1rem;"><i class="fas fa-envelope" style="color: #ff9800; margin-right: 8px;"></i> informes@vonhumboldt.edu.pe</p>
                             </div>
                             
                             <button id="closeInfoModal" style="background: linear-gradient(135deg, #7b1fa2, #4a148c); color: white; border: none; padding: 14px 30px; border-radius: 50px; font-size: 1rem; cursor: pointer; font-weight: bold; box-shadow: 0 8px 20px rgba(123, 31, 162, 0.4); transition: all 0.3s; width: 100%; max-width: 200px;">
@@ -1243,15 +1261,15 @@
                             </button>
                         </div>
                     `;
-                    
+
                     document.body.appendChild(modalInfo);
-                    
+
                     // Cerrar modal de información
                     const closeInfoModalBtn = document.getElementById('closeInfoModal');
                     closeInfoModalBtn.addEventListener('click', () => {
                         document.body.removeChild(modalInfo);
                     });
-                    
+
                     // Cerrar modal haciendo clic fuera
                     modalInfo.addEventListener('click', (e) => {
                         if (e.target === modalInfo) {
@@ -1306,7 +1324,8 @@
             document.head.appendChild(style);
         });
     </script>
-    
+
     @stack('scripts')
 </body>
+
 </html>

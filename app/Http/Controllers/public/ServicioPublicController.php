@@ -7,6 +7,7 @@ use App\Models\BibliotecaArchivo;
 use App\Models\BienestarServicio;
 use App\Models\OfertaLaboral;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ServicioPublicController extends Controller
 {
@@ -18,7 +19,7 @@ class ServicioPublicController extends Controller
     public function biblioteca()
     {
         if (!auth()->check()) {
-            return redirect()->route('public.biblioteca.login');
+            return redirect()->guest(route('public.biblioteca.login'));
         }
 
         $archivos = BibliotecaArchivo::query()
@@ -26,7 +27,13 @@ class ServicioPublicController extends Controller
             ->orderBy('orden')
             ->get();
 
-        return view('public.servicios.biblioteca', compact('archivos'));
+        // También buscamos en la tabla de libros que no tiene modelo pero sí tabla
+        $libros = DB::table('biblioteca_libros')
+            ->where('activo', true)
+            ->orderBy('orden')
+            ->get();
+
+        return view('public.servicios.biblioteca', compact('archivos', 'libros'));
     }
 
     public function libraryLogin()
@@ -63,10 +70,16 @@ class ServicioPublicController extends Controller
     public function verPdf($id)
     {
         if (!auth()->check()) {
-            return redirect()->route('public.biblioteca.login');
+            return redirect()->guest(route('public.biblioteca.login'));
         }
 
+        // Primero buscamos en BibliotecaArchivo
         $archivo = BibliotecaArchivo::find($id);
+
+        if (!$archivo) {
+            // Si no está, buscamos en la tabla de libros
+            $archivo = DB::table('biblioteca_libros')->where('id', $id)->first();
+        }
 
         abort_unless($archivo && $archivo->activo, 404);
 

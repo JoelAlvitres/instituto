@@ -27,8 +27,8 @@
         <span class="instituto">Instituto de Educación Superior</span>
       </div>
       <div class="top-bar-right">
-        <span>📞 922 022 800</span>
-        <span>✉️ informes@instituto.edu.pe</span>
+        <span>📞 044-345333 / 922 022 800</span>
+        <span>✉️ informes@vonhumboldt.edu.pe</span>
       </div>
     </div>
   </div>
@@ -143,8 +143,8 @@
         <div>
           <h4 class="footer-title">Contáctanos</h4>
           <div class="footer-contact">
-            <p>📞 044-345333 / 922 022 800</p>
-            <p>✉️ informes@instituto.edu.pe</p>
+            <p>📞 044-345333 / 044-662953 / 922 022 800</p>
+            <p>✉️ informes@vonhumboldt.edu.pe</p>
           </div>
 
           {{-- REDES SOCIALES --}}
@@ -161,7 +161,7 @@
           <h4 class="footer-title">Ubicación</h4>
           <div class="map-container">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.728527237759!2d-79.032864!3d-8.111521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMDYnNDEuNSJTIDc5wrAwMSc1OC4yIlc!5e0!3m2!1ses!2spe!4v1709765432100!5m2!1ses!2spe"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d237.95!2d-79.0242992!3d-8.1185358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad3d7f208c7a3f%3A0xe88cc6eceffa5541!2sTupac+Yupanqui+555%2C+V%C3%ADctor+Larco+Herrera+13006!5e0!3m2!1ses!2spe!4v1741537200000!5m2!1ses!2spe"
               loading="lazy" title="Ubicación del Instituto Von Humboldt">
             </iframe>
           </div>

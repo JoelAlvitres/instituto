@@ -26,7 +26,7 @@ class ContactController extends Controller
         $data = $request->only('nombre', 'email', 'telefono', 'mensaje');
 
         try {
-            Mail::to('direccion@vonhumboldt.edu.pe')->send(new ContactMessage($data));
+            Mail::to('informes@vonhumboldt.edu.pe')->send(new ContactMessage($data));
 
             return back()->with('success', '¡Gracias por tu mensaje! Nos contactaremos contigo pronto.');
         } catch (\Exception $e) {

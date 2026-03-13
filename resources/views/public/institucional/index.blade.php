@@ -1083,36 +1083,206 @@
         padding: 3.5rem 3rem;
       }
     }
-      .docente-group { margin-bottom: 3.5rem; }
-      .group-title { color: #690080; font-size: 1.8rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; }
-      .group-title::after { content: ''; display: block; width: 60px; height: 3px; background: #806600; margin: 10px auto; }
-      
-      .slider-container { position: relative; display: flex; align-items: center; border-radius: 20px; background: #f8f8f8; padding: 1.5rem; box-shadow: inset 0 0 10px rgba(0,0,0,0.05); }
-      .docente-slider { display: flex; overflow-x: auto; gap: 1.5rem; scroll-behavior: smooth; scrollbar-width: none; width: 100%; padding: 5px; }
-      .docente-slider::-webkit-scrollbar { display: none; }
-      
-      .slider-btn { background: #ab7c05; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: all 0.3s ease; }
-      .slider-btn.prev { left: -15px; }
-      .slider-btn.next { right: -15px; }
-      .slider-btn:hover { background: #8a7007; transform: translateY(-50%) scale(1.1); }
-      
-      .docente-card-new { min-width: 320px; max-width: 320px; background: white; border: 2px solid #806d00; border-radius: 15px; display: flex; padding: 1rem; gap: 1rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); }
-      .docente-photo-wrapper { width: 100px; height: 125px; border-radius: 8px; overflow: hidden; border: 1px solid #eeeeee; flex-shrink: 0; }
-      .docente-photo-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-      .docente-placeholder { width: 100%; height: 100%; background: #eeeeee; display: flex; align-items: center; justify-content: center; color: #999999; }
-      .docente-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-      .docente-name-row { display: flex; gap: 8px; align-items: flex-start; color: #7e621a; }
-      .docente-name { font-size: 1.05rem; font-weight: 800; margin: 0; line-height: 1.2; }
-      .docente-email-row { display: flex; gap: 8px; align-items: center; margin: 8px 0; color: #666; font-size: 0.85rem; }
-      .btn-cv { background: #bb930e; color: white; text-decoration: none; font-size: 0.85rem; font-weight: 700; padding: 8px 15px; border-radius: 20px; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; width: fit-content; }
-      .btn-cv:hover { background: #836a04; box-shadow: 0 5px 15px rgba(141, 115, 20, 0.3); }
-      .btn-cv-disabled { background: #e0e0e0; color: #999; padding: 8px 15px; border-radius: 20px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; cursor: not-allowed; width: fit-content; }
+
+    .docente-group {
+      margin-bottom: 3.5rem;
+    }
+
+    .group-title {
+      color: #690080;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .group-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #806600;
+      margin: 10px auto;
+    }
+
+    .slider-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      border-radius: 20px;
+      background: #f8f8f8;
+      padding: 1.5rem;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .docente-slider {
+      display: flex;
+      overflow-x: auto;
+      gap: 1.5rem;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      width: 100%;
+      padding: 5px;
+    }
+
+    .docente-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .slider-btn {
+      background: #ab7c05;
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .slider-btn.prev {
+      left: -15px;
+    }
+
+    .slider-btn.next {
+      right: -15px;
+    }
+
+    .slider-btn:hover {
+      background: #8a7007;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .docente-card-new {
+      min-width: 320px;
+      max-width: 320px;
+      background: white;
+      border: 2px solid #806d00;
+      border-radius: 15px;
+      display: flex;
+      padding: 1rem;
+      gap: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .docente-photo-wrapper {
+      width: 100px;
+      height: 125px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #eeeeee;
+      flex-shrink: 0;
+    }
+
+    .docente-photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .docente-placeholder {
+      width: 100%;
+      height: 100%;
+      background: #eeeeee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999999;
+    }
+
+    .docente-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .docente-name-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      color: #7e621a;
+    }
+
+    .docente-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .docente-email-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin: 8px 0;
+      color: #666;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .docente-email {
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      flex: 1;
+    }
+
+    .btn-cv {
+      background: #bb930e;
+      color: white;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 8px 15px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      width: fit-content;
+    }
+
+    .btn-cv:hover {
+      background: #836a04;
+      box-shadow: 0 5px 15px rgba(141, 115, 20, 0.3);
+    }
+
+    .btn-cv-disabled {
+      background: #e0e0e0;
+      color: #999;
+      padding: 8px 15px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      cursor: not-allowed;
+      width: fit-content;
+    }
     }
 
     @media (max-width: 768px) {
-      .docente-card-new { min-width: 280px; max-width: 280px; }
-      .slider-container { padding: 1rem; }
-      .slider-btn { width: 35px; height: 35px; }
+      .docente-card-new {
+        min-width: 280px;
+        max-width: 280px;
+      }
+
+      .slider-container {
+        padding: 1rem;
+      }
+
+      .slider-btn {
+        width: 35px;
+        height: 35px;
+      }
     }
 
     @media (min-width: 1920px) {
@@ -1137,7 +1307,7 @@
         const slider = container.querySelector('.docente-slider');
         const prevBtn = container.querySelector('.slider-btn.prev');
         const nextBtn = container.querySelector('.slider-btn.next');
-        
+
         if (slider && prevBtn && nextBtn) {
           prevBtn.addEventListener('click', () => slider.scrollBy({ left: -350, behavior: 'smooth' }));
           nextBtn.addEventListener('click', () => slider.scrollBy({ left: 350, behavior: 'smooth' }));
