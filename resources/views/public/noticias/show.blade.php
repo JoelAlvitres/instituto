@@ -215,5 +215,57 @@
         .footer-offset {
             margin-bottom: 0 !important;
         }
+
+        /* === RESPONSIVE NOTICIAS SHOW === */
+        @media (max-width: 768px) {
+            h1.text-4xl.md\:text-6xl {
+                font-size: 2.2rem;
+                line-height: 1.2;
+            }
+
+            .pt-12.pb-16.md\:pt-16.md\:pb-24 {
+                padding-top: 2rem;
+                padding-bottom: 3rem;
+            }
+
+            /* Sidebar on mobile appears below content */
+            .sticky.top-28 {
+                position: static;
+            }
+
+            /* CTA Admission card padding */
+            .bg-gradient-to-br.from-primary.to-primary-dark.rounded-\[2\.5rem\].p-10 {
+                padding: 1.5rem;
+            }
+
+            /* Summary block */
+            .p-8.bg-gray-50 {
+                padding: 1.25rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            h1.text-4xl.md\:text-6xl {
+                font-size: 1.8rem;
+            }
+
+            /* Author bar responsive */
+            .flex.items-center.justify-between.py-6 {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .prose.prose-lg.md\:prose-xl {
+                font-size: 1rem;
+            }
+
+            /* Sidebar recent article thumbnails */
+            .w-20.h-24 {
+                width: 4rem;
+                height: 5rem;
+            }
+        }
     </style>
 @endsection

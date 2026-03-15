@@ -214,7 +214,7 @@
             <p class="text-white/80">Publica tus ofertas laborales y encuentra talento en nuestra institución.</p>
           </div>
         </div>
-        <div class="flex gap-4">
+        <div class="flex flex-wrap gap-4">
           <a href="#" 
              class="px-8 py-4 bg-white text-[#4a2e6e] font-bold rounded-xl hover:bg-[#c9a227] hover:text-white transition-all duration-300 shadow-xl">
             Publicar Oferta

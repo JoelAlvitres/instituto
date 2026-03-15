@@ -232,7 +232,7 @@
           <h4 class="text-2xl font-bold mb-2">¿Necesitas más información?</h4>
           <p class="text-white/80">Estamos aquí para ayudarte en tu proceso de admisión y servicios estudiantiles.</p>
         </div>
-        <div class="flex gap-4">
+        <div class="flex flex-wrap gap-4">
           <a href="{{ route('public.contacto') }}" 
              class="px-8 py-4 bg-white text-[#4a2e6e] font-bold rounded-xl hover:bg-[#c9a227] hover:text-white transition-all duration-300 shadow-xl">
             Contactar

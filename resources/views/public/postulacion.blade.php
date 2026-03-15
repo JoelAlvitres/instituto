@@ -250,5 +250,99 @@
         .animate-fade-in-up {
             animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
+
+        /* === RESPONSIVE POSTULACIÓN === */
+        @media (max-width: 1024px) {
+            .grid.lg\\:grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1.text-4xl.md\\:text-5xl {
+                font-size: 2.2rem;
+            }
+
+            .p-10 {
+                padding: 1.5rem !important;
+            }
+
+            .p-8 {
+                padding: 1.25rem;
+            }
+
+            .grid.md\\:grid-cols-3 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .grid.lg\\:grid-cols-2 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            /* Bank account numbers - prevent overflow */
+            .font-mono.font-bold.text-lg {
+                font-size: 0.85rem;
+                word-break: break-all;
+            }
+        }
+
+        @media (max-width: 640px) {
+            h1.text-4xl.md\\:text-5xl {
+                font-size: 1.8rem;
+            }
+
+            .p-10 {
+                padding: 1.25rem !important;
+            }
+
+            .p-6 {
+                padding: 1rem;
+            }
+
+            /* Bank account grid: stack vertically on small screens */
+            .grid.grid-cols-2.gap-4 {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .font-mono.font-bold.text-lg {
+                font-size: 0.8rem;
+                word-break: break-all;
+            }
+
+            /* WhatsApp/email contact items */
+            .flex.items-center.gap-4.p-4 {
+                gap: 0.75rem;
+            }
+
+            .w-12.h-12.rounded-xl {
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.2rem;
+            }
+
+            /* Steps grid */
+            .grid.md\\:grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            /* FAQ details */
+            details summary {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            h1.text-4xl.md\\:text-5xl {
+                font-size: 1.6rem;
+            }
+
+            .flex.justify-between.items-start {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
     </style>
 @endsection
