@@ -26,7 +26,7 @@
 
                 <div class="flex items-center gap-4 relative z-10">
                     <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center p-2 shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="max-w-full h-auto">
+                        <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="max-w-full h-auto">
                     </div>
                     <div>
                         <h2 class="text-2xl font-black leading-tight tracking-tight">Biblioteca Virtual</h2>

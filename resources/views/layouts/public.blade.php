@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title', 'IES')</title>
-  <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo.svg') }}">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   @yield('styles')
 
@@ -40,7 +40,7 @@
       {{-- LOGO --}}
       <a href="{{ route('public.home') }}" class="logo-link">
         <div class="logo-image">
-          <img src="{{ asset('images/logo.png') }}" alt="Instituto Von Humboldt">
+          <img src="{{ asset('images/logo.svg') }}" alt="Instituto Von Humboldt">
         </div>
         <div class="logo-text">
           <span class="logo-title">VON HUMBOLDT</span>
@@ -84,7 +84,7 @@
 
     <div class="mobile-menu-header">
       <div class="mobile-menu-logo">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo">
+        <img src="{{ asset('images/logo.svg') }}" alt="Logo">
       </div>
       <div>
         <div class="mobile-menu-title">VON HUMBOLDT</div>

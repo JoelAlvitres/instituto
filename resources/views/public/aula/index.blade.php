@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Instituto Von Humboldt - Plataforma Estudiantil')</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo.svg') }}">
 
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -987,7 +987,7 @@
         <div class="logo-overlay-container">
             <div class="logo-overlay-circle">
                 <div class="logo-inner-glow"></div>
-                <img src="{{ asset('images/logo1.png') }}" alt="Logo Instituto Von Humboldt" class="logo-overlay-img">
+                <img src="{{ asset('images/logo1.svg') }}" alt="Logo Instituto Von Humboldt" class="logo-overlay-img">
             </div>
 
             <main class="login-section">
