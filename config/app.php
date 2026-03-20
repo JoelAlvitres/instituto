@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'aula_virtual_url' => env('AULA_VIRTUAL_URL', 'https://iestp.vonhumboldt.edu.pe/aulavirtual/login/index.php'),
+
 ];

@@ -90,10 +90,15 @@
 
         <div class="organigrama-content">
           @if($pagina->organigrama_pdf)
+            @php
+              $pdfUrl = str_starts_with($pagina->organigrama_pdf, 'paginas/')
+                ? asset('storage/' . $pagina->organigrama_pdf)
+                : asset('images/organigrama/' . $pagina->organigrama_pdf);
+            @endphp
             <div class="pdf-viewer">
-              <iframe src="{{ asset('storage/' . $pagina->organigrama_pdf) }}" class="pdf-iframe"></iframe>
+              <iframe src="{{ $pdfUrl }}" class="pdf-iframe"></iframe>
             </div>
-            <a class="btn-pdf" href="{{ asset('storage/' . $pagina->organigrama_pdf) }}" target="_blank" rel="noopener">
+            <a class="btn-pdf" href="{{ $pdfUrl }}" target="_blank" rel="noopener">
               <span>Abrir/Descargar PDF</span>
               <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd"
@@ -102,8 +107,13 @@
               </svg>
             </a>
           @elseif($pagina->organigrama_imagen)
+            @php
+              $imgUrl = str_starts_with($pagina->organigrama_imagen, 'paginas/')
+                ? asset('storage/' . $pagina->organigrama_imagen)
+                : asset('images/organigrama/' . $pagina->organigrama_imagen);
+            @endphp
             <div class="image-viewer">
-              <img src="{{ asset('storage/' . $pagina->organigrama_imagen) }}" alt="Organigrama">
+              <img src="{{ $imgUrl }}" alt="Organigrama">
             </div>
           @else
             <p class="empty-message">El organigrama institucional estará disponible próximamente.</p>

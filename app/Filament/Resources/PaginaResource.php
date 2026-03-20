@@ -83,8 +83,8 @@ class PaginaResource extends Resource
                             ->schema([
                                 Forms\Components\FileUpload::make('organigrama_pdf')
                                     ->label('Organigrama (PDF)')
-                                    ->disk('public')
-                                    ->directory('paginas/organigrama')
+                                    ->disk('organigrama')
+                                    ->directory('')
                                     ->acceptedFileTypes(['application/pdf'])
                                     ->maxSize(10240)
                                     ->downloadable()
@@ -92,8 +92,8 @@ class PaginaResource extends Resource
 
                                 Forms\Components\FileUpload::make('organigrama_imagen')
                                     ->label('Organigrama (Imagen)')
-                                    ->disk('public')
-                                    ->directory('paginas/organigrama')
+                                    ->disk('organigrama')
+                                    ->directory('')
                                     ->image()
                                     ->imageEditor()
                                     ->imagePreviewHeight('200')

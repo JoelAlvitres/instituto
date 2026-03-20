@@ -47,6 +47,16 @@ return [
             'report' => false,
         ],
 
+        // Organigrama: almacena en public para evitar dependencia de storage:link en producción
+        'organigrama' => [
+            'driver' => 'local',
+            'root' => public_path('images/organigrama'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/images/organigrama',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

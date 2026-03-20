@@ -996,9 +996,9 @@
                     @yield('page-subtitle', 'Plataforma exclusiva para nuestros estudiantes. Ingresa con tus credenciales para acceder a materiales, calificaciones y más.')
                 </p>
 
-                <button class="btn-primary" id="accederBtn">
+                <a href="{{ config('app.aula_virtual_url') }}" target="_blank" rel="noopener" class="btn-primary" id="accederBtn">
                     Acceder <i class="fas fa-chevron-right"></i>
-                </button>
+                </a>
             </main>
         </div>
 
@@ -1118,70 +1118,7 @@
             const btnAcceder = document.getElementById('accederBtn');
             const cards = document.querySelectorAll('.card');
 
-            // 1. Efecto al hacer clic en "Acceder"
-            if (btnAcceder) {
-                btnAcceder.addEventListener('click', () => {
-                    // Animación mejorada
-                    btnAcceder.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Accediendo...';
-                    btnAcceder.disabled = true;
-                    btnAcceder.style.opacity = '0.8';
-
-                    // Simular proceso de login
-                    setTimeout(() => {
-                        // Crear modal de éxito
-                        const modal = document.createElement('div');
-                        modal.style.cssText = `
-                            position: fixed;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            background: rgba(0,0,0,0.85);
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            z-index: 10000;
-                            animation: fadeIn 0.4s ease;
-                            padding: 20px;
-                        `;
-
-                        modal.innerHTML = `
-                            <div style="background: linear-gradient(135deg, #fff, #f9f5ff); padding: 30px; border-radius: 20px; text-align: center; max-width: 550px; width: 100%; box-shadow: 0 20px 50px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.6); position: relative;">
-                                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 8px; background: linear-gradient(90deg, #ff9800, #7b1fa2); border-radius: 20px 20px 0 0;"></div>
-                                <i class="fas fa-check-circle" style="font-size: 4rem; background: linear-gradient(135deg, #4CAF50, #2E7D32); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;"></i>
-                                <h2 style="color: #4a148c; margin-bottom: 15px; font-size: 1.8rem; font-weight: 800;">¡Acceso Exitoso!</h2>
-                                <p style="margin-bottom: 25px; font-size: 1.1rem; color: #555; line-height: 1.5;">Bienvenido a la plataforma estudiantil del Instituto Von Humboldt</p>
-                                <button id="closeModal" style="background: linear-gradient(135deg, #f57c00, #ff9800); color: white; border: none; padding: 14px 30px; border-radius: 50px; font-size: 1rem; cursor: pointer; font-weight: bold; box-shadow: 0 8px 20px rgba(245, 124, 0, 0.4); transition: all 0.3s; width: 100%; max-width: 200px;">
-                                    Continuar
-                                </button>
-                            </div>
-                        `;
-
-                        document.body.appendChild(modal);
-
-                        // Cerrar modal
-                        const closeModalBtn = document.getElementById('closeModal');
-                        closeModalBtn.addEventListener('click', () => {
-                            document.body.removeChild(modal);
-                            btnAcceder.innerHTML = 'Acceder <i class="fas fa-chevron-right"></i>';
-                            btnAcceder.disabled = false;
-                            btnAcceder.style.opacity = '1';
-                        });
-
-                        // Cerrar modal haciendo clic fuera
-                        modal.addEventListener('click', (e) => {
-                            if (e.target === modal) {
-                                document.body.removeChild(modal);
-                                btnAcceder.innerHTML = 'Acceder <i class="fas fa-chevron-right"></i>';
-                                btnAcceder.disabled = false;
-                                btnAcceder.style.opacity = '1';
-                            }
-                        });
-                    }, 1500);
-                });
-            }
-
-            // 2. Efectos para las tarjetas de carreras
+            // Efectos para las tarjetas de carreras
             cards.forEach(card => {
                 card.addEventListener('mouseenter', () => {
                     if (window.innerWidth > 768) { // Solo en pantallas grandes
