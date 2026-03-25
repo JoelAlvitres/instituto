@@ -77,7 +77,7 @@
     @if(count($items) > 0)
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach($items as $index => $it)
-          <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-[#6b3f8c]/10 overflow-hidden animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
+          <div class="group flex flex-col h-full bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-[#6b3f8c]/10 overflow-hidden animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
             {{-- Cabecera con gradiente --}}
             <div class="h-2 bg-gradient-to-r from-[#e67e22] via-[#c9a227] to-[#6b3f8c]"></div>
             
@@ -98,34 +98,34 @@
             </div>
             
             {{-- Contenido --}}
-            <div class="p-6">
-              <div class="flex items-start gap-3 mb-3">
-                <span class="text-2xl group-hover:scale-110 transition-transform">🧑‍🤝‍🧑</span>
-                <h3 class="text-xl font-bold text-[#4a2e6e] group-hover:text-[#c9a227] transition-colors">
+            <div class="p-5 sm:p-6 flex flex-col flex-1">
+              <div class="flex items-start gap-3 mb-2">
+                <span class="text-2xl shrink-0 mt-0.5 group-hover:scale-110 transition-transform" aria-hidden="true">🧑‍🤝‍🧑</span>
+                <h3 class="text-lg sm:text-xl font-bold text-[#4a2e6e] group-hover:text-[#c9a227] transition-colors leading-snug">
                   {{ $it->titulo }}
                 </h3>
               </div>
               
-              <div class="mt-3 min-h-[4.5rem]">
-                <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed text-block-justify">
+              <div class="mt-2 min-h-[3.5rem]">
+                <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed text-left">
                   {{ $it->resumen ?? 'Servicio disponible para estudiantes. Contáctanos para más información.' }}
                 </p>
               </div>
 
               @if(filled($it->contenido))
-                <details class="mt-4 group/details rounded-xl border border-[#c9a227]/20 bg-[#faf5ff]/50 px-4 py-2 text-sm text-[#4a2e6e]">
-                  <summary class="cursor-pointer font-semibold list-none flex items-center justify-between gap-2">
+                <details class="bienestar-details mt-4 group/details rounded-xl border border-[#6b3f8c]/12 bg-white shadow-sm text-[#4a2e6e] overflow-hidden">
+                  <summary class="cursor-pointer select-none font-semibold text-sm list-none flex items-center justify-between gap-3 px-4 py-3 bg-[#faf5ff]/80 hover:bg-[#faf5ff] transition-colors [&::-webkit-details-marker]:hidden">
                     <span>Ver detalle del servicio</span>
-                    <span class="text-[#c9a227] group-open/details:rotate-180 transition-transform">▼</span>
+                    <span class="text-[#c9a227] text-xs shrink-0 group-open/details:rotate-180 transition-transform duration-200" aria-hidden="true">▼</span>
                   </summary>
-                  <div class="admin-html-content mt-3 text-sm text-gray-700">
+                  <div class="admin-html-content bienestar-html px-4 pb-4 pt-0 text-sm text-gray-700 border-t border-[#e8e0ec]/60">
                     {!! $it->contenido !!}
                   </div>
                 </details>
               @endif
 
               <a href="{{ route('public.contacto') }}"
-                 class="group/btn relative inline-flex items-center gap-2 mt-6 px-6 py-3 bg-gradient-to-r from-[#6b3f8c] to-[#4a2e6e] text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center">
+                 class="group/btn relative inline-flex items-center gap-2 mt-auto pt-6 px-6 py-3 bg-gradient-to-r from-[#6b3f8c] to-[#4a2e6e] text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center">
                 <span class="absolute inset-0 bg-gradient-to-r from-[#c9a227] to-[#e67e22] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
                 <span class="relative flex items-center gap-2">
                   <span class="text-lg group-hover/btn:scale-110 transition-transform">📞</span>

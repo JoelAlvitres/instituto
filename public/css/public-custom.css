@@ -1471,3 +1471,77 @@ main {
   -webkit-hyphens: auto;
   line-height: 1.65;
 }
+
+/* === Bienestar: tarjetas (columnas estrechas) — sin justificar el cuerpo === */
+.admin-html-content.bienestar-html {
+  text-align: start;
+  hyphens: manual;
+}
+
+.admin-html-content.bienestar-html p,
+.admin-html-content.bienestar-html li {
+  text-align: start !important;
+}
+
+.admin-html-content.bienestar-html p {
+  margin: 0 0 0.65rem;
+  line-height: 1.6;
+}
+
+.admin-html-content.bienestar-html ul,
+.admin-html-content.bienestar-html ol {
+  margin: 0.45rem 0 0.75rem;
+  padding-left: 1.35rem;
+  list-style-position: outside;
+}
+
+.admin-html-content.bienestar-html ul {
+  list-style-type: disc;
+}
+
+.admin-html-content.bienestar-html ol {
+  list-style-type: decimal;
+}
+
+.admin-html-content.bienestar-html li {
+  margin: 0.35rem 0;
+  padding-left: 0.2rem;
+  line-height: 1.55;
+}
+
+.admin-html-content.bienestar-html li + li {
+  margin-top: 0.25rem;
+}
+
+.admin-html-content.bienestar-html li > p {
+  margin: 0.15rem 0 0.25rem;
+}
+
+.admin-html-content.bienestar-html h2,
+.admin-html-content.bienestar-html h3,
+.admin-html-content.bienestar-html h4 {
+  margin: 0.85rem 0 0.45rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #4a2e6e;
+  text-align: start;
+}
+
+.admin-html-content.bienestar-html h2:first-child,
+.admin-html-content.bienestar-html h3:first-child,
+.admin-html-content.bienestar-html h4:first-child {
+  margin-top: 0;
+}
+
+.admin-html-content.bienestar-html blockquote {
+  text-align: start;
+  margin: 0.65rem 0;
+}
+
+details.bienestar-details summary {
+  list-style: none;
+}
+
+details.bienestar-details summary::-webkit-details-marker {
+  display: none;
+}
