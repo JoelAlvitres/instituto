@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\DocenteResource\Pages;
 use App\Models\Docente;
+use App\Support\MediaUrl;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -68,8 +69,8 @@ class DocenteResource extends Resource
                                 ->default(0),
 
                             Forms\Components\FileUpload::make('foto')
-                                ->disk('public')
-                                ->directory('docentes')
+                                ->disk('docentes_public')
+                                ->directory('')
                                 ->image()
                                 ->imageEditor()
                                 ->imagePreviewHeight('200')
@@ -92,9 +93,9 @@ class DocenteResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('foto')
-                    ->disk('public')
                     ->circular()
-                    ->label('Foto'),
+                    ->label('Foto')
+                    ->formatStateUsing(fn (?string $state): ?string => $state ? MediaUrl::docenteFoto($state) : null),
 
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable()

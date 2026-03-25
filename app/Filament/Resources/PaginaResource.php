@@ -45,8 +45,8 @@ class PaginaResource extends Resource
                         Forms\Components\Section::make('Banner')
                             ->schema([
                                 Forms\Components\FileUpload::make('banner')
-                                    ->disk('public')
-                                    ->directory('paginas/banners')
+                                    ->disk('paginas_banners')
+                                    ->directory('')
                                     ->image()
                                     ->imageEditor()
                                     ->imagePreviewHeight('200')

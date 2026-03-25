@@ -1,7 +1,7 @@
 <div class="docente-card-new">
     <div class="docente-photo-wrapper">
         @if($docente->foto)
-            <img src="{{ asset('storage/' . $docente->foto) }}" alt="{{ $docente->nombre }}">
+            <img src="{{ \App\Support\MediaUrl::docenteFoto($docente->foto) }}" alt="{{ $docente->nombre }}">
         @else
             <div class="docente-placeholder">
                 <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor">
@@ -31,7 +31,7 @@
         @endif
 
         @if($docente->cv_pdf)
-            <a href="{{ asset('storage/' . $docente->cv_pdf) }}" target="_blank" class="btn-cv">
+            <a href="{{ \App\Support\MediaUrl::docenteCv($docente->cv_pdf) }}" target="_blank" rel="noopener" class="btn-cv">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                     <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
                 </svg>

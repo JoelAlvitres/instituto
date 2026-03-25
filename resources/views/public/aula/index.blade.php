@@ -238,6 +238,8 @@
                 inset 0 5px 15px rgba(255, 255, 255, 0.8);
             z-index: 2;
             overflow: hidden;
+            /* No interceptar clics: el botón «Acceder» queda debajo en el apilamiento */
+            pointer-events: none;
         }
 
         /* Marco circular con gradiente - Versión compatible */
@@ -323,6 +325,7 @@
             box-shadow: var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.6);
             position: relative;
+            z-index: 5;
             overflow: hidden;
             text-align: center;
             margin-top: 80px;
@@ -372,12 +375,14 @@
             box-shadow: 0 8px 25px rgba(245, 124, 0, 0.4);
             transition: var(--transition);
             position: relative;
+            z-index: 1;
             overflow: hidden;
             letter-spacing: 0.5px;
             margin-top: 15px;
             width: auto;
             display: inline-block;
             min-width: 200px;
+            text-decoration: none;
         }
 
         .btn-primary::before {
@@ -996,7 +1001,13 @@
                     @yield('page-subtitle', 'Plataforma exclusiva para nuestros estudiantes. Ingresa con tus credenciales para acceder a materiales, calificaciones y más.')
                 </p>
 
-                <a href="{{ config('app.aula_virtual_url') }}" target="_blank" rel="noopener" class="btn-primary" id="accederBtn">
+                @php
+                    $aulaVirtualUrl = config('app.aula_virtual_url');
+                    if (empty($aulaVirtualUrl)) {
+                        $aulaVirtualUrl = 'https://iestp.vonhumboldt.edu.pe/aulavirtual/login/index.php';
+                    }
+                @endphp
+                <a href="{{ $aulaVirtualUrl }}" target="_blank" rel="noopener noreferrer" class="btn-primary" id="accederBtn">
                     Acceder <i class="fas fa-chevron-right"></i>
                 </a>
             </main>
@@ -1114,8 +1125,6 @@
                 slidesPerView: 1,
             });
 
-            // Referencias a los elementos
-            const btnAcceder = document.getElementById('accederBtn');
             const cards = document.querySelectorAll('.card');
 
             // Efectos para las tarjetas de carreras

@@ -123,7 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'aula_virtual_url' => env('AULA_VIRTUAL_URL', 'https://iestp.vonhumboldt.edu.pe/aulavirtual/login/index.php'),
+    'aula_virtual_url' => env('AULA_VIRTUAL_URL') ?: 'https://iestp.vonhumboldt.edu.pe/aulavirtual/login/index.php',
 
     'matricula_bcp_cuenta_soles' => env('MATRICULA_BCP_CUENTA_SOLES', '570-2078001-0-83'),
 

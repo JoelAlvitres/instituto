@@ -15,7 +15,7 @@
 
       {{-- HEADER CON BANNER DE FONDO --}}
       <div class="institutional-header" @if($pagina->banner)
-      style="background-image: url('{{ asset('storage/' . $pagina->banner) }}');" @else
+      style="background-image: url('{{ \App\Support\MediaUrl::paginaBanner($pagina->banner) }}');" @else
         style="background-image: url('{{ asset('images/baner-institucional.png') }}');" @endif>
 
         {{-- Overlay oscuro para mejorar legibilidad --}}
@@ -91,9 +91,7 @@
         <div class="organigrama-content">
           @if($pagina->organigrama_pdf)
             @php
-              $pdfUrl = str_starts_with($pagina->organigrama_pdf, 'paginas/')
-                ? asset('storage/' . $pagina->organigrama_pdf)
-                : asset('images/organigrama/' . $pagina->organigrama_pdf);
+              $pdfUrl = \App\Support\MediaUrl::organigramaPdf($pagina->organigrama_pdf);
             @endphp
             <div class="pdf-viewer">
               <iframe src="{{ $pdfUrl }}" class="pdf-iframe"></iframe>
@@ -108,9 +106,7 @@
             </a>
           @elseif($pagina->organigrama_imagen)
             @php
-              $imgUrl = str_starts_with($pagina->organigrama_imagen, 'paginas/')
-                ? asset('storage/' . $pagina->organigrama_imagen)
-                : asset('images/organigrama/' . $pagina->organigrama_imagen);
+              $imgUrl = \App\Support\MediaUrl::organigramaImagen($pagina->organigrama_imagen);
             @endphp
             <div class="image-viewer">
               <img src="{{ $imgUrl }}" alt="Organigrama">
@@ -173,7 +169,7 @@
             <div class="team-card">
               <div class="team-card-image">
                 @if($a->foto)
-                  <img src="{{ asset('storage/' . $a->foto) }}" alt="{{ $a->nombre }}">
+                  <img src="{{ \App\Support\MediaUrl::autoridadFoto($a->foto) }}" alt="{{ $a->nombre }}">
                 @else
                   <div class="image-placeholder">
                     <span>{{ substr($a->nombre, 0, 1) }}</span>

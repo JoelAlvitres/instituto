@@ -57,6 +57,42 @@ return [
             'report' => false,
         ],
 
+        'docentes_public' => [
+            'driver' => 'local',
+            'root' => public_path('images/docentes'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/images/docentes',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'docentes_cvs_public' => [
+            'driver' => 'local',
+            'root' => public_path('images/docentes/cvs'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/images/docentes/cvs',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'paginas_banners' => [
+            'driver' => 'local',
+            'root' => public_path('images/paginas/banners'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/images/paginas/banners',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'autoridades_public' => [
+            'driver' => 'local',
+            'root' => public_path('images/autoridades'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/images/autoridades',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
