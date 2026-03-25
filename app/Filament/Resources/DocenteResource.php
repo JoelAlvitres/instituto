@@ -78,8 +78,8 @@ class DocenteResource extends Resource
 
                             Forms\Components\FileUpload::make('cv_pdf')
                                 ->label('Hoja de Vida (PDF)')
-                                ->disk('public')
-                                ->directory('docentes/cvs')
+                                ->disk('docentes_cvs_public')
+                                ->directory('')
                                 ->acceptedFileTypes(['application/pdf'])
                                 ->maxSize(10240),
                         ]),
@@ -95,7 +95,8 @@ class DocenteResource extends Resource
                 Tables\Columns\ImageColumn::make('foto')
                     ->circular()
                     ->label('Foto')
-                    ->formatStateUsing(fn (?string $state): ?string => $state ? MediaUrl::docenteFoto($state) : null),
+                    ->getStateUsing(fn (Docente $record): ?string => $record->foto ? MediaUrl::docenteFoto($record->foto) : null)
+                    ->checkFileExistence(false),
 
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable()

@@ -84,7 +84,8 @@ class AutoridadResource extends Resource
                 Tables\Columns\ImageColumn::make('foto')
                     ->circular()
                     ->label('Foto')
-                    ->formatStateUsing(fn (?string $state): ?string => $state ? MediaUrl::autoridadFoto($state) : null),
+                    ->getStateUsing(fn (Autoridad $record): ?string => $record->foto ? MediaUrl::autoridadFoto($record->foto) : null)
+                    ->checkFileExistence(false),
 
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable()
