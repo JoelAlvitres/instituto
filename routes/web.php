@@ -54,6 +54,9 @@ Route::permanentRedirect('/servicios/bolsa', '/servicios/bolsa-trabajo');
 Route::permanentRedirect('/servicios/bolsa-de-trabajo', '/servicios/bolsa-trabajo');
 Route::permanentRedirect('/servicios/bienestar-estudiantil', '/servicios/bienestar');
 
+// Servicios publicados desde Gestión Web → Servicios (slug único; va después de las rutas fijas)
+Route::get('/servicios/{servicio:slug}', [ServicioPublicController::class, 'show'])->name('public.servicios.show');
+
 // Authenticated library viewer
 Route::middleware(['auth'])->group(function () {
     Route::get('/biblioteca/ver/{archivo}', [ServicioPublicController::class, 'verPdf'])->name('public.biblioteca.ver');

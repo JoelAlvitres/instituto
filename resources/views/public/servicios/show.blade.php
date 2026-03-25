@@ -27,9 +27,9 @@
           {{ $servicio->titulo }}
         </h1>
         
-        @if($servicio->descripcion_corta ?? false)
+        @if(filled($servicio->resumen))
           <p class="text-white/80 text-base md:text-lg max-w-2xl leading-relaxed font-light">
-            {{ $servicio->descripcion_corta }}
+            {{ $servicio->resumen }}
           </p>
         @endif
       </div>
@@ -104,8 +104,8 @@
               </div>
               <div>
                 <h1 class="text-2xl md:text-3xl font-bold text-[#4a2e6e]">{{ $servicio->titulo }}</h1>
-                @if($servicio->descripcion_corta ?? false)
-                  <p class="text-sm text-[#6b3f8c] mt-1">{{ $servicio->descripcion_corta }}</p>
+                @if(filled($servicio->resumen))
+                  <p class="text-sm text-[#6b3f8c] mt-1">{{ $servicio->resumen }}</p>
                 @endif
               </div>
             </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BibliotecaArchivo;
 use App\Models\BienestarServicio;
 use App\Models\OfertaLaboral;
+use App\Models\Servicio;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +14,23 @@ class ServicioPublicController extends Controller
 {
     public function index()
     {
-        return view('public.servicios.index');
+        $serviciosWeb = Servicio::query()
+            ->where('activo', true)
+            ->orderBy('orden')
+            ->orderBy('titulo')
+            ->get();
+
+        return view('public.servicios.index', compact('serviciosWeb'));
+    }
+
+    /**
+     * Páginas creadas en Gestión Web → Servicios (modelo Servicio, tabla servicios).
+     */
+    public function show(Servicio $servicio)
+    {
+        abort_unless($servicio->activo, 404);
+
+        return view('public.servicios.show', compact('servicio'));
     }
 
     public function biblioteca()
