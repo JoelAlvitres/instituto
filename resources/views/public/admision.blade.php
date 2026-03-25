@@ -198,6 +198,32 @@
               Los costos incluyen matrícula semestral y pensiones. Consulta por nuestras becas y descuentos.
             </p>
           </div>
+
+          {{-- Pagos de matrícula — cuentas bancarias --}}
+          <div
+            class="mt-8 p-6 md:p-8 rounded-2xl border-2 border-[#4a2e6e]/15 bg-gradient-to-br from-white to-[#faf5ff] shadow-inner">
+            <div class="flex items-start gap-4 mb-6">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-xl bg-[#4a2e6e]/10 flex items-center justify-center text-2xl"
+                aria-hidden="true">🏦</div>
+              <div>
+                <h4 class="text-xl font-bold text-[#4a2e6e]">Pagos de matrícula</h4>
+                <p class="text-sm text-[#6b3f8c] mt-1">Realiza tus depósitos o transferencias a las siguientes cuentas del
+                  instituto (Banco de Crédito del Perú — soles).</p>
+              </div>
+            </div>
+            <dl class="space-y-4 text-sm md:text-base">
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 p-4 rounded-xl bg-white border border-gray-100">
+                <dt class="font-semibold text-[#4a2e6e] sm:min-w-[200px]">Número de cuenta BCP (soles)</dt>
+                <dd class="font-mono font-bold text-gray-900 tracking-wide select-all">{{ config('app.matricula_bcp_cuenta_soles') }}</dd>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 p-4 rounded-xl bg-white border border-gray-100">
+                <dt class="font-semibold text-[#4a2e6e] sm:min-w-[200px]">CCI (interbancaria)</dt>
+                <dd class="font-mono font-bold text-gray-900 tracking-wide select-all break-all">{{ config('app.matricula_cci') }}</dd>
+              </div>
+            </dl>
+            <p class="mt-4 text-xs text-gray-500">Indica en el concepto o voucher tus datos y el programa al que postulas.</p>
+          </div>
         </div>
       </div>
 

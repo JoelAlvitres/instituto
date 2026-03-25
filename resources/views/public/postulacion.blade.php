@@ -10,6 +10,9 @@
         </div>
 
         <div class="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+            <p class="text-white/70 text-sm mb-4">
+                <a href="{{ route('public.admision') }}" class="hover:text-[#c9a227] underline underline-offset-2">← Volver a Admisión</a>
+            </p>
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 animate-fade-in-up">
                 Proceso de <span class="text-[#c9a227]">Postulación</span>
             </h1>
@@ -64,10 +67,10 @@
                             <div
                                 class="w-16 h-16 bg-[#faf5ff] rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">
                                 💳</div>
-                            <h3 class="text-xl font-bold text-[#4a2e6e] mb-4">Pago del Derecho</h3>
+                            <h3 class="text-xl font-bold text-[#4a2e6e] mb-4">Pago del derecho / matrícula</h3>
                             <p class="text-gray-600 leading-relaxed">
-                                Realiza el pago correspondiente al prospecto y examen de admisión a través de nuestros
-                                medios autorizados.
+                                Deposita o transfiere a la cuenta BCP del instituto (soles). Los datos exactos están en la
+                                sección <a href="#pagos" class="text-[#6b3f8c] font-semibold underline">Medios de pago</a> más abajo.
                             </p>
                         </div>
                     </div>
@@ -96,62 +99,35 @@
                 {{-- Información de Bancos --}}
                 <div class="space-y-8">
                     <div class="bg-white p-10 rounded-3xl shadow-2xl border-l-[6px] border-[#c9a227]">
-                        <h2 class="text-2xl font-bold text-[#4a2e6e] mb-8 flex items-center gap-3">
-                            <span class="text-3xl">🏦</span> Medios de Pago Autorizados
+                        <h2 class="text-2xl font-bold text-[#4a2e6e] mb-2 flex items-center gap-3">
+                            <span class="text-3xl">🏦</span> Medios de pago autorizados
                         </h2>
+                        <p class="text-sm text-[#6b3f8c] mb-8">Cuenta oficial del instituto para pagos de matrícula y derechos de admisión (BCP — soles).</p>
 
                         <div class="space-y-6">
-                            {{-- Banco 1 --}}
-                            <div class="p-6 bg-[#faf5ff] rounded-2xl border border-gray-100">
-                                <div class="flex justify-between items-start mb-4">
-                                    <h4 class="font-bold text-[#4a2e6e] text-lg">Banco de Crédito (BCP)</h4>
-                                    <span
-                                        class="px-3 py-1 bg-white text-[#c9a227] text-xs font-bold rounded-full border border-[#c9a227]/20 uppercase">Ahorros
-                                        Soles</span>
+                            <div class="p-6 md:p-8 bg-[#faf5ff] rounded-2xl border border-[#6b3f8c]/15">
+                                <div class="flex flex-wrap justify-between items-start gap-3 mb-6">
+                                    <h4 class="font-bold text-[#4a2e6e] text-lg">Banco de Crédito del Perú (BCP)</h4>
+                                    <span class="px-3 py-1 bg-white text-[#c9a227] text-xs font-bold rounded-full border border-[#c9a227]/20 uppercase">Soles</span>
                                 </div>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Número de
-                                            Cuenta</p>
-                                        <p class="text-[#4a2e6e] font-mono font-bold text-lg">191-XXXXXXXX-X-XX</p>
+                                <dl class="space-y-4">
+                                    <div class="p-4 rounded-xl bg-white border border-gray-100">
+                                        <dt class="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Número de cuenta BCP (soles)</dt>
+                                        <dd class="text-[#4a2e6e] font-mono font-bold text-base md:text-lg select-all break-all">{{ config('app.matricula_bcp_cuenta_soles') }}</dd>
                                     </div>
-                                    <div>
-                                        <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold">CCI
-                                            (Interbancario)</p>
-                                        <p class="text-[#4a2e6e] font-mono font-bold text-lg">002-XXXXXXXXXXXXXXXXXXXX</p>
+                                    <div class="p-4 rounded-xl bg-white border border-gray-100">
+                                        <dt class="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">CCI (interbancaria)</dt>
+                                        <dd class="text-[#4a2e6e] font-mono font-bold text-base md:text-lg select-all break-all">{{ config('app.matricula_cci') }}</dd>
                                     </div>
-                                </div>
-                            </div>
-
-                            {{-- Banco 2 --}}
-                            <div class="p-6 bg-[#faf5ff] rounded-2xl border border-gray-100">
-                                <div class="flex justify-between items-start mb-4">
-                                    <h4 class="font-bold text-[#4a2e6e] text-lg">Banco de la Nación</h4>
-                                    <span
-                                        class="px-3 py-1 bg-white text-[#c9a227] text-xs font-bold rounded-full border border-[#c9a227]/20 uppercase">Cuenta
-                                        Corriente</span>
-                                </div>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Número de
-                                            Cuenta</p>
-                                        <p class="text-[#4a2e6e] font-mono font-bold text-lg">00-XXX-XXXXXX</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs text-gray-400 uppercase tracking-wider font-semibold">CCI
-                                            (Interbancario)</p>
-                                        <p class="text-[#4a2e6e] font-mono font-bold text-lg">018-XXXXXXXXXXXXXXXXXXXX</p>
-                                    </div>
-                                </div>
+                                </dl>
                             </div>
                         </div>
 
                         <div class="mt-8 p-5 bg-amber-50 rounded-2xl border border-amber-200 flex items-start gap-4">
-                            <span class="text-2xl mt-1">⚠️</span>
+                            <span class="text-2xl mt-1 shrink-0">⚠️</span>
                             <p class="text-sm text-amber-800 leading-relaxed">
-                                <strong>Importante:</strong> Al realizar el depósito o transferencia, asegúrate de colocar
-                                tu <strong>Nombre Completo</strong> y <strong>DNI</strong> en el concepto o referencia.
-                                Guarda el voucher digital o físico.
+                                <strong>Importante:</strong> En el concepto o referencia indica tu <strong>nombre completo</strong>,
+                                <strong>DNI</strong> y el <strong>programa</strong> al que postulas. Conserva el voucher o comprobante de transferencia.
                             </p>
                         </div>
                     </div>
@@ -173,16 +149,16 @@
                         </p>
 
                         <div class="space-y-4">
-                            <a href="https://wa.me/51XXXXXXXXX" target="_blank"
+                            <a href="https://wa.me/{{ config('app.admision_whatsapp') }}?text={{ urlencode('Hola, envío comprobante de pago / consulta sobre postulación — ') }}" target="_blank" rel="noopener"
                                 class="flex items-center gap-4 p-4 bg-white/10 hover:bg-white/20 rounded-2xl transition-all border border-white/20 group">
                                 <div
                                     class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
                                     💬</div>
-                                <div class="flex-1">
-                                    <p class="text-xs text-white/60 uppercase font-bold">WhatsApp Admisión</p>
-                                    <p class="font-bold text-lg">+51 XXX XXX XXX</p>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs text-white/60 uppercase font-bold">WhatsApp</p>
+                                    <p class="font-bold text-lg">922 022 800</p>
                                 </div>
-                                <span class="text-white/40">➔</span>
+                                <span class="text-white/40 shrink-0">➔</span>
                             </a>
 
                             <a href="mailto:admision@vonhumboldt.edu.pe"

@@ -125,4 +125,10 @@ return [
 
     'aula_virtual_url' => env('AULA_VIRTUAL_URL', 'https://iestp.vonhumboldt.edu.pe/aulavirtual/login/index.php'),
 
+    'matricula_bcp_cuenta_soles' => env('MATRICULA_BCP_CUENTA_SOLES', '570-2078001-0-83'),
+
+    'matricula_cci' => env('MATRICULA_CCI', '00257000207800108309'),
+
+    'admision_whatsapp' => env('ADMISION_WHATSAPP', '51922022800'),
+
 ];
