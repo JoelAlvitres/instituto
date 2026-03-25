@@ -49,6 +49,11 @@ Route::get('/servicios/biblioteca/login', [ServicioPublicController::class, 'lib
 Route::get('/servicios/bienestar', [ServicioPublicController::class, 'bienestar'])->name('public.servicios.bienestar');
 Route::get('/servicios/bolsa-trabajo', [ServicioPublicController::class, 'bolsa'])->name('public.servicios.bolsa');
 
+// Alias cortos → URLs canónicas
+Route::permanentRedirect('/servicios/bolsa', '/servicios/bolsa-trabajo');
+Route::permanentRedirect('/servicios/bolsa-de-trabajo', '/servicios/bolsa-trabajo');
+Route::permanentRedirect('/servicios/bienestar-estudiantil', '/servicios/bienestar');
+
 // Authenticated library viewer
 Route::middleware(['auth'])->group(function () {
     Route::get('/biblioteca/ver/{archivo}', [ServicioPublicController::class, 'verPdf'])->name('public.biblioteca.ver');

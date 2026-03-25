@@ -240,7 +240,7 @@
               </div>
             </div>
 
-            <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+            <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed admin-html-content">
               {!! $carrera->perfil_profesional
     ?? '<p class="text-gray-600 italic">Complete este contenido desde el panel de administración.</p>' !!}
             </div>

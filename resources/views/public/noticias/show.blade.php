@@ -86,12 +86,12 @@
                     {{-- Resumen destacado si existe --}}
                     @if($noticia->resumen)
                         <div
-                            class="mb-10 p-8 bg-gray-50 rounded-2xl border-l-4 border-secondary italic text-xl text-gray-700 font-medium">
+                            class="mb-10 p-8 bg-gray-50 rounded-2xl border-l-4 border-secondary italic text-xl text-gray-700 font-medium text-block-justify">
                             “{{ $noticia->resumen }}”
                         </div>
                     @endif
 
-                    <div class="prose prose-lg md:prose-xl max-w-none text-gray-800 leading-[1.8] text-justify font-serif">
+                    <div class="prose prose-lg md:prose-xl max-w-none text-gray-800 leading-[1.8] font-serif admin-html-content">
                         {!! $noticia->contenido !!}
                     </div>
 

@@ -119,7 +119,7 @@
             @endif
 
             {{-- Contenido del servicio --}}
-            <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+            <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed admin-html-content">
               {!! $servicio->contenido ?: '<p class="text-gray-500 italic">Complete el contenido desde el panel de administración.</p>' !!}
             </div>
           </div>

@@ -124,12 +124,15 @@
                 @endif
               </div>
 
-              {{-- Descripción / Resumen --}}
+              {{-- Descripción / Resumen (texto justificado; descripción rica sin truncar) --}}
               @if($o->resumen || $o->descripcion)
-                <div class="mt-4 p-4 bg-gradient-to-br from-[#faf5ff] to-white rounded-xl border border-[#c9a227]/10">
-                  <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed">
-                    {{ $o->resumen ?? \Illuminate\Support\Str::limit(strip_tags($o->descripcion), 140) }}
-                  </p>
+                <div class="mt-4 p-4 bg-gradient-to-br from-[#faf5ff] to-white rounded-xl border border-[#c9a227]/10 admin-html-content text-sm text-gray-700">
+                  @if(filled($o->resumen))
+                    <p class="mb-3 last:mb-0 text-block-justify">{{ $o->resumen }}</p>
+                  @endif
+                  @if(filled($o->descripcion))
+                    {!! $o->descripcion !!}
+                  @endif
                 </div>
               @endif
 

@@ -9,7 +9,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
 
 class OfertaLaboralResource extends Resource
 {
@@ -29,14 +28,7 @@ class OfertaLaboralResource extends Resource
                         ->schema([
                             Forms\Components\TextInput::make('titulo')
                                 ->required()
-                                ->live(onBlur: true)
-                                ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
-
-                            Forms\Components\TextInput::make('slug')
-                                ->required()
-                                ->disabled()
-                                ->dehydrated()
-                                ->unique(ignoreRecord: true),
+                                ->maxLength(255),
 
                             Forms\Components\TextInput::make('empresa')
                                 ->required()
@@ -45,6 +37,14 @@ class OfertaLaboralResource extends Resource
                             Forms\Components\TextInput::make('ubicacion')
                                 ->label('Ubicación')
                                 ->maxLength(120),
+
+                            Forms\Components\TextInput::make('tipo')
+                                ->label('Tipo (ej. Tiempo completo, Prácticas)')
+                                ->maxLength(80),
+
+                            Forms\Components\Textarea::make('resumen')
+                                ->rows(2)
+                                ->columnSpanFull(),
 
                             Forms\Components\RichEditor::make('descripcion')
                                 ->label('Descripción del puesto')
@@ -57,8 +57,9 @@ class OfertaLaboralResource extends Resource
                 ->schema([
                     Forms\Components\Section::make('Vigencia y Estado')
                         ->schema([
-                            Forms\Components\DatePicker::make('fecha_limite')
-                                ->label('Fecha límite'),
+                            Forms\Components\DatePicker::make('fecha_cierre')
+                                ->label('Fecha de cierre')
+                                ->native(false),
 
                             Forms\Components\TextInput::make('enlace_postulacion')
                                 ->label('Link de postulación')
@@ -72,15 +73,6 @@ class OfertaLaboralResource extends Resource
                             Forms\Components\TextInput::make('orden')
                                 ->numeric()
                                 ->default(0),
-
-                            Forms\Components\FileUpload::make('imagen')
-                                ->label('Logo / Banner')
-                                ->disk('public')
-                                ->directory('ofertas')
-                                ->image()
-                                ->imageEditor()
-                                ->imagePreviewHeight('150')
-                                ->maxSize(4096),
                         ]),
                 ])
                 ->columnSpan(['lg' => 1]),
@@ -91,11 +83,6 @@ class OfertaLaboralResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('imagen')
-                    ->disk('public')
-                    ->label('Img')
-                    ->circular(),
-
                 Tables\Columns\TextColumn::make('titulo')
                     ->searchable()
                     ->sortable()
@@ -106,7 +93,10 @@ class OfertaLaboralResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('fecha_limite')
+                Tables\Columns\TextColumn::make('tipo')
+                    ->toggleable(),
+
+                Tables\Columns\TextColumn::make('fecha_cierre')
                     ->date()
                     ->sortable()
                     ->label('Cierre'),

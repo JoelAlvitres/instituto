@@ -44,7 +44,7 @@
       {{-- HISTORIA --}}
       <div id="historia" class="content-card historia-card">
         <h2 class="section-title">Historia</h2>
-        <div class="content-text">
+        <div class="content-text admin-html-content">
           @if($pagina->historia)
             {!! $pagina->historia !!}
           @else
@@ -60,7 +60,7 @@
             <div class="icon-wrapper mision-icon">🎯</div>
             <h2 class="section-title">Misión</h2>
           </div>
-          <div class="content-text">
+          <div class="content-text admin-html-content">
             @if($pagina->mision)
               {!! $pagina->mision !!}
             @else
@@ -74,7 +74,7 @@
             <div class="icon-wrapper vision-icon">👁️</div>
             <h2 class="section-title">Visión</h2>
           </div>
-          <div class="content-text">
+          <div class="content-text admin-html-content">
             @if($pagina->vision)
               {!! $pagina->vision !!}
             @else

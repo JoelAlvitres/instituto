@@ -1,4 +1,4 @@
-﻿/* ===== INSTITUTO VON HUMBOLDT - CUSTOM STYLES ===== */
+/* ===== INSTITUTO VON HUMBOLDT - CUSTOM STYLES ===== */
 
 :root {
   --primary: #6b4f8c;
@@ -1345,4 +1345,129 @@ main {
     min-width: 50px;
     padding: 0.4rem 0.5rem;
   }
+}
+
+/* === Contenido desde el panel (Rich text / HTML) === */
+.admin-html-content {
+  text-align: justify;
+  text-wrap: pretty;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.7;
+  color: inherit;
+}
+
+.admin-html-content > *:first-child {
+  margin-top: 0;
+}
+
+.admin-html-content > *:last-child {
+  margin-bottom: 0;
+}
+
+.admin-html-content p {
+  margin: 0 0 0.85em;
+  text-align: justify;
+}
+
+.admin-html-content h1,
+.admin-html-content h2,
+.admin-html-content h3,
+.admin-html-content h4 {
+  text-align: start;
+  margin: 1.1em 0 0.5em;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--gray-text, #374151);
+}
+
+.admin-html-content h1 {
+  font-size: 1.35rem;
+}
+
+.admin-html-content h2 {
+  font-size: 1.2rem;
+}
+
+.admin-html-content h3 {
+  font-size: 1.1rem;
+}
+
+.admin-html-content ul,
+.admin-html-content ol {
+  margin: 0.4em 0 0.85em;
+  padding-left: 1.35rem;
+  text-align: start;
+}
+
+.admin-html-content li {
+  margin: 0.25em 0;
+  text-align: justify;
+}
+
+.admin-html-content li > p {
+  margin-bottom: 0.35em;
+}
+
+.admin-html-content blockquote {
+  margin: 0.75em 0;
+  padding: 0.65rem 1rem;
+  border-left: 4px solid var(--secondary, #d4af37);
+  background: rgba(107, 79, 140, 0.06);
+  font-style: italic;
+  text-align: justify;
+}
+
+.admin-html-content a {
+  color: var(--primary, #6b4f8c);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.admin-html-content a:hover {
+  color: var(--accent, #e67e22);
+}
+
+.admin-html-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 0.75em 0;
+}
+
+.admin-html-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75em 0;
+  font-size: 0.95em;
+}
+
+.admin-html-content th,
+.admin-html-content td {
+  border: 1px solid var(--gray-border, #e8e0ec);
+  padding: 0.45rem 0.6rem;
+  text-align: start;
+}
+
+.admin-html-content strong {
+  font-weight: 600;
+  color: var(--gray-text, #374151);
+}
+
+/* Gana a utilidades de Tailwind Typography (.prose) para cuerpo de texto */
+.prose.admin-html-content p,
+.prose.admin-html-content li {
+  text-align: justify !important;
+}
+
+/* Texto plano justificado (resúmenes sin HTML) */
+.text-block-justify {
+  text-align: justify;
+  text-wrap: pretty;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  line-height: 1.65;
 }

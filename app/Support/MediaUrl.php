@@ -96,4 +96,19 @@ class MediaUrl
             ? asset('storage/'.$path)
             : asset('images/organigrama/'.$path);
     }
+
+    /** Imagen de tarjeta bienestar (legado: storage/bienestar/...) */
+    public static function bienestarImagen(?string $path): ?string
+    {
+        if (! $path) {
+            return null;
+        }
+        if (self::isAbsoluteUrl($path)) {
+            return $path;
+        }
+
+        return str_starts_with($path, 'bienestar/')
+            ? asset('storage/'.$path)
+            : asset('images/bienestar/'.$path);
+    }
 }

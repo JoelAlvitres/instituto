@@ -83,9 +83,9 @@
             
             {{-- Imagen del servicio --}}
             <div class="relative h-48 overflow-hidden bg-gradient-to-br from-[#faf5ff] to-[#6b3f8c]/10 border-b-2 border-[#c9a227]/20">
-              @if($it->imagen)
-                <img src="{{ asset('storage/'.$it->imagen) }}" 
-                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
+              @if($img = \App\Support\MediaUrl::bienestarImagen($it->imagen))
+                <img src="{{ $img }}"
+                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                      alt="{{ $it->titulo }}">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#4a2e6e]/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               @else
@@ -106,43 +106,33 @@
                 </h3>
               </div>
               
-              <div class="mt-3 h-20">
-                <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed">
+              <div class="mt-3 min-h-[4.5rem]">
+                <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed text-block-justify">
                   {{ $it->resumen ?? 'Servicio disponible para estudiantes. Contáctanos para más información.' }}
                 </p>
               </div>
 
-              {{-- Metadatos adicionales --}}
-              <div class="mt-4 flex items-center gap-3 text-xs text-gray-500">
-                @if(!empty($it->categoria))
-                  <span class="px-2 py-1 rounded-full bg-[#faf5ff] text-[#4a2e6e] border border-[#c9a227]/30">
-                    {{ $it->categoria }}
-                  </span>
-                @endif
-                @if(!empty($it->ubicacion))
-                  <span class="flex items-center gap-1">
-                    <span>📍</span>
-                    {{ $it->ubicacion }}
-                  </span>
-                @endif
-              </div>
-              
-              {{-- Botón de acción --}}
-              @if(isset($it->enlace) || isset($it->contacto))
-                <a href="{{ $it->enlace ?? '#' }}" 
-                   class="group/btn relative inline-flex items-center gap-2 mt-6 px-6 py-3 bg-gradient-to-r from-[#6b3f8c] to-[#4a2e6e] text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center">
-                  <span class="absolute inset-0 bg-gradient-to-r from-[#c9a227] to-[#e67e22] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
-                  <span class="relative flex items-center gap-2">
-                    <span class="text-lg group-hover/btn:scale-110 transition-transform">📞</span>
-                    Solicitar Información
-                    <span class="text-lg group-hover/btn:translate-x-1 transition-transform">→</span>
-                  </span>
-                </a>
-              @else
-                <div class="mt-6 px-6 py-3 bg-[#faf5ff] text-[#6b3f8c] font-semibold rounded-xl border border-[#c9a227]/20 text-center text-sm">
-                  Próximamente más información
-                </div>
+              @if(filled($it->contenido))
+                <details class="mt-4 group/details rounded-xl border border-[#c9a227]/20 bg-[#faf5ff]/50 px-4 py-2 text-sm text-[#4a2e6e]">
+                  <summary class="cursor-pointer font-semibold list-none flex items-center justify-between gap-2">
+                    <span>Ver detalle del servicio</span>
+                    <span class="text-[#c9a227] group-open/details:rotate-180 transition-transform">▼</span>
+                  </summary>
+                  <div class="admin-html-content mt-3 text-sm text-gray-700">
+                    {!! $it->contenido !!}
+                  </div>
+                </details>
               @endif
+
+              <a href="{{ route('public.contacto') }}"
+                 class="group/btn relative inline-flex items-center gap-2 mt-6 px-6 py-3 bg-gradient-to-r from-[#6b3f8c] to-[#4a2e6e] text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center">
+                <span class="absolute inset-0 bg-gradient-to-r from-[#c9a227] to-[#e67e22] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
+                <span class="relative flex items-center gap-2">
+                  <span class="text-lg group-hover/btn:scale-110 transition-transform">📞</span>
+                  Contactar (bienestar)
+                  <span class="text-lg group-hover/btn:translate-x-1 transition-transform">→</span>
+                </span>
+              </a>
             </div>
           </div>
         @endforeach

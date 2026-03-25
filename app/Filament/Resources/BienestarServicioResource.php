@@ -9,7 +9,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
 
 class BienestarServicioResource extends Resource
 {
@@ -29,19 +28,17 @@ class BienestarServicioResource extends Resource
                         ->schema([
                             Forms\Components\TextInput::make('titulo')
                                 ->required()
-                                ->live(onBlur: true)
-                                ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state))),
+                                ->maxLength(255),
 
-                            Forms\Components\TextInput::make('slug')
-                                ->required()
-                                ->disabled()
-                                ->dehydrated()
-                                ->unique(ignoreRecord: true),
-
-                            Forms\Components\Textarea::make('descripcion')
+                            Forms\Components\Textarea::make('resumen')
+                                ->label('Resumen')
                                 ->rows(3)
                                 ->columnSpanFull(),
-                        ])->columns(2),
+
+                            Forms\Components\RichEditor::make('contenido')
+                                ->label('Contenido (detalle)')
+                                ->columnSpanFull(),
+                        ])->columns(1),
                 ])
                 ->columnSpan(['lg' => 2]),
 
@@ -59,8 +56,7 @@ class BienestarServicioResource extends Resource
                                 ->minValue(0),
 
                             Forms\Components\FileUpload::make('imagen')
-                                ->disk('public')
-                                ->directory('bienestar')
+                                ->disk('bienestar_public')
                                 ->image()
                                 ->imageEditor()
                                 ->imagePreviewHeight('180')
@@ -76,7 +72,7 @@ class BienestarServicioResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('imagen')
-                    ->disk('public')
+                    ->disk('bienestar_public')
                     ->label('Img')
                     ->circular(),
 
@@ -85,8 +81,9 @@ class BienestarServicioResource extends Resource
                     ->sortable()
                     ->weight('bold'),
 
-                Tables\Columns\TextColumn::make('slug')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('resumen')
+                    ->limit(40)
+                    ->toggleable(),
 
                 Tables\Columns\IconColumn::make('activo')
                     ->boolean()

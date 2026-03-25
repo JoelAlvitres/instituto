@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\BibliotecaArchivo;
 use App\Models\BienestarServicio;
 use App\Models\OfertaLaboral;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ServicioPublicController extends Controller
 {
@@ -59,7 +59,12 @@ class ServicioPublicController extends Controller
     {
         $ofertas = OfertaLaboral::query()
             ->where('activa', true)
+            ->where(function ($q) {
+                $q->whereNull('fecha_cierre')
+                    ->orWhereDate('fecha_cierre', '>=', now()->toDateString());
+            })
             ->orderBy('orden')
+            ->orderByDesc('created_at')
             ->get();
 
         return view('public.servicios.bolsa', compact('ofertas'));
