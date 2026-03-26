@@ -67,6 +67,55 @@
       <div class="w-24 h-1 bg-gradient-to-r from-[#c9a227] to-[#e67e22] mx-auto rounded-full"></div>
     </div>
 
+    @php
+      $serviciosWeb = $serviciosWeb ?? collect();
+    @endphp
+
+    {{-- Primero: lo publicado en Gestión Web → Servicios (visible sin hacer scroll excesivo) --}}
+    <div class="mb-12">
+      <div class="text-center md:text-left mb-6">
+        <span class="text-sm uppercase tracking-[0.3em] text-[#6b3f8c] font-semibold">INSTITUCIÓN</span>
+        <h2 class="text-2xl md:text-3xl font-bold text-[#4a2e6e] mt-2">Servicios y programas</h2>
+        <p class="text-gray-600 mt-2 max-w-2xl mx-auto md:mx-0 text-sm sm:text-base">
+          Contenido cargado desde el panel (Gestión Web → Servicios). Cada tarjeta abre su página con el detalle.
+        </p>
+      </div>
+      @if($serviciosWeb->isNotEmpty())
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          @foreach($serviciosWeb as $svc)
+            <a href="{{ route('public.servicios.show', $svc->slug) }}"
+               class="group flex flex-col bg-white rounded-2xl border border-[#6b3f8c]/10 shadow-lg hover:shadow-xl hover:border-[#c9a227]/40 transition-all duration-300 overflow-hidden">
+              @if($svc->imagen)
+                <div class="h-40 overflow-hidden bg-[#faf5ff]">
+                  <img src="{{ asset('storage/'.$svc->imagen) }}" alt=""
+                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+              @else
+                <div class="h-28 bg-gradient-to-br from-[#6b3f8c]/15 to-[#c9a227]/10 flex items-center justify-center text-4xl">
+                  📄
+                </div>
+              @endif
+              <div class="p-5 flex-1 flex flex-col">
+                <h3 class="text-lg font-bold text-[#4a2e6e] group-hover:text-[#c9a227] transition-colors">
+                  {{ $svc->titulo }}
+                </h3>
+                @if(filled($svc->resumen))
+                  <p class="text-sm text-gray-600 mt-2 line-clamp-3 text-left flex-1 leading-relaxed">{{ $svc->resumen }}</p>
+                @endif
+                <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#6b3f8c]">
+                  Ver más <span class="group-hover:translate-x-1 transition-transform">→</span>
+                </span>
+              </div>
+            </a>
+          @endforeach
+        </div>
+      @else
+        <div class="rounded-2xl border border-dashed border-[#c9a227]/40 bg-white/80 px-6 py-8 text-center text-gray-600 text-sm">
+          Aún no hay servicios publicados con el interruptor <strong>Activo</strong> en el panel. Activa el registro o crea uno nuevo en <strong>Gestión Web → Servicios</strong>.
+        </div>
+      @endif
+    </div>
+
     {{-- GRID PRINCIPAL --}}
     <div class="grid lg:grid-cols-12 gap-8">
       
@@ -167,49 +216,6 @@
         </div>
       </aside>
     </div>
-
-    {{-- Servicios creados en el panel: Gestión Web → Servicios --}}
-    @isset($serviciosWeb)
-      @if($serviciosWeb->isNotEmpty())
-        <div class="mt-12">
-          <div class="text-center md:text-left mb-8">
-            <span class="text-sm uppercase tracking-[0.3em] text-[#6b3f8c] font-semibold">INSTITUCIÓN</span>
-            <h2 class="text-2xl md:text-3xl font-bold text-[#4a2e6e] mt-2">Servicios y programas</h2>
-            <p class="text-gray-600 mt-2 max-w-2xl mx-auto md:mx-0">
-              Información publicada desde administración (cada ítem tiene su propia página).
-            </p>
-          </div>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach($serviciosWeb as $svc)
-              <a href="{{ route('public.servicios.show', $svc->slug) }}"
-                 class="group flex flex-col bg-white rounded-2xl border border-[#6b3f8c]/10 shadow-lg hover:shadow-xl hover:border-[#c9a227]/40 transition-all duration-300 overflow-hidden">
-                @if($svc->imagen)
-                  <div class="h-40 overflow-hidden bg-[#faf5ff]">
-                    <img src="{{ asset('storage/'.$svc->imagen) }}" alt=""
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                  </div>
-                @else
-                  <div class="h-28 bg-gradient-to-br from-[#6b3f8c]/15 to-[#c9a227]/10 flex items-center justify-center text-4xl">
-                    📄
-                  </div>
-                @endif
-                <div class="p-5 flex-1 flex flex-col">
-                  <h3 class="text-lg font-bold text-[#4a2e6e] group-hover:text-[#c9a227] transition-colors">
-                    {{ $svc->titulo }}
-                  </h3>
-                  @if(filled($svc->resumen))
-                    <p class="text-sm text-gray-600 mt-2 line-clamp-3 text-block-justify flex-1">{{ $svc->resumen }}</p>
-                  @endif
-                  <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#6b3f8c]">
-                    Ver más <span class="group-hover:translate-x-1 transition-transform">→</span>
-                  </span>
-                </div>
-              </a>
-            @endforeach
-          </div>
-        </div>
-      @endif
-    @endisset
 
     {{-- TARJETAS: Bolsa de Trabajo + Bienestar --}}
     <div class="mt-10 grid md:grid-cols-2 gap-8">

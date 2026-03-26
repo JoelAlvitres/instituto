@@ -20,7 +20,9 @@ class ServicioPublicController extends Controller
             ->orderBy('titulo')
             ->get();
 
-        return view('public.servicios.index', compact('serviciosWeb'));
+        return response()
+            ->view('public.servicios.index', compact('serviciosWeb'))
+            ->header('Cache-Control', 'private, must-revalidate, max-age=0');
     }
 
     /**

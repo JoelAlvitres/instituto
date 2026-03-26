@@ -10,9 +10,11 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   @yield('styles')
 
-
-
-  <link rel="stylesheet" href="{{ asset('css/public-custom.css') }}">
+  @php
+    $__pubCss = public_path('css/public-custom.css');
+    $__pubCssVer = is_file($__pubCss) ? (string) filemtime($__pubCss) : '1';
+  @endphp
+  <link rel="stylesheet" href="{{ asset('css/public-custom.css') }}?v={{ $__pubCssVer }}">
 
 
 </head>
