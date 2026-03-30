@@ -70,8 +70,8 @@
             {{ $carrera->nombre }}
           </h1>
 
-          {{-- Subtítulo elegante --}}
-          <p class="text-xl md:text-2xl text-white/80 mb-8 font-light tracking-wide">
+          {{-- Subtítulo: tono crema/dorado claro (legible sobre morado sin modo oscuro) --}}
+          <p class="text-xl md:text-2xl mb-8 font-light tracking-wide text-[#fff3d4] drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)]">
             Instituto Superior {{ strtolower($carrera->nombre) }}
           </p>
 
@@ -109,39 +109,26 @@
             @endif
           </div>
 
-          {{-- Datos clave — franja resaltada (duración / modalidad / inicio) --}}
-          <div
-            class="mt-12 relative overflow-hidden rounded-2xl border-2 border-[#c9a227]/55 bg-gradient-to-br from-[#2d1a45]/98 via-[#4a2e6e]/95 to-[#3d2560]/98 shadow-[0_16px_56px_rgba(0,0,0,0.5),0_0_0_1px_rgba(201,162,39,0.15)]">
-            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'80\' height=\'80\' viewBox=\'0 0 80 80\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 40h80M40 0v80\' stroke=\'%23c9a227\' stroke-opacity=\'.06\' stroke-width=\'.5\'/%3E%3C/svg%3E')] opacity-60 pointer-events-none">
+          {{-- Datos clave: vidrio sobre el hero + dorados forzados (sin depender de modo oscuro) --}}
+          <div class="carrera-hero-stats mt-12 relative overflow-hidden rounded-2xl border-2 border-[#e8c547]/80 bg-white/[0.12] backdrop-blur-md shadow-[0_12px_40px_rgba(0,0,0,0.25)] ring-1 ring-white/20">
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#c9a227]/10 via-transparent to-[#6b3f8c]/15">
             </div>
-            <div
-              class="h-1.5 bg-gradient-to-r from-transparent via-[#e8c547] to-transparent opacity-90">
-            </div>
-            <div
-              class="relative grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/20">
-              {{-- Duración --}}
-              <div class="px-5 py-6 sm:py-7 text-center group/stat">
-                <span class="text-2xl mb-2 block opacity-90" aria-hidden="true">⏱️</span>
-                <div
-                  class="text-4xl sm:text-[2.35rem] font-extrabold text-[#f0d060] mb-1.5 leading-none drop-shadow-[0_2px_12px_rgba(201,162,39,0.55)] tracking-tight">
-                  3</div>
-                <div class="text-xs sm:text-sm font-semibold text-white/95 uppercase tracking-[0.2em]">Años</div>
+            <div class="h-1 bg-gradient-to-r from-transparent via-[#ffd666] to-transparent opacity-95"></div>
+            <div class="relative grid grid-cols-1 divide-y divide-white/25 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+              <div class="px-5 py-6 text-center sm:py-7">
+                <span class="stat-ico mb-2 block text-2xl" aria-hidden="true">⏱️</span>
+                <p class="stat-value text-4xl font-extrabold leading-none tracking-tight sm:text-[2.5rem]">3</p>
+                <p class="stat-label mt-2">Años</p>
               </div>
-              {{-- Modalidad --}}
-              <div class="px-5 py-6 sm:py-7 text-center group/stat bg-white/[0.04] sm:bg-transparent">
-                <span class="text-2xl mb-2 block opacity-90" aria-hidden="true">📍</span>
-                <div
-                  class="text-2xl sm:text-3xl font-extrabold text-[#f0d060] mb-1.5 leading-tight drop-shadow-[0_2px_12px_rgba(201,162,39,0.55)]">
-                  Presencial</div>
-                <div class="text-xs sm:text-sm font-semibold text-white/95 uppercase tracking-[0.2em]">Modalidad</div>
+              <div class="px-5 py-6 text-center sm:py-7">
+                <span class="stat-ico mb-2 block text-2xl" aria-hidden="true">📍</span>
+                <p class="stat-value text-2xl font-extrabold leading-tight sm:text-3xl">Presencial</p>
+                <p class="stat-label mt-2">Modalidad</p>
               </div>
-              {{-- Inicio --}}
-              <div class="px-5 py-6 sm:py-7 text-center group/stat">
-                <span class="text-2xl mb-2 block opacity-90" aria-hidden="true">📅</span>
-                <div
-                  class="text-3xl sm:text-4xl font-extrabold text-[#f0d060] mb-1.5 leading-none drop-shadow-[0_2px_12px_rgba(201,162,39,0.55)]">
-                  Marzo</div>
-                <div class="text-xs sm:text-sm font-semibold text-white/95 uppercase tracking-[0.2em]">Inicio</div>
+              <div class="px-5 py-6 text-center sm:py-7">
+                <span class="stat-ico mb-2 block text-2xl" aria-hidden="true">📅</span>
+                <p class="stat-value text-3xl font-extrabold leading-none sm:text-4xl">Marzo</p>
+                <p class="stat-label mt-2">Inicio</p>
               </div>
             </div>
           </div>
@@ -501,6 +488,31 @@
 
     .prose {
       color: #312f2f;
+    }
+
+    /* Hero programa: duración / modalidad / inicio — dorado legible (no hereda gris del body) */
+    .carrera-hero-stats {
+      isolation: isolate;
+    }
+
+    .carrera-hero-stats .stat-value {
+      color: #ffe08a !important;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), 0 0 24px rgba(201, 162, 39, 0.35);
+    }
+
+    .carrera-hero-stats .stat-label {
+      color: #fff6d4 !important;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      font-weight: 700;
+      text-transform: uppercase;
+      opacity: 0.98;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    }
+
+    .carrera-hero-stats .stat-ico {
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+      opacity: 0.95;
     }
 
     /* === NUEVAS ANIMACIONES MEJORADAS === */
