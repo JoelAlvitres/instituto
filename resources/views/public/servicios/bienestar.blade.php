@@ -73,11 +73,12 @@
       </div>
     </div>
 
-    {{-- Grid de servicios de bienestar --}}
+    {{-- Grid de servicios de bienestar + modales (Alpine) --}}
     @if(count($items) > 0)
+      <div x-data="{ openId: null }" @keydown.escape.window="openId = null">
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach($items as $index => $it)
-          <div class="group flex flex-col h-full bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-[#6b3f8c]/10 overflow-hidden animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
+          <div id="bienestar-{{ $it->id }}" class="group flex flex-col h-full bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-[#6b3f8c]/10 overflow-hidden scroll-mt-24 animate-fade-in-up" style="animation-delay: {{ $index * 0.1 }}s">
             {{-- Cabecera con gradiente --}}
             <div class="h-2 bg-gradient-to-r from-[#e67e22] via-[#c9a227] to-[#6b3f8c]"></div>
             
@@ -113,15 +114,12 @@
               </div>
 
               @if(filled($it->contenido))
-                <details class="bienestar-details mt-4 group/details rounded-xl border border-[#6b3f8c]/12 bg-white shadow-sm text-[#4a2e6e] overflow-hidden">
-                  <summary class="cursor-pointer select-none font-semibold text-sm list-none flex items-center justify-between gap-3 px-4 py-3 bg-[#faf5ff]/80 hover:bg-[#faf5ff] transition-colors [&::-webkit-details-marker]:hidden">
-                    <span>Ver detalle del servicio</span>
-                    <span class="text-[#c9a227] text-xs shrink-0 group-open/details:rotate-180 transition-transform duration-200" aria-hidden="true">▼</span>
-                  </summary>
-                  <div class="admin-html-content bienestar-html px-4 pb-4 pt-0 text-sm text-gray-700 border-t border-[#e8e0ec]/60">
-                    {!! $it->contenido !!}
-                  </div>
-                </details>
+                <button type="button"
+                  @click="openId = {{ $it->id }}"
+                  class="bienestar-details mt-4 w-full rounded-xl border border-[#6b3f8c]/15 bg-[#faf5ff]/90 hover:bg-[#faf5ff] text-left font-semibold text-sm text-[#4a2e6e] flex items-center justify-between gap-3 px-4 py-3 shadow-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a227]/60">
+                  <span>Ver detalle del servicio</span>
+                  <span class="text-[#c9a227] text-lg shrink-0" aria-hidden="true">↗</span>
+                </button>
               @endif
 
               <a href="{{ route('public.contacto') }}"
@@ -136,6 +134,42 @@
             </div>
           </div>
         @endforeach
+      </div>
+
+      @foreach($items as $it)
+        @if(filled($it->contenido))
+          <div
+            x-show="openId === {{ $it->id }}"
+            x-cloak
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 z-[100] flex items-end justify-center sm:items-center p-4 sm:p-6"
+            role="dialog"
+            aria-modal="true"
+            :aria-hidden="openId !== {{ $it->id }}"
+          >
+            <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="openId = null" aria-hidden="true"></div>
+            <div
+              class="relative z-10 w-full max-w-lg max-h-[88vh] flex flex-col rounded-2xl border border-[#c9a227]/35 bg-[#1a1525] text-gray-100 shadow-[0_24px_80px_rgba(0,0,0,0.55)] ring-1 ring-white/10"
+              @click.stop
+            >
+              <div class="flex shrink-0 items-start justify-between gap-3 border-b border-white/10 px-5 py-4 bg-[#221a32]/90">
+                <h3 class="text-lg font-bold leading-snug text-[#f0d060] pr-2">{{ $it->titulo }}</h3>
+                <button type="button" @click="openId = null" class="shrink-0 rounded-lg p-1.5 text-white/70 hover:bg-white/10 hover:text-white transition-colors" aria-label="Cerrar">
+                  <span class="text-xl leading-none">×</span>
+                </button>
+              </div>
+              <div class="modal-bienestar-body admin-html-content bienestar-html overflow-y-auto px-5 py-4 text-sm leading-relaxed">
+                {!! $it->contenido !!}
+              </div>
+            </div>
+          </div>
+        @endif
+      @endforeach
       </div>
     @else
       {{-- Mensaje cuando no hay servicios --}}
@@ -286,6 +320,34 @@
 
 .group:hover .group-hover\:rotate-3 {
     transform: rotate(3deg);
+}
+
+/* === Modal detalle bienestar (fondo oscuro) === */
+.modal-bienestar-body.admin-html-content,
+.modal-bienestar-body.admin-html-content p {
+    color: #d1d5db !important;
+    text-align: start !important;
+}
+.modal-bienestar-body.admin-html-content h1,
+.modal-bienestar-body.admin-html-content h2,
+.modal-bienestar-body.admin-html-content h3,
+.modal-bienestar-body.admin-html-content h4 {
+    color: #f0d060 !important;
+}
+.modal-bienestar-body.admin-html-content a {
+    color: #e8c547 !important;
+}
+.modal-bienestar-body.admin-html-content ul,
+.modal-bienestar-body.admin-html-content ol {
+    color: #d1d5db;
+}
+.modal-bienestar-body.admin-html-content li {
+    color: #d1d5db !important;
+}
+.modal-bienestar-body.admin-html-content blockquote {
+    border-left-color: #c9a227;
+    background: rgba(201, 162, 39, 0.08);
+    color: #e5e7eb !important;
 }
 
 /* === LINE-CLAMP UTILITY === */

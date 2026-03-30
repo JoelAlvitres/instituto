@@ -18,4 +18,13 @@ class BienestarServicio extends Model
     protected $casts = [
         'activo' => 'boolean',
     ];
+
+    public function scopePublicados($query)
+    {
+        return $query->where(function ($q) {
+            $q->where('activo', true)
+                ->orWhere('activo', 1)
+                ->orWhereNull('activo');
+        });
+    }
 }

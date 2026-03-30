@@ -15,13 +15,19 @@ class ServicioPublicController extends Controller
     public function index()
     {
         $serviciosWeb = Servicio::query()
-            ->where('activo', true)
+            ->publicados()
+            ->orderBy('orden')
+            ->orderBy('titulo')
+            ->get();
+
+        $bienestarServicios = BienestarServicio::query()
+            ->publicados()
             ->orderBy('orden')
             ->orderBy('titulo')
             ->get();
 
         return response()
-            ->view('public.servicios.index', compact('serviciosWeb'))
+            ->view('public.servicios.index', compact('serviciosWeb', 'bienestarServicios'))
             ->header('Cache-Control', 'private, must-revalidate, max-age=0');
     }
 
@@ -30,7 +36,7 @@ class ServicioPublicController extends Controller
      */
     public function show(Servicio $servicio)
     {
-        abort_unless($servicio->activo, 404);
+        abort_unless($servicio->estaPublicado(), 404);
 
         return view('public.servicios.show', compact('servicio'));
     }
@@ -67,7 +73,7 @@ class ServicioPublicController extends Controller
     public function bienestar()
     {
         $items = BienestarServicio::query()
-            ->where('activo', true)
+            ->publicados()
             ->orderBy('orden')
             ->get();
 

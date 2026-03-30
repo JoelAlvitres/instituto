@@ -109,36 +109,40 @@
             @endif
           </div>
 
-          {{-- Estadísticas o datos clave - VERSIÓN MEJORADA --}}
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-12 text-center">
-            {{-- 3 Años --}}
-            <div
-              class="relative px-4 py-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 sm:border-0 sm:bg-transparent sm:backdrop-blur-none sm:rounded-none sm:p-0">
-              <div
-                class="sm:hidden absolute left-0 top-1/2 -translate-y-1/2 w-1 h-10 bg-gradient-to-b from-[#c9a227] to-[#e67e22] rounded-r-full">
-              </div>
-              <div class="text-3xl font-bold text-[#c9a227] mb-1">3</div>
-              <div class="text-sm text-white/60 uppercase tracking-wider">Años</div>
+          {{-- Datos clave — franja resaltada (duración / modalidad / inicio) --}}
+          <div
+            class="mt-12 relative overflow-hidden rounded-2xl border-2 border-[#c9a227]/55 bg-gradient-to-br from-[#2d1a45]/98 via-[#4a2e6e]/95 to-[#3d2560]/98 shadow-[0_16px_56px_rgba(0,0,0,0.5),0_0_0_1px_rgba(201,162,39,0.15)]">
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'80\' height=\'80\' viewBox=\'0 0 80 80\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 40h80M40 0v80\' stroke=\'%23c9a227\' stroke-opacity=\'.06\' stroke-width=\'.5\'/%3E%3C/svg%3E')] opacity-60 pointer-events-none">
             </div>
-
-            {{-- Modalidad Presencial --}}
             <div
-              class="relative px-4 py-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 sm:border-0 sm:bg-transparent sm:backdrop-blur-none sm:rounded-none sm:p-0 sm:border-l sm:border-r sm:border-white/20">
-              <div
-                class="sm:hidden absolute left-0 top-1/2 -translate-y-1/2 w-1 h-10 bg-gradient-to-b from-[#c9a227] to-[#e67e22] rounded-r-full">
-              </div>
-              <div class="text-3xl font-bold text-[#c9a227] mb-1">Presencial</div>
-              <div class="text-sm text-white/60 uppercase tracking-wider">Modalidad</div>
+              class="h-1.5 bg-gradient-to-r from-transparent via-[#e8c547] to-transparent opacity-90">
             </div>
-
-            {{-- Inicio Marzo --}}
             <div
-              class="relative px-4 py-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 sm:border-0 sm:bg-transparent sm:backdrop-blur-none sm:rounded-none sm:p-0">
-              <div
-                class="sm:hidden absolute left-0 top-1/2 -translate-y-1/2 w-1 h-10 bg-gradient-to-b from-[#c9a227] to-[#e67e22] rounded-r-full">
+              class="relative grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/20">
+              {{-- Duración --}}
+              <div class="px-5 py-6 sm:py-7 text-center group/stat">
+                <span class="text-2xl mb-2 block opacity-90" aria-hidden="true">⏱️</span>
+                <div
+                  class="text-4xl sm:text-[2.35rem] font-extrabold text-[#f0d060] mb-1.5 leading-none drop-shadow-[0_2px_12px_rgba(201,162,39,0.55)] tracking-tight">
+                  3</div>
+                <div class="text-xs sm:text-sm font-semibold text-white/95 uppercase tracking-[0.2em]">Años</div>
               </div>
-              <div class="text-3xl font-bold text-[#c9a227] mb-1">Marzo</div>
-              <div class="text-sm text-white/60 uppercase tracking-wider">Inicio</div>
+              {{-- Modalidad --}}
+              <div class="px-5 py-6 sm:py-7 text-center group/stat bg-white/[0.04] sm:bg-transparent">
+                <span class="text-2xl mb-2 block opacity-90" aria-hidden="true">📍</span>
+                <div
+                  class="text-2xl sm:text-3xl font-extrabold text-[#f0d060] mb-1.5 leading-tight drop-shadow-[0_2px_12px_rgba(201,162,39,0.55)]">
+                  Presencial</div>
+                <div class="text-xs sm:text-sm font-semibold text-white/95 uppercase tracking-[0.2em]">Modalidad</div>
+              </div>
+              {{-- Inicio --}}
+              <div class="px-5 py-6 sm:py-7 text-center group/stat">
+                <span class="text-2xl mb-2 block opacity-90" aria-hidden="true">📅</span>
+                <div
+                  class="text-3xl sm:text-4xl font-extrabold text-[#f0d060] mb-1.5 leading-none drop-shadow-[0_2px_12px_rgba(201,162,39,0.55)]">
+                  Marzo</div>
+                <div class="text-xs sm:text-sm font-semibold text-white/95 uppercase tracking-[0.2em]">Inicio</div>
+              </div>
             </div>
           </div>
         </div>
