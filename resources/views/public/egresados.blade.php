@@ -34,12 +34,6 @@
                         <span class="absolute inset-0 bg-gradient-to-r from-[#b38b1f] to-[#c9a227] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                         <span class="relative">Inicio</span>
                     </a>
-                    <a href="#seguimiento" class="group relative inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md text-white font-semibold rounded-xl overflow-hidden border border-white/20 hover:bg-white/20 transition-all duration-300">
-                        Medios
-                    </a>
-                    <a href="#programas" class="group relative inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md text-white font-semibold rounded-xl overflow-hidden border border-white/20 hover:bg-white/20 transition-all duration-300">
-                        Programas
-                    </a>
                     <a href="#testimonios" class="group relative inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md text-white font-semibold rounded-xl overflow-hidden border border-white/20 hover:bg-white/20 transition-all duration-300">
                         Testimonios
                     </a>

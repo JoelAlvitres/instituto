@@ -72,16 +72,12 @@
       $bienestarServicios = $bienestarServicios ?? collect();
     @endphp
 
-    {{-- Gestión Web → Servicios (tabla servicios) --}}
-    <div class="mb-12">
-      <div class="text-center md:text-left mb-6">
-        <span class="text-sm uppercase tracking-[0.3em] text-[#6b3f8c] font-semibold">INSTITUCIÓN</span>
-        <h2 class="text-2xl md:text-3xl font-bold text-[#4a2e6e] mt-2">Servicios y programas</h2>
-        <p class="text-gray-600 mt-2 max-w-2xl mx-auto md:mx-0 text-sm sm:text-base">
-          <strong>Gestión Web → Servicios:</strong> cada tarjeta abre su propia página con el detalle.
-        </p>
-      </div>
-      @if($serviciosWeb->isNotEmpty())
+    @if($serviciosWeb->isNotEmpty())
+      <div class="mb-12">
+        <div class="text-center md:text-left mb-6">
+          <span class="text-sm uppercase tracking-[0.3em] text-[#6b3f8c] font-semibold">INSTITUCIÓN</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-[#4a2e6e] mt-2">Servicios y programas</h2>
+        </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           @foreach($serviciosWeb as $svc)
             <a href="{{ route('public.servicios.show', $svc->slug) }}"
@@ -110,23 +106,15 @@
             </a>
           @endforeach
         </div>
-      @else
-        <div class="rounded-2xl border border-dashed border-[#c9a227]/40 bg-white/80 px-6 py-8 text-center text-gray-600 text-sm">
-          No hay ítems en <strong>Gestión Web → Servicios</strong> (o están inactivos). Si cargaste en <strong>Servicios Estudiantiles → Bienestar</strong>, mira la sección de abajo.
-        </div>
-      @endif
-    </div>
-
-    {{-- Servicios Estudiantiles → Bienestar (tabla bienestar_servicios) --}}
-    <div class="mb-12">
-      <div class="text-center md:text-left mb-6">
-        <span class="text-sm uppercase tracking-[0.3em] text-[#c9a227] font-semibold">BIENESTAR</span>
-        <h2 class="text-2xl md:text-3xl font-bold text-[#4a2e6e] mt-2">Servicios de bienestar</h2>
-        <p class="text-gray-600 mt-2 max-w-2xl mx-auto md:mx-0 text-sm sm:text-base">
-          <strong>Servicios Estudiantiles → Bienestar</strong> del panel. El enlace abre la página de bienestar y baja hasta la tarjeta elegida.
-        </p>
       </div>
-      @if($bienestarServicios->isNotEmpty())
+    @endif
+
+    @if($bienestarServicios->isNotEmpty())
+      <div class="mb-12">
+        <div class="text-center md:text-left mb-6">
+          <span class="text-sm uppercase tracking-[0.3em] text-[#c9a227] font-semibold">BIENESTAR</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-[#4a2e6e] mt-2">Servicios de bienestar</h2>
+        </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           @foreach($bienestarServicios as $bs)
             <a href="{{ route('public.servicios.bienestar') }}#bienestar-{{ $bs->id }}"
@@ -154,12 +142,8 @@
             </a>
           @endforeach
         </div>
-      @else
-        <div class="rounded-2xl border border-dashed border-[#6b3f8c]/30 bg-white/80 px-6 py-8 text-center text-gray-600 text-sm">
-          No hay ítems activos en <strong>Servicios Estudiantiles → Bienestar</strong>.
-        </div>
-      @endif
-    </div>
+      </div>
+    @endif
 
     {{-- GRID PRINCIPAL --}}
     <div class="grid lg:grid-cols-12 gap-8">
