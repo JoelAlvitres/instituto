@@ -2,73 +2,87 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class ChatController extends Controller
 {
-    public function chat(Request $request)
+    public function chat(Request $request): JsonResponse
     {
-        if (!$request->has('message') || empty($request->message)) {
+        $validated = $request->validate([
+            'message' => ['required', 'string', 'max:2000'],
+        ]);
+
+        $mensajeUsuario = Str::squish($validated['message']);
+        if ($mensajeUsuario === '') {
             return response()->json([
-                'error' => 'Por favor escribe un mensaje'
-            ], 400);
+                'error' => 'Por favor escribe un mensaje',
+            ], 422);
         }
 
-        $mensajeUsuario = $request->message;
-        $apiKey = env('GROQ_API_KEY');
-        $model = env('GROQ_MODEL', 'llama-3.3-70b-versatile');
+        $apiKey = config('services.groq.api_key');
+        $model = config('services.groq.model');
 
-        if (!$apiKey) {
+        if (empty($apiKey)) {
             Log::error('GROQ_API_KEY no está configurada');
+
             return response()->json([
-                'error' => 'Error de configuración del servidor'
-            ], 500);
+                'error' => 'El asistente no está disponible en este momento. Intenta más tarde o contáctanos por teléfono.',
+            ], 503);
         }
 
         try {
-            // Prompt del sistema MEJORADO con información completa
             $systemPrompt = $this->getSystemPrompt();
 
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $apiKey,
-                'Content-Type' => 'application/json'
+                'Authorization' => 'Bearer '.$apiKey,
+                'Content-Type' => 'application/json',
             ])->timeout(45)->post('https://api.groq.com/openai/v1/chat/completions', [
-                        'model' => $model,
-                        'messages' => [
-                            ['role' => 'system', 'content' => $systemPrompt],
-                            ['role' => 'user', 'content' => $mensajeUsuario]
-                        ],
-                        'temperature' => 0.7,
-                        'max_tokens' => 1000
-                    ]);
+                'model' => $model,
+                'messages' => [
+                    ['role' => 'system', 'content' => $systemPrompt],
+                    ['role' => 'user', 'content' => $mensajeUsuario],
+                ],
+                'temperature' => 0.7,
+                'max_tokens' => 1000,
+            ]);
 
             if ($response->failed()) {
                 Log::error('Error en Groq AI', [
                     'status' => $response->status(),
-                    'body' => $response->body()
+                    'body' => $response->body(),
                 ]);
 
                 return response()->json([
-                    'error' => 'Error al comunicarse con el servicio'
-                ], 500);
+                    'error' => 'No pudimos obtener respuesta del asistente. Intenta de nuevo en unos segundos.',
+                ], 502);
             }
 
             $respuesta = $response->json();
+            $content = data_get($respuesta, 'choices.0.message.content');
+
+            if (! is_string($content) || $content === '') {
+                Log::warning('Respuesta Groq sin contenido usable', ['json' => $respuesta]);
+
+                return response()->json([
+                    'reply' => 'Lo siento, no pude procesar tu mensaje. ¿Puedes reformular la pregunta?',
+                ]);
+            }
 
             return response()->json([
-                'reply' => $respuesta['choices'][0]['message']['content'] ?? 'Lo siento, no pude procesar tu mensaje.'
+                'reply' => $content,
             ]);
-
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Log::error('Excepción en ChatController', [
                 'message' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'trace' => $e->getTraceAsString(),
             ]);
 
             return response()->json([
-                'error' => 'Error interno del servidor'
+                'error' => 'Error interno del servidor',
             ], 500);
         }
     }

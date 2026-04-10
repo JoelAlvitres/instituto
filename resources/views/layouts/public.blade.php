@@ -223,6 +223,9 @@
     </div>
   </div>
 
+  <script>
+    window.__chatEndpoint = @json(url('/chat'));
+  </script>
   <script src="{{ asset('js/chatbot.js') }}"></script>
 </body>
 

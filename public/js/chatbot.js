@@ -1,5 +1,5 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-  console.log('🚀 Inicializando chat con funcionalidad de voz...');
+  console.log('Inicializando chat con funcionalidad de voz...');
 
   // ===== ELEMENTOS DEL DOM =====
   const chatButton = document.getElementById('chatButton');
@@ -15,7 +15,7 @@
   let cancelVoice = null;
 
   if (!chatButton || !chatWindow) {
-    console.error('❌ Faltan elementos esenciales');
+    console.error('Faltan elementos esenciales del chat');
     return;
   }
 
@@ -40,7 +40,7 @@
       recognition.onend = handleSpeechEnd;
 
       voiceSupported = true;
-      console.log('✅ Reconocimiento de voz disponible');
+      console.log('Reconocimiento de voz disponible');
     }
   }
   function handleSpeechResult(event) {
@@ -110,7 +110,7 @@
     if (!chatBody) return;
     const tempDiv = document.createElement('div');
     tempDiv.className = 'message bot';
-    tempDiv.innerHTML = `<div class="message-avatar">🤖</div><div class="message-content"><p><em>${escapeHtml(message)}</em></p></div>`;
+    tempDiv.innerHTML = `<div class="message-avatar">&#x1F916;</div><div class="message-content"><p><em>${escapeHtml(message)}</em></p></div>`;
     chatBody.appendChild(tempDiv);
     chatBody.scrollTop = chatBody.scrollHeight;
     setTimeout(() => { tempDiv.remove(); }, 3000);
@@ -142,7 +142,7 @@
 
     voiceStatus = document.createElement('div');
     voiceStatus.id = 'voiceStatus'; voiceStatus.className = 'chat-voice-status'; voiceStatus.style.display = 'none';
-    voiceStatus.innerHTML = `<span class="voice-indicator"></span><span>Escuchando...</span><button class="voice-cancel" id="cancelVoice">✕</button>`;
+    voiceStatus.innerHTML = `<span class="voice-indicator"></span><span>Escuchando...</span><button class="voice-cancel" id="cancelVoice">&#x2715;</button>`;
 
     cancelVoice = voiceStatus.querySelector('#cancelVoice');
     if (cancelVoice) { cancelVoice.addEventListener('click', (e) => { e.preventDefault(); stopRecording(); }); }
@@ -152,43 +152,79 @@
     controlsContainer.appendChild(voiceControls);
     inputContainer.appendChild(voiceStatus);
   }
+
+  function appendBotText(text, isError) {
+    if (!chatBody) return;
+    const botMsg = document.createElement('div');
+    botMsg.className = 'message bot' + (isError ? ' message-error' : '');
+    botMsg.innerHTML = `<div class="message-avatar">&#x1F916;</div><div class="message-content"><p>${escapeHtml(text)}</p><span class="message-time">${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}</span></div>`;
+    chatBody.appendChild(botMsg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    if (!isError) speakText(text);
+  }
+
   function enviarMensaje() {
     const mensaje = chatInput.value.trim();
     if (!mensaje) return;
     const userMsg = document.createElement('div');
     userMsg.className = 'message user';
-    userMsg.innerHTML = `<div class="message-avatar">👤</div><div class="message-content"><p>${escapeHtml(mensaje)}</p><span class="message-time">${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}</span></div>`;
+    userMsg.innerHTML = `<div class="message-avatar">&#x1F464;</div><div class="message-content"><p>${escapeHtml(mensaje)}</p><span class="message-time">${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}</span></div>`;
     chatBody.appendChild(userMsg);
     chatInput.value = '';
     chatBody.scrollTop = chatBody.scrollHeight;
 
     const typingDiv = document.createElement('div');
     typingDiv.className = 'message bot'; typingDiv.id = 'typingIndicator';
-    typingDiv.innerHTML = `<div class="message-avatar">🤖</div><div class="message-content"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+    typingDiv.innerHTML = `<div class="message-avatar">&#x1F916;</div><div class="message-content"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
     chatBody.appendChild(typingDiv);
     chatBody.scrollTop = chatBody.scrollHeight;
 
-    fetch('/chat', {
+    const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+    const csrfToken = csrfMeta ? csrfMeta.getAttribute('content') : '';
+    if (!csrfToken) {
+      console.error('CSRF token no encontrado');
+      document.getElementById('typingIndicator')?.remove();
+      showTemporaryMessage('Recarga la página e intenta de nuevo.');
+      return;
+    }
+
+    const chatUrl = window.__chatEndpoint || '/chat';
+
+    fetch(chatUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') },
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN': csrfToken
+      },
+      credentials: 'same-origin',
       body: JSON.stringify({ message: mensaje })
     })
-    .then(r => r.json())
-    .then(data => {
-      document.getElementById('typingIndicator')?.remove();
-      if (data.reply) {
-        const botMsg = document.createElement('div');
-        botMsg.className = 'message bot';
-        botMsg.innerHTML = `<div class="message-avatar">🤖</div><div class="message-content"><p>${escapeHtml(data.reply)}</p><span class="message-time">${new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' })}</span></div>`;
-        chatBody.appendChild(botMsg);
-        speakText(data.reply);
-      }
-      chatBody.scrollTop = chatBody.scrollHeight;
-    })
-    .catch(e => {
-      console.error('Error:', e);
-      document.getElementById('typingIndicator')?.remove();
-    });
+      .then(async (r) => {
+        let data = {};
+        try {
+          data = await r.json();
+        } catch (_) { /* no JSON */ }
+        document.getElementById('typingIndicator')?.remove();
+        if (!r.ok) {
+          const err = data.error || (r.status === 419 ? 'Sesión expirada. Recarga la página.' : 'No se pudo conectar con el asistente.');
+          appendBotText(err, true);
+          return;
+        }
+        if (data.reply) {
+          appendBotText(data.reply, false);
+        } else if (data.error) {
+          appendBotText(data.error, true);
+        } else {
+          appendBotText('Respuesta vacía. Intenta de nuevo.', true);
+        }
+      })
+      .catch((e) => {
+        console.error('Error:', e);
+        document.getElementById('typingIndicator')?.remove();
+        appendBotText('Error de red. Comprueba tu conexión e intenta otra vez.', true);
+      });
   }
 
   function init() {

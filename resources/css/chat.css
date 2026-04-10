@@ -236,6 +236,15 @@
     border-left: 3px solid var(--chat-gold);
 }
 
+.message.bot.message-error .message-content {
+    border-left-color: #dc2626;
+    background: #fef2f2;
+}
+
+.message.bot.message-error .message-content p {
+    color: #991b1b;
+}
+
 .message.user .message-content {
     background: linear-gradient(135deg, var(--chat-purple-dark), var(--chat-purple-medium));
     color: white;
