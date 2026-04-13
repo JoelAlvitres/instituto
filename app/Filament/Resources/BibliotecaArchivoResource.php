@@ -51,6 +51,12 @@ class BibliotecaArchivoResource extends Resource
                 ->schema([
                     Forms\Components\Section::make('Clasificación')
                         ->schema([
+                            Forms\Components\Select::make('carrera_id')
+                                ->relationship('carrera', 'nombre')
+                                ->label('Carrera')
+                                ->nullable()
+                                ->searchable(),
+
                             Forms\Components\Select::make('categoria')
                                 ->options([
                                     'Revistas' => 'Revistas',
@@ -82,6 +88,13 @@ class BibliotecaArchivoResource extends Resource
                     ->searchable()
                     ->weight('bold')
                     ->wrap(),
+
+                Tables\Columns\TextColumn::make('carrera.nombre')
+                    ->label('Carrera')
+                    ->sortable()
+                    ->searchable()
+                    ->badge()
+                    ->color('warning'),
 
                 Tables\Columns\TextColumn::make('categoria')
                     ->badge()

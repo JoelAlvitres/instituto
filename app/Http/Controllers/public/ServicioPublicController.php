@@ -48,12 +48,13 @@ class ServicioPublicController extends Controller
         }
 
         $archivos = BibliotecaArchivo::query()
+            ->with('carrera')
             ->where('activo', true)
             ->orderBy('orden')
             ->get();
 
-        // También buscamos en la tabla de libros que no tiene modelo pero sí tabla
-        $libros = DB::table('biblioteca_libros')
+        $libros = \App\Models\BibliotecaLibro::query()
+            ->with('carrera')
             ->where('activo', true)
             ->orderBy('orden')
             ->get();
@@ -108,7 +109,7 @@ class ServicioPublicController extends Controller
 
         if (!$archivo) {
             // Si no está, buscamos en la tabla de libros
-            $archivo = DB::table('biblioteca_libros')->where('id', $id)->first();
+            $archivo = \App\Models\BibliotecaLibro::find($id);
         }
 
         abort_unless($archivo && $archivo->activo, 404);

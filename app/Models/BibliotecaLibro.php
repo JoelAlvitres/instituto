@@ -4,20 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BibliotecaArchivo extends Model
+class BibliotecaLibro extends Model
 {
     protected $fillable = [
-        'servicio_id','titulo','archivo_pdf','activo','orden', 'carrera_id'
+        'titulo', 'descripcion', 'archivo_pdf', 'activo', 'orden', 'autor', 'carrera_id'
     ];
 
     protected $casts = [
         'activo' => 'boolean',
     ];
-
-    public function servicio()
-    {
-        return $this->belongsTo(Servicio::class);
-    }
 
     public function carrera()
     {
