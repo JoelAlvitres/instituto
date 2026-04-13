@@ -51,6 +51,13 @@ class BibliotecaArchivoResource extends Resource
                 ->schema([
                     Forms\Components\Section::make('Clasificación')
                         ->schema([
+                            Forms\Components\Select::make('servicio_id')
+                                ->relationship('servicio', 'titulo')
+                                ->label('Servicio Web (Página)')
+                                ->required()
+                                ->searchable()
+                                ->preload(),
+
                             Forms\Components\Select::make('carrera_id')
                                 ->relationship('carrera', 'nombre')
                                 ->label('Carrera')
