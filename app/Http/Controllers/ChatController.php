@@ -27,7 +27,7 @@ class ChatController extends Controller
         $model = config('services.groq.model');
 
         if (empty($apiKey)) {
-            Log::error('GROQ_API_KEY no está configurada');
+            Log::error('Chat Groq: API key vacía en config. Revisa GROQ_API_KEY en .env del servidor y, si usas config:cache, ejecuta: php artisan config:clear y luego config:cache con el .env ya actualizado.');
 
             return response()->json([
                 'error' => 'El asistente no está disponible en este momento. Intenta más tarde o contáctanos por teléfono.',
@@ -51,9 +51,13 @@ class ChatController extends Controller
             ]);
 
             if ($response->failed()) {
+                $status = $response->status();
                 Log::error('Error en Groq AI', [
-                    'status' => $response->status(),
+                    'http_status' => $status,
                     'body' => $response->body(),
+                    'hint' => $status === 401 || $status === 403
+                        ? 'Clave API inválida o sin permiso (comprueba GROQ_API_KEY en el servidor).'
+                        : ($status === 0 ? 'Posible bloqueo de salida HTTPS/firewall hacia api.groq.com desde el hosting.' : null),
                 ]);
 
                 return response()->json([
