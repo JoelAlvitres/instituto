@@ -40,7 +40,7 @@ class BibliotecaArchivoResource extends Resource
                                 ->disk('public')
                                 ->directory('biblioteca/archivos')
                                 ->acceptedFileTypes(['application/pdf'])
-                                ->maxSize(10240)
+                                ->maxSize(51200)
                                 ->downloadable()
                                 ->columnSpanFull(),
                         ]),
