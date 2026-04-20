@@ -153,7 +153,7 @@
           'type' => 'archivo',
           'carrera_nombre' => $item->carrera ? $item->carrera->nombre : 'Otros',
           'orden' => $item->orden,
-        ]))->concat($libros->map(fn($item) => (object) [
+        ])->concat($libros->map(fn($item) => (object) [
                 'id' => $item->id,
                 'titulo' => $item->titulo,
                 'autor' => $item->autor,
@@ -162,7 +162,7 @@
                 'type' => 'libro',
                 'carrera_nombre' => $item->carrera ? $item->carrera->nombre : 'Otros',
                 'orden' => $item->orden,
-              ]))->sortBy('orden');
+              ])->sortBy('orden');
 
         $groupedItems = $mergedItems->groupBy('carrera_nombre');
         
