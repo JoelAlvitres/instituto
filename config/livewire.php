@@ -66,7 +66,7 @@ return [
     'temporary_file_upload' => [
         'disk' => 'public',
         'rules' => ['required', 'file', 'max:153600'], // 150 MiB; Livewire temporal uploads (kilobytes)
-        'directory' => null,   // Example: 'tmp'                      | Default: 'livewire-tmp'
+        'directory' => 'livewire-tmp',
         'middleware' => null,  // Example: 'throttle:5,1'             | Default: 'throttle:60,1'
         'preview_mimes' => [
             'png', 'gif', 'bmp', 'svg', 'wav', 'mp4',
