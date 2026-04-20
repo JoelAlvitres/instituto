@@ -162,7 +162,7 @@
                 'type' => 'libro',
                 'carrera_nombre' => $item->carrera ? $item->carrera->nombre : 'Otros',
                 'orden' => $item->orden,
-              ])->sortBy('orden');
+              ])->sortBy('orden'));
 
         $groupedItems = $mergedItems->groupBy('carrera_nombre');
         
