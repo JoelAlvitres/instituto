@@ -147,17 +147,21 @@
         $mergedItems = $archivos->map(fn($item) => (object) [
           'id' => $item->id,
           'titulo' => $item->titulo,
-          'descripcion' => $item->descripcion ?? 'Documento disponible para lectura en línea.',
+          'autor' => $item->autor,
+          'detalle' => collect([$item->editorial, $item->anio])->filter()->implode(' · '),
           'archivo_pdf' => $item->archivo_pdf,
           'type' => 'archivo',
-          'carrera_nombre' => $item->carrera ? $item->carrera->nombre : 'Otros'
-        ])->concat($libros->map(fn($item) => (object) [
+          'carrera_nombre' => $item->carrera ? $item->carrera->nombre : 'Otros',
+          'orden' => $item->orden,
+        ]))->concat($libros->map(fn($item) => (object) [
                 'id' => $item->id,
                 'titulo' => $item->titulo,
-                'descripcion' => $item->descripcion ?? ($item->autor ? "Por: {$item->autor}" : 'Libro disponible para lectura en línea.'),
+                'autor' => $item->autor,
+                'detalle' => $item->descripcion,
                 'archivo_pdf' => $item->archivo_pdf,
                 'type' => 'libro',
-                'carrera_nombre' => $item->carrera ? $item->carrera->nombre : 'Otros'
+                'carrera_nombre' => $item->carrera ? $item->carrera->nombre : 'Otros',
+                'orden' => $item->orden,
               ]))->sortBy('orden');
 
         $groupedItems = $mergedItems->groupBy('carrera_nombre');
@@ -214,8 +218,19 @@
                     {{ $item->titulo }}
                   </h3>
 
-                  <div class="mt-4 h-16">
-                    <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed">{{ $item->descripcion }}</p>
+                  <div class="mt-4 min-h-[4rem] space-y-1">
+                    @if(!empty($item->autor))
+                      <p class="text-sm font-semibold text-[#6b3f8c] leading-snug">
+                        {{ $item->type === 'libro' ? 'Autor' : 'Autor / responsable' }}: {{ $item->autor }}
+                      </p>
+                    @endif
+                    @if(!empty($item->detalle))
+                      <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed">{{ $item->detalle }}</p>
+                    @elseif(empty($item->autor))
+                      <p class="text-sm text-gray-500 line-clamp-2">
+                        {{ $item->type === 'libro' ? 'Libro disponible para lectura en línea.' : 'Documento disponible para lectura en línea.' }}
+                      </p>
+                    @endif
                   </div>
 
                   {{-- Botón de lectura --}}

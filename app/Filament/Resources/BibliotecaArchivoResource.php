@@ -25,22 +25,38 @@ class BibliotecaArchivoResource extends Resource
             Forms\Components\Group::make()
                 ->schema([
                     Forms\Components\Section::make('Archivo')
+                        ->columns(2)
                         ->schema([
                             Forms\Components\TextInput::make('titulo')
                                 ->required()
                                 ->maxLength(160)
                                 ->columnSpanFull(),
 
-                            Forms\Components\Textarea::make('descripcion')
-                                ->rows(2)
+                            Forms\Components\TextInput::make('autor')
+                                ->label('Autor')
+                                ->maxLength(160)
+                                ->placeholder('Apellidos, nombre o institución')
                                 ->columnSpanFull(),
+
+                            Forms\Components\TextInput::make('editorial')
+                                ->label('Editorial / fuente')
+                                ->maxLength(160)
+                                ->columnSpan(1),
+
+                            Forms\Components\TextInput::make('anio')
+                                ->label('Año')
+                                ->numeric()
+                                ->minValue(1900)
+                                ->maxValue((int) date('Y') + 1)
+                                ->nullable()
+                                ->columnSpan(1),
 
                             Forms\Components\FileUpload::make('archivo_pdf')
                                 ->label('Documento (PDF)')
                                 ->disk('public')
                                 ->directory('biblioteca/archivos')
                                 ->acceptedFileTypes(['application/pdf'])
-                                ->maxSize(51200)
+                                ->maxSize(153600) // 150 MiB (Filament usa kilobytes)
                                 ->downloadable()
                                 ->columnSpanFull(),
                         ]),
@@ -51,13 +67,6 @@ class BibliotecaArchivoResource extends Resource
                 ->schema([
                     Forms\Components\Section::make('Clasificación')
                         ->schema([
-                            Forms\Components\Select::make('servicio_id')
-                                ->relationship('servicio', 'titulo')
-                                ->label('Servicio Web (Página)')
-                                ->required()
-                                ->searchable()
-                                ->preload(),
-
                             Forms\Components\Select::make('carrera_id')
                                 ->relationship('carrera', 'nombre')
                                 ->label('Carrera')
@@ -95,6 +104,11 @@ class BibliotecaArchivoResource extends Resource
                     ->searchable()
                     ->weight('bold')
                     ->wrap(),
+
+                Tables\Columns\TextColumn::make('autor')
+                    ->searchable()
+                    ->placeholder('—')
+                    ->toggleable(),
 
                 Tables\Columns\TextColumn::make('carrera.nombre')
                     ->label('Carrera')
